@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/all.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-01-23T00:55:00Z</updated><entry><title>W3cValidate.vim</title><link href="http://brainacle.com/w3cvalidatevim.html" rel="alternate"></link><updated>2011-01-23T00:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-23:/w3cvalidatevim.html/</id><summary type="html">&lt;p&gt;W3cValidate.vim is a plugin that enables buffer/url validation using the &lt;a class="reference external" href="http://validator.w3.org"&gt;W3 Validator&lt;/a&gt; API.&lt;/p&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;:W3cValidate to validate the current buffer&lt;/p&gt;
+&lt;p&gt;:W3cValidate &amp;quot;[url_here]&amp;quot; to validate a hosted page&lt;/p&gt;
+&lt;p&gt;:W3cValidateDT &amp;quot;[doctype]&amp;quot; to validate the buffer using the [doctype] override. Make sure the doctype is a valid doctype&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The validator service url can be changed if you run an instance of it localy by setting  g:w3_validator_url  in .vimrc&lt;/p&gt;
+&lt;p&gt;The script has API timeout default to 20 seconds. You can change it by setting  g:w3_apicall_timeout  in .vimrc&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/w3cvalidate.vim"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/w3cvalidate.vim"&gt;GitHub&lt;/a&gt;
+&lt;a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=3416"&gt;Vim Scripts&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="vim"></category><category term="plugin"></category><category term="coding"></category></entry><entry><title>Generate960.py</title><link href="http://brainacle.com/generate960py.html" rel="alternate"></link><updated>2011-01-15T12:06:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-15:/generate960py.html/</id><summary type="html">&lt;p&gt;Command line utility script for generating custom &lt;a class="reference external" href="http://960.gs"&gt;960gs&lt;/a&gt; grids (css). It can generate grids will custom width, column number and gutter width. Outputs to file or stdout.&lt;/p&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python generate960.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="optional-arguments"&gt;
+&lt;h2&gt;Optional Arguments&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;table class="docutils option-list" frame="void" rules="none"&gt;
+&lt;col class="option" /&gt;
+&lt;col class="description" /&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="option-group"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-h&lt;/span&gt;, &lt;span class="option"&gt;--help&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;show help message and exit&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-w &lt;var&gt;WIDTH&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--width &lt;var&gt;WIDTH&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Content width in px. Defaults to 960px.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-c &lt;var&gt;COLUMNS&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--columns &lt;var&gt;COLUMNS&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Number of columns. Defaults to 12.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-g &lt;var&gt;GUTTER&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--gutter &lt;var&gt;GUTTER&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Gutter width in px. Defaults to 20px.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-f &lt;var&gt;FILE&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--file &lt;var&gt;FILE&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Name of the file to be saved. If this is not specified the css will be printed to stdout&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To generate 1024 grid with 15px gutters and 10 columns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python generate960.py -w 1024 -c 10 -g 15
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="requirements"&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt; and &lt;a class="reference external" href="http://code.google.com/p/argparse/"&gt;Argparse&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/generate960.py"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/generate960.py"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="960gs"></category><category term="grids"></category><category term="design"></category></entry><entry><title>How to easily enable r600g Gallium3D in Ubuntu and Ubuntu derivatives for radeon</title><link href="http://brainacle.com/how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html" rel="alternate"></link><updated>2011-01-05T01:47:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-05:/how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html/</id><summary type="html">&lt;p&gt;Gallium3D is a software library for 3D graphics device drivers developed by VMware. It's the next big thing in linux graphic drivers world. At the moment, it drives the old (sub r300) ATI graphic cards
+and it is in a very active development for NVidia and newer ATI(AMD) hardware. You can read more about Gallium &lt;a class="reference external" href="http://wiki.freedesktop.org/wiki/Software/gallium"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Last three weeks I became obsessed with the open source radeon driver. There is a lot of buzz going on there, a lot of optimizations and development (much expected in kernel 2.6.38) which is pretty much covered on the forums of
+&lt;a class="reference external" href="http://phoronix.com"&gt;Phoronix&lt;/a&gt;. I decided to take a spin on new drivers, the development versions of &lt;a class="reference external" href="http://www.mesa3d.org/"&gt;Mesa&lt;/a&gt; and a newer kernel 2.6.37 from the
+&lt;a class="reference external" href="http://kernel.ubuntu.com/~kernel-ppa/mainline/"&gt;Ubuntu mainline builds&lt;/a&gt;. I have an R700 based ATI HD4650. The gallium driver for this card is r600g. It shows many improvements and
+optimizations but it's still in development cycle, unlike the driver for older cards r300g which is pretty much the default driver in Meerkat. Because of it's status, r600g is tricky to install
+especially if you aren't comfortable with building git versions with compiler switches that enable gallium in mesa. But, thanks to the guys at &lt;a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/ppa"&gt;Xorg-edgers PPA&lt;/a&gt;
+the simple mortals can have gallium on Ubuntu as easy as installing a video player.&lt;/p&gt;
+&lt;p&gt;Xorg-edgers PPA states that if you install the packages from the main PPA (ppa:xorg-edgers/ppa) and add Option &amp;quot;ForceGallium&amp;quot; &amp;quot;true&amp;quot; in xorg.conf, r600g will be used.
+However, if this doesn't work with the latest updates, check &lt;a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/radeon"&gt;Xorg-edgers/radeon&lt;/a&gt;. Packages from this PPA enable gallium
+by default. The only thing you need to do is add it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-add-repository ppa:xorg-edgers/radeon
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now if you installed the driver/gl stack from /radeon you should delete xorg.conf if you don't have any monitor specific lines there. If you used the main ppa, you should add that option &amp;quot;ForceGallium&amp;quot; inside the device section and &lt;em&gt;voila&lt;/em&gt;, you have r600g driver running.&lt;/p&gt;
+&lt;p&gt;I tested this with stock kernel 2.6.35 and updated 2.6.37 and it works pretty good. There is huge performance gain which I felt playing Penumbra Overture. On high settings, 1920x1200 resolution, the game is flying. Video is smooth, compiz works great and games play smoother.
+The 2.6.38 kernel brings even more good news for radeon users. Massive performance gain with the &lt;a class="reference external" href="http://www.phoronix.com/scan.php?page=news_item&amp;amp;px=OTAwNA"&gt;PageFlipping&lt;/a&gt; and the CollorTilling implementations in the radeon driver give it a big boost.
+We just have to wait for a more stable version of the kernel. The kernel is at rc2 stage at the moment of writing.&lt;/p&gt;
+&lt;p&gt;Anyway, Kudos to the open source driver developers, better make that to ALL open source developers involved in Linux.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This post is a general guideline for installing the
+Gallium3D radeon driver for linux practiced by the author. The author
+will not accept any liability for any damages/data-loss caused using
+the technique described above.&lt;/p&gt;
+</summary><category term="linux"></category><category term="ati"></category><category term="drivers"></category></entry><entry><title>PyFaceDetect</title><link href="http://brainacle.com/pyfacedetect.html" rel="alternate"></link><updated>2010-12-28T18:00:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-12-28:/pyfacedetect.html/</id><summary type="html">&lt;p&gt;PyFaceDetect is a thin wrapper around &lt;a class="reference external" href="http://opencv.willowgarage.com"&gt;OpenCV&lt;/a&gt; for detection and marking faces in images.&lt;/p&gt;
+&lt;p&gt;The module can be used as an API or in console for testing purposes. For usage and options:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python pyfacedetect.py -h
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="sample-input"&gt;
+&lt;h2&gt;Sample input&lt;/h2&gt;
+&lt;img alt="http://i.imgur.com/5Lq4O.jpg" src="http://i.imgur.com/5Lq4O.jpg" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample-output"&gt;
+&lt;h2&gt;Sample output&lt;/h2&gt;
+&lt;img alt="http://i.imgur.com/56aTg.jpg" src="http://i.imgur.com/56aTg.jpg" /&gt;
+&lt;p&gt;The module consists of 2 classes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OcvDetector that wraps OpenCV Api for face detection and can be used bare
+without the helper methods for loading images, marking faces, or getting
+human friendly output&lt;/p&gt;
+&lt;p&gt;FaceDetect - full feature class that extends OcvDetector and adds helper
+methods for loading/marking/outputing/saving images and dumping faces in
+json.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can enable scaning for profiles for quantity of faces by setting
+SCAN_FOR_PROFILES to True. That, however will give some overlapping rectangles.&lt;/p&gt;
+&lt;p&gt;Try and tweak MIN_FACE_SIZE, HAAR_SCALE and MIN_NEIGHBORS so you can change the
+accuracy of the detection. For more info, read
+&lt;a class="reference external" href="http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html"&gt;http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For speed, all images above 1000width or 1000h are scaled to 1000w or 1000h max.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="api-usage"&gt;
+&lt;h2&gt;API Usage&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;face_detect = new FaceDetect()
+
+face_detect.image_from_file(file_name)#load from file
+
+face_detect.image_from_input(input_id)#load 1 frame from video input
+
+face_detect.detect_faces()#stores faces in local list
+
+face_detect.overlay_image(rgb_border = (255,0,0), width = 2) #overlays original image with rectangles around detected faces.
+
+face_detect.to_json()#returns json string with faces rectangles
+
+face_detect.output_image()#shows image in window
+
+face_detect.save_image(file_name)#saves overlaid image to file_name
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dependencies"&gt;
+&lt;h2&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://opencv.willowgarage.com/wiki/"&gt;OpenCV 2.1+&lt;/a&gt; and Argparse&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/pyfacedetect"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/pyfacedetect"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="opencv"></category><category term="face-detection"></category></entry><entry><title>Calculating image entropy with Python, How and Why?</title><link href="http://brainacle.com/calculating-image-entropy-with-python-how-and-why.html" rel="alternate"></link><updated>2010-10-04T12:20:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-10-04:/calculating-image-entropy-with-python-how-and-why.html/</id><summary type="html">&lt;div class="section" id="the-why"&gt;
+&lt;h2&gt;The Why?&lt;/h2&gt;
+&lt;p&gt;Lets say you are developing a video portal, kinda like youtube/vimeo
+and you want to have an automated way of making thumbnails. Since
+video manipulation in python is a bit tricky, you might as well make
+the thumbnails with &lt;strong&gt;ffmpeg&lt;/strong&gt; every [n] seconds. You need 10 thumbnails
+for each video, and you want those thumbnails to show parts of it.&lt;/p&gt;
+&lt;p&gt;If you leave it random, you might end up having thumbnails that show
+a black scene or some scene that barely shows anything. Using the
+image
+entropy, you can sort out the thumbnails based on the &lt;a class="reference external" href="http://www.astro.cornell.edu/research/projects/compression/entropy.html"&gt;&amp;quot;business&amp;quot;&lt;/a&gt; of
+the scene they depict. The technique can be implemented as follows:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Generate n&amp;gt;[thumbnails_needed] thumbnails&lt;/li&gt;
+&lt;li&gt;Calculate the image entropy for each of them&lt;/li&gt;
+&lt;li&gt;Sort them by their entropy&lt;/li&gt;
+&lt;li&gt;Use the first [thumbnails_needed] thumbnails&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-how"&gt;
+&lt;h2&gt;The How?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Entropy&lt;/strong&gt; H of a sampled signal of length N samples is calculated:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;H(X) = -1 * sum_1_to_N ( p_i log( p_i ) )
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;p_i is the probability of the i-th sample of the signal and can be calculated:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;p_i = Histogram(sample)[i]/Length(Histogram(sample))
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All we need to do is to get the histogram list and we can calculate
+the entropy.&lt;/p&gt;
+&lt;p&gt;On a first sight, this sounds like a complex mathematical problem. And
+it is, but we will make a little shortcut. We will use the &lt;a class="reference external" href="http://www.pythonware.com/products/pil/"&gt;Python
+imaging library&lt;/a&gt; or &lt;strong&gt;PIL&lt;/strong&gt;. This package is de facto standard package for
+image manipulation in Python. It is one of the first packages I
+install when preparing my development environment (before making
+virtualenvs). PIL provides a method for calculating the histogram of
+the image and solves most of our problems. The function for
+calculating the entropy looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;import Image
+import math
+
+
+def image_entropy(img):
+    &amp;quot;&amp;quot;&amp;quot;calculate the entropy of an image&amp;quot;&amp;quot;&amp;quot;
+    histogram = img.histogram()
+    histogram_length = sum(histogram)
+
+    samples_probability = [float(h) / histogram_length for h in histogram]
+
+    return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
+
+img = Image.open(&amp;#39;headshot.jpg&amp;#39;)
+print image_entropy(img)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, PIL’s method for calculating the histogram really
+simplifies things and makes the functions seem slim and simple. All
+its left is iterating through set of thumbnails, calculating the
+entropy and sorting them.&lt;/p&gt;
+&lt;p&gt;Remember: &lt;strong&gt;Bigger entropy means more
+noise/liveliness/color/business.*&lt;/strong&gt; You will usually need the thumbnails
+with greater entropy.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="development"></category><category term="entropy"></category><category term="image"></category><category term="pil"></category><category term="python"></category></entry><entry><title>Install Proprietary ATI 10.8 drivers on Ubuntu Lucid / Linux Mint</title><link href="http://brainacle.com/install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html" rel="alternate"></link><updated>2010-09-09T20:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-09-09:/install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html/</id><summary type="html">&lt;p&gt;I will digress a bit from the theme of the blog, but seeing a lot of
+people having issues with installing the ATI drivers on Ubuntu, I
+decided to put my thoughts and experience with it here.&lt;/p&gt;
+&lt;p&gt;I have experimented with the drivers quite a bit. I own Sapphire
+Radeon HD 4650, and always try out games on Wine(i wish all of them
+worked in Gnu/Linux) which is the reason I need updated drivers on my
+rig. Two weeks ago, AMD(then ATI) updated the drivers to 10.8
+version. By their claims, these drivers introduce some performance
+gain, bugfixes and general stability. I installed the driver 30
+minutes before writing this post and it actually works pretty good.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Now for the technical part:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;What you need is a rig with AMD graphic card powered by a &lt;a class="reference external" href="http://linuxmint.com/"&gt;Linux Mint&lt;/a&gt;
+or &lt;a class="reference external" href="http://ubuntu.org/"&gt;Ubuntu Lucid distro&lt;/a&gt; with installed
+build-essential. Driver (which
+in fact is shell script) can be downloaded &lt;a class="reference external" href="http://support.amd.com/us/gpudownload/Pages/index.aspx"&gt;Here&lt;/a&gt;. The script is called
+ati-driver-installer-[version]-[CPU architecture].run. Download it to
+new empty folder - lets call it ati in home folder.&lt;/p&gt;
+&lt;p&gt;Now we have the driver and we can start with installation. Before we
+actually commence the installation, we have to purge/remove the old
+ati driver from the system. You should try these commands to remove
+it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get purge fglrx
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo sh /usr/share/fglrx/fglrx-uninstall.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After the removing is done, reboot the PC. You could be asked to turn
+the graphics to low details (safe mode). Do that. Next, open a
+terminal and navigate to the folder with the driver.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd ~/ati/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add permissions for execution to the script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;chmod +x ati-driver-installer-[version]-[CPU architecture].run
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Generate distro-specific packages(for lucid or mint 9):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –buildpkg Ubuntu/lucid
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or list all available distro builds:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –listpkg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After this operation (if everything went ok) you will have several
+.deb packages. Install them with the next command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo dpkg -i *.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The drivers are installed. If this is your first ATI driver
+installation, invoke next command to make the initial config:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo aticonfig –initial
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot the PC, and you’ll have the drivers installed. If you have any
+problems, refer to the Installation Instructions on the driver’s
+download page.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This post is a general guideline for installing the
+proprietary ati drivers for linux practiced by the author. The author
+will not accept any liability for any damages/data-loss caused using
+the technique described above.&lt;/p&gt;
+</summary><category term="linux"></category><category term="ati"></category><category term="drivers"></category></entry><entry><title>Pgbouncer Makes a Difference</title><link href="http://brainacle.com/pgbouncer-makes-a-difference.html" rel="alternate"></link><updated>2010-06-15T23:17:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2010-06-15:/pgbouncer-makes-a-difference.html/</id><summary type="html">&lt;p&gt;Last week I was building VMware images for database and web server
+appliances that would host a fairly large Django application. The
+application is backed by a PostgreSQL database and I was looking for
+some info on compiling/configuring pgpool on Debian (I like to compile
+stuff when I can, especially when the last version of Debian is 2
+years old). Googling around I came across some very interesting posts
+on mailing lists and SO regarding Django, PostgeSQL and connection
+pooling.&lt;/p&gt;
+&lt;p&gt;Among other things, people seem to have a notion that using pooling
+middleware won’t accomplish much as the web server still needs to open
+a TCP connection and that is the source of a noticeable overhead for
+each request. So they’ve come up with solutions to avoid opening TCP
+connections as much as possible, trying to accomplish something
+similar to what SQLAlchemy’s connection pool does, keeping the web
+server connected to the database with multiple connections at all
+times. These solutions of course range from changing the code in
+django.db.backends.... to monkey-patching it.&lt;/p&gt;
+&lt;p&gt;When you change Django’s code you’ve just created a fork of a growing
+and evolving open source project and based your own project around
+that fork you have to maintain yourself. Monkey-patching is not as
+bad, but comes very close regarding maintenance problems. And is all
+that really necessary?&lt;/p&gt;
+&lt;div class="section" id="the-overhead-doesnt-stem-from-opening-tcp-connections"&gt;
+&lt;h2&gt;The Overhead Doesn’t Stem From Opening TCP Connections&lt;/h2&gt;
+&lt;p&gt;Every time you open a database connection (session) to execute some
+SQL on a Postgres database the Postgres server spawns a new process
+and upon closing the connection (session) from your application that
+process is shut down. With the way Django handles database sessions
+this is repeated for every request. Which means for every request
+Postgres will have to spawn a new worker process that will last for
+the duration of the database session involved in responding to that
+HTTP request. The overhead involved in opening a TCP connection to a
+process running on the same machine or on the same network is not much
+compared to the overhead involved in spawning a new process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solutions-do-exist"&gt;
+&lt;h2&gt;Solutions Do Exist&lt;/h2&gt;
+&lt;p&gt;So if the overhead for each request comes from spawning new processes
+then the obvious solution would be to keep that at a minimum level. If
+you keep the connections to the database server open and reuse them
+for every request then the processes spawned at the time the
+connections were established would be reused as the connections are
+reused.&lt;/p&gt;
+&lt;p&gt;But you don’t have to keep your web server connected to the database
+server to achieve this. Two more popular solutions are pgpool II and
+pgbouncer. Both are designed as sort of middleware proxies that sit
+between your application and your database. Pgpool is more of a
+replication and load balancing solution than a connection pool. It
+works as a connection pool because at each connection opened by your
+application to pgpool it will have a separate process handling that
+connection, but it will keep those processes alive and connected to
+the Postgres server even after your application closes those
+connections. So using it would have the effect of lowering the net
+amount of new processes created to serve a certain number of requests
+to your web application. Pgbouncer on the other hand handles all the
+requests between your application and Postgres in a highly efficient
+asynchronous manner by utilizing libevent and not using
+multiprocessing at all, and it will keep the initially opened
+connections for a longer time after your application closes them, so
+making a new connection to pgbouncer will rarely result in Postges
+spawning a process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-proof"&gt;
+&lt;h2&gt;The Proof&lt;/h2&gt;
+&lt;p&gt;To prove that solutions like pgbouncer do make a difference I created
+a simple test scenario. A very small Django project with one page
+displaying 5 rows from a table in a PostgreSQL database. Both the
+database server and the web server (Apache with mod-wsgi in daemon
+mode) running on one small VM with 1GB of RAM and 4 CPU cores
+assigned.&lt;/p&gt;
+&lt;p&gt;In the first test I configured the application to connect to the
+database server directly and put the page under
+&lt;a class="reference external" href="http://www.joedog.org/index/siege-home"&gt;siege&lt;/a&gt; with 1, 5, 15,&lt;/p&gt;
+&lt;p&gt;50, 100 and 200 concurrent requests, each session lasting for 1
+minute. Then I repeated the process with the application configured to
+connect to pgbouncer instead. The results show something close to a
+50% increase in responsiveness:&lt;/p&gt;
+&lt;img alt="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;amp;oid=2&amp;amp;zx=8zp184e7ixus" src="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;amp;oid=2&amp;amp;zx=8zp184e7ixus" /&gt;
+&lt;/div&gt;
+</summary><category term="django"></category><category term="pgbouncer"></category><category term="pgpool"></category><category term="postgresql"></category></entry><entry><title>Django Toolbox for Komodo</title><link href="http://brainacle.com/django-toolbox-for-komodo.html" rel="alternate"></link><updated>2010-05-03T16:08:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2010-05-03:/django-toolbox-for-komodo.html/</id><summary type="html">&lt;p&gt;If you’re using TextMate for Django development you’ve probably came
+across the &lt;a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/"&gt;Python Django&lt;/a&gt;
+and Python &lt;a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/"&gt;Django Template&lt;/a&gt; bundles.&lt;/p&gt;
+&lt;p&gt;The Django Toolbox for Komodo does most of what the TextMate bundles
+do, plus integrated shortcuts for the most important links in the
+Django docs. Builtin template filter support is still a work in
+progress.&lt;/p&gt;
+&lt;p&gt;To get the most out of the toolbox, first install the &lt;a class="reference external" href="http://community.activestate.com/xpi/tab-abbreviations"&gt;Tab
+Abbreviations&lt;/a&gt;
+add-on and set a keyboard shortcut (eg. TAB) to the
+command “Insert Abbreviation Snippet By Name”.&lt;/p&gt;
+&lt;p&gt;Download link: &lt;a class="reference external" href="/static/downloads/DjangoKomodoToolbox-0.1.kpz"&gt;DjangoKomodoToolbox-0.1.kpz&lt;/a&gt;&lt;/p&gt;
+</summary><category term="development"></category><category term="editors"></category><category term="komodo"></category><category term="django"></category></entry><entry><title>JqCarousel Three-D</title><link href="http://brainacle.com/jqcarousel-three-d.html" rel="alternate"></link><updated>2010-01-27T19:59:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-01-27:/jqcarousel-three-d.html/</id><summary type="html">&lt;p&gt;This plugin was coded to prove a point. We saw another similar plugin like this,
+but it was only for sale with obfuscated code, so I decided to write it and opensource it.
+It doesn't have the limited functionality and the custom implementation of the paid ones,
+it is easy to implement and highly customizable. Works with images and other HTML containers.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/static/uploads/jqcarousel3d/index.html"&gt;Here&lt;/a&gt; you can check out a demo of
+the carousel. The JS embed code is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#carouselthreed&amp;#39;).carousel3D({
+    speed: 900,
+    perspectiveZoom: 70,
+    sideOffset: 80,
+    topOffset:0,
+    secondaryOpacity: .35,
+    emClass:&amp;#39;tdc-element&amp;#39;
+})
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And here is the HTML:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;div id=&amp;quot;carouselthreed&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;fly.jpg&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;gates.jpg&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;penguins.jpg&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The settings object attributes are:
+- speed - Speed of animation in milliseconds (default 350)
+- perspectiveZoom - Percentage of secondary element's sizes relative to primary element (default 80)
+- sideOffset - Offset of secondary elements (default 70)
+- topOffset - Offset from top of secondary elements (default 0)
+- secondaryOpacity - Opacity of secondary elements (default 0.8)
+- emClass - CSS class of elements that will rotate (images/dom) (default &amp;quot;tdc-element&amp;quot;)&lt;/p&gt;
+&lt;p&gt;Any of those attributes can be omitted and default values will be used.
+For reference, the second element in the container is taken, it is the
+central element and all other elements are resized relative to it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It works with unlimited number of elements.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/static/uploads/jqcarousel3d/Carousel3D3.js"&gt;Download&lt;/a&gt; the plugin and get a
+fresh copy of &lt;a class="reference external" href="http://jquery.com/"&gt;JQuery&lt;/a&gt; and you're set.&lt;/p&gt;
+&lt;p&gt;Enjoy&lt;/p&gt;
+</summary><category term="javascript"></category><category term="jquery"></category><category term="plugin"></category><category term="ui"></category></entry><entry><title>Benchmark of django deployment techniques</title><link href="http://brainacle.com/benchmark-of-django-deployment-techniques.html" rel="alternate"></link><updated>2010-01-19T19:55:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2010-01-19:/benchmark-of-django-deployment-techniques.html/</id><summary type="html">&lt;p&gt;I made a benchmark of different Django deployment techniques and configurations
+mostly for my personal purposes. The results are published in the hope that it
+would save others some time. The benchmark was not designed to test the speed
+of Django itself, only to give relative comparison between different techniques
+for running a Django application in production environments. I'm not affiliated
+with any of the following open source projects: Apache,&amp;nbsp; Nginx, Cherokee,
+mod_wsgi, mod_python, Cherrypy or uWSGI. Further, I'm not claiming to be an
+expert in configuring any of the software mentioned here.&lt;/p&gt;
+&lt;div class="section" id="what-was-measured"&gt;
+&lt;h2&gt;What was measured&lt;/h2&gt;
+&lt;p&gt;The Django project used for the benchmark was a simple application for
+displaying rows from 3 different tables with pagination. Each page had
+references to 3 static files (css, javascript and an image). Each page
+involved rendering a simple template inheriting from a base template
+and including another one, built-in filters were also used. The database
+had more than a million records in all three tables combined. I browsed
+different pages of the application over a proxy which recorded the URLs
+of the browsing session. So for each request that was handled by the application
+there were 3 more requests for static files. For each deployment technique I ran
+4 tests at different concurrency levels for 1 minute making GET requests to the
+recorded URLs. For each test run I recorded throughput (number of requests
+served per second), response time (average time in which a request was served)
+and longest request (the longest time a request was served in each run).
+Only for the tests at highest concurrency levels I recorded memory usage.
+I tried to make sure that only the necessary processes for each test were
+running at a time. Automatic maintenance tasks on the system and the database
+were turned off. Every test cycle was repeated at least 3 times to
+recheck the results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hardware-and-software-details"&gt;
+&lt;h2&gt;Hardware and software details&lt;/h2&gt;
+&lt;p&gt;For generating the loads I used Siege and ran all the benchmarks over
+gigabit ethernet from a 2.16 GHz machine with 2 GB of RAM running OS X Snow
+Leopard.&lt;/p&gt;
+&lt;p&gt;The system that served as a web and database server ran in a VMware appliance
+on a 2.8 GHz Core2Duo PC with 8GBs of RAM. The appliance was given only 1GB
+of working memory and assigned both cores of the CPU. Software details:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Ubuntu 9.10 32b&lt;/li&gt;
+&lt;li&gt;Python 2.6&lt;/li&gt;
+&lt;li&gt;PostgreSQL 8.4&lt;/li&gt;
+&lt;li&gt;Apache 2.2.12 worker MPM&lt;/li&gt;
+&lt;li&gt;Nginx 0.7.64&lt;/li&gt;
+&lt;li&gt;Cherokee 0.99.39&lt;/li&gt;
+&lt;li&gt;Django 1.1&lt;/li&gt;
+&lt;li&gt;psycopg2 2.0.8&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tested-configurations"&gt;
+&lt;h2&gt;Tested configurations&lt;/h2&gt;
+&lt;div class="section" id="apache-with-mod-wsgi"&gt;
+&lt;h3&gt;Apache with mod_wsgi&lt;/h3&gt;
+&lt;p&gt;This was the first configuration I tested. Apache was serving both the static
+files and dynamic content via mod_wsgi which ran in daemon mode with 5 processes
+and 1 thread per process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx-apache-with-mod-wsgi"&gt;
+&lt;h3&gt;Nginx + Apache with mod_wsgi&lt;/h3&gt;
+&lt;p&gt;My preferred configuration for running django sites. Apache with mod_wsgi
+was used only for the dynamic content, requests to these urls were proxied
+by nginx. Static files were served by nginx directly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx-fcgi"&gt;
+&lt;h3&gt;Nginx + fcgi&lt;/h3&gt;
+&lt;p&gt;Here nginx is used for serving the static content while the dynamic content
+was handled by FastCGI processes. I used all the defaults from the runfcgi
+management command and used a TCP socket instead of a socket file because I
+was bumping into issues with access to the socket file at large numbers of
+concurrent requests.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="cherokee-scgi"&gt;
+&lt;h3&gt;Cherokee + SCGI&lt;/h3&gt;
+&lt;p&gt;This was set up from the Cherokee web based wizard for deploying django
+applications. Static files were served by Cherokee directly. I have to say
+this is by far the&amp;nbsp; easiest method of deploying Django applications in
+production environments.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="cherokee-apache-with-mod-wsgi"&gt;
+&lt;h3&gt;Cherokee + Apache with mod_wsgi&lt;/h3&gt;
+&lt;p&gt;This is essentially the same as Nginx + Apache and mod_wsgi except here
+Cherokee was used as a proxy and for serving static content. Since it's the
+first time I'm using Cherokee everything was configured via the web based admin
+interface and all parameters were left to default values.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx-cherrypy-wsgi-server"&gt;
+&lt;h3&gt;Nginx + Cherrypy WSGI server&lt;/h3&gt;
+&lt;p&gt;Here I used the &lt;a class="reference external" href="http://github.com/lincolnloop/django-cpserver"&gt;django-cpserver&lt;/a&gt;
+management command to run the application in the Cherrypy WSGI server. 5
+Instances of the WSGI server were running behind Nginx as a load balancer.
+Nginx was serving the static files.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configurations-that-are-left-out"&gt;
+&lt;h2&gt;Configurations that are left out&lt;/h2&gt;
+&lt;div class="section" id="apache-with-mod-python"&gt;
+&lt;h3&gt;Apache with mod_python&lt;/h3&gt;
+&lt;p&gt;This was left out because I couldn't get consistent results at 250 concurrent
+requests and the application would often error out at this concurrency level.
+The benchmark already took a significant amount of my time and I'm not
+experienced with mod_python so I decided not to proceed with locating the
+problem or publishing any shaky results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="uwsgi"&gt;
+&lt;h3&gt;uWSGI&lt;/h3&gt;
+&lt;p&gt;I tried to deploy the application on uWSGI with the Cherokee web based wizard.
+With the default configuration (1 process) the tests ran 4 times slower at high
+concurrency compared to the other configurations. Bumping up the number of
+process to 5 still didn't yield comparable results. At 25 processes I got
+comparable results but memory usage skyrocketed. I still suspect I was doing
+something wrong here, so I didn't publish the results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="lighttpd"&gt;
+&lt;h3&gt;lighttpd&lt;/h3&gt;
+&lt;p&gt;Personally I avoid using lighty for a number of subjective reasons. When I have
+the time I may update this post with some configurations based on lighty,
+although I wouldn't expect the results to be much different than the ones
+for the Nginx or Cherokee configurations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-results"&gt;
+&lt;h2&gt;The results&lt;/h2&gt;
+&lt;a class="reference external image-reference" href="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=5&amp;amp;amp&amp;amp;v=1263914004562"&gt;&lt;img alt="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=5&amp;amp;amp&amp;amp;v=1263914004562" src="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=5&amp;amp;amp&amp;amp;v=1263914004562" /&gt;&lt;/a&gt;
+&lt;a class="reference external image-reference" href="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=7&amp;amp;amp&amp;amp;v=1263914042360"&gt;&lt;img alt="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=7&amp;amp;amp&amp;amp;v=1263914042360" src="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=7&amp;amp;amp&amp;amp;v=1263914042360" /&gt;&lt;/a&gt;
+&lt;a class="reference external image-reference" href="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=6&amp;amp;amp&amp;amp;v=1263914066019"&gt;&lt;img alt="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=6&amp;amp;amp&amp;amp;v=1263914066019" src="http://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGdJOFVicHNGSFJGemFRT1pGMnVQMlE&amp;amp;amp&amp;amp;oid=6&amp;amp;amp&amp;amp;v=1263914066019" /&gt;&lt;/a&gt;
+&lt;div class="section" id="memory-usage"&gt;
+&lt;h3&gt;Memory usage&lt;/h3&gt;
+&lt;p&gt;I measured memory usage only at 250 concurrent requests. All the tests ran for
+60 seconds, so you can work out where the load on the server happened from the
+graphs.&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h4&gt;Apache with mod_wsgi&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/mod_wsgi2.png"&gt;&lt;img alt="/static/uploads/djbenchmark/mod_wsgi2-300x225.png" src="/static/uploads/djbenchmark/mod_wsgi2-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h4&gt;Nginx + Apache with mod_wsgi&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/nginxmod_wsgi3.png"&gt;&lt;img alt="/static/uploads/djbenchmark/nginxmod_wsgi3-300x225.png" src="/static/uploads/djbenchmark/nginxmod_wsgi3-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h4&gt;Nginx + FCGI&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/nginxcgi1.png"&gt;&lt;img alt="/static/uploads/djbenchmark/nginxcgi1-300x225.png" src="/static/uploads/djbenchmark/nginxcgi1-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nginx-cherrypy"&gt;
+&lt;h4&gt;Nginx + Cherrypy&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/nginxcp1.png"&gt;&lt;img alt="/static/uploads/djbenchmark/nginxcp1-300x225.png" src="/static/uploads/djbenchmark/nginxcp1-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h4&gt;Cherokee + SCGI&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/cherokeewscgi1.png"&gt;&lt;img alt="/static/uploads/djbenchmark/cherokeewscgi1-300x225.png" src="/static/uploads/djbenchmark/cherokeewscgi1-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h4&gt;Cherokee + Apache with mod_wsgi&lt;/h4&gt;
+&lt;a class="reference external image-reference" href="/static/uploads/djbenchmark/cherokeewsgi1.png"&gt;&lt;img alt="/static/uploads/djbenchmark/cherokeewsgi1-300x225.png" src="/static/uploads/djbenchmark/cherokeewsgi1-300x225.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="django"></category><category term="python"></category><category term="deployment"></category><category term="sys"></category><category term="benchmark"></category></entry><entry><title>Announcing Django-audit-log</title><link href="http://brainacle.com/announcing-django-audit-log.html" rel="alternate"></link><updated>2009-12-22T21:39:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2009-12-22:/announcing-django-audit-log.html/</id><summary type="html">&lt;p&gt;For those unfamiliar with the term, a definition from Wikipedia:&lt;/p&gt;
+&lt;blockquote&gt;
+Audit trail or audit log is a chronological sequence of audit records, each
+of which contains evidence directly pertaining to and resulting from the
+execution of a business process or system function.&lt;/blockquote&gt;
+&lt;p&gt;How does this come into play in a web application?&lt;/p&gt;
+&lt;p&gt;Lets examine the case of a simple application for keeping track of a store's
+inventory:&lt;/p&gt;
+&lt;p&gt;In the most simple case there would be a single database table in which
+we'd keep details on different products in the store. In the case where
+multiple users would have access to INSERT/UPDATE/DELETE records in the
+products table, one user could insert a product with name, description
+and price, later another user could change the description or even delete
+the whole record. If at some later point we wanted to restore the original
+record or see who made the latest changes we'd have to ask all the users to
+remember what they did. An audit log for this table would provide the means
+of keeping track of all the changes that were made to it and who made the
+changes in a chronological order.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://code.google.com/p/django-audit-log/"&gt;django-audit-log&lt;/a&gt; provides such
+facilities for your Django models. It's designed to be very simple to add
+chronological tracking to any django model with the least amount of changes
+to your existing code. Adding an audit log for your models is done in
+three steps:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Add a middleware class in settings.py.&lt;/li&gt;
+&lt;li&gt;Add a manager property to every model you need to keep track of.&lt;/li&gt;
+&lt;li&gt;Execute the syncdb management command.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To keep track of all the changes a separate table will be created for
+each tracked model. This table would have the same column structure as
+the original model plus columns for tracking the time, type of action
+(create, change or delete) and user who did the action. Queries on the
+audit log for a model are made via the manager added in step 2.&lt;/p&gt;
+&lt;p&gt;The project is still under heavy development and there's no
+official release yet. Keep that in mind if you consider using it in
+production. The code can be downloaded from the mercurial repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;hg clone https://django-audit-log.googlecode.com/hg/ django-audit-log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basic usage instructions can be found on
+&lt;a class="reference external" href="https://code.google.com/p/django-audit-log/wiki/UsageInstructions"&gt;this wiki page&lt;/a&gt; .
+&lt;strong&gt;Feature requests are always welcome.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Details on how it works and extension points will be coming up on
+the project wiki page soon.&lt;/p&gt;
+</summary><category term="django"></category><category term="python"></category><category term="audit-log"></category></entry><entry><title>Livescape jQuery Live Landscape</title><link href="http://brainacle.com/livescape-jquery-live-landscape.html" rel="alternate"></link><updated>2009-12-15T19:56:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2009-12-15:/livescape-jquery-live-landscape.html/</id><summary type="html">&lt;p&gt;The idea behind this plugin is to have some kind of landscape container that
+will contain objects moving inside of it e.g. sky with the clouds moving.
+The plugin is built simple, has simple implementation, it is very easy to
+use, yet very flexible. You only need the landscape image, the object images
+and one container.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#livescape&amp;#39;).livescape({
+    //height of the landscape (can be omitted)
+    height : &amp;#39;360px&amp;#39;,
+    //width of the landscape (can be omitted)
+    width : &amp;#39;1000px&amp;#39;,
+    //background image (can be omitted)
+    background_image : &amp;#39;img/bg.jpg&amp;#39;,
+
+    // Next define the objects that are moving:
+    objects : [
+        {
+            //the positions are relative to the landscape
+            //if omitted, random assumed - same for duration
+
+            //x of start position
+            start_x : &amp;quot;1700px&amp;quot;,
+            //y of start position
+            start_y : &amp;quot;190px&amp;quot;,
+            //x of end position
+            end_x : &amp;quot;-4000px&amp;quot;,
+             //y of end position
+            end_y : &amp;quot;190px&amp;quot;,
+            //image of the object (url)
+            image : &amp;#39;img/car.png&amp;#39;,
+            // duration of the animation
+            duration : 18000,
+            // the animation loops
+            loop : true,
+            //the object is anchor
+            href : &amp;quot;ThisisBatCountry.png&amp;quot;,
+            //pause in between loops in ms
+            pause: 1000,
+            //the objects fade in on start and out on end
+            fade : true
+        },
+        //another object
+        {
+            start_x : &amp;quot;-250px&amp;quot;,
+            start_y : &amp;quot;5px&amp;quot;,
+            end_x : &amp;quot;1250px&amp;quot;,
+            end_y : &amp;quot;5px&amp;quot;,
+            duration : 49000,
+            image : &amp;#39;img/cloud1.png&amp;#39;,
+            loop : true,
+            fade : true
+        }
+    ]
+})
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is setup is for 2 objects. The implementation is pretty intuitive and i
+think you will get a hold of it very fast.&lt;/p&gt;
+&lt;div class="section" id="update"&gt;
+&lt;h2&gt;Update&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;The objects now turn towards the direction of movement using CSS3 rotation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;For every object you can define a random starting and ending range using the attrubutes:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first simple"&gt;
+&lt;li&gt;range_sx_min (start_x min range)&lt;/li&gt;
+&lt;li&gt;range_sx_max (start_x max range)&lt;/li&gt;
+&lt;li&gt;range_ex_min&lt;/li&gt;
+&lt;li&gt;range_ex_max&lt;/li&gt;
+&lt;li&gt;range_sy_min&lt;/li&gt;
+&lt;li&gt;range_sy_max&lt;/li&gt;
+&lt;li&gt;range_ey_min&lt;/li&gt;
+&lt;li&gt;range_ey_max&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="last"&gt;all these attributes can be omitted and random will be used.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;The plugin is still beta and needs refactoring.&lt;/strong&gt; Nevertheless you will
+have access to an early access version.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source-and-example"&gt;
+&lt;h2&gt;Source and example&lt;/h2&gt;
+&lt;p&gt;You can check this plugin in action &lt;a class="reference external" href="/static/uploads/livescape/index.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Get the &lt;a class="reference external" href="/static/uploads/livescape/jqLiveScape.js"&gt;source&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="javascript"></category><category term="jquery"></category><category term="plugin"></category><category term="code"></category><category term="ui"></category></entry></feed>

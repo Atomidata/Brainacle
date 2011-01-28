@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>How to easily enable r600g Gallium3D in Ubuntu and Ubuntu derivatives for radeon</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Brainacle ATOM Feed" />
+        
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+    <a href="#index" id="goto-top">TOP</a>
+    <a href="#extras" id="goto-bottom">Links/Blogroll</a>
+
+        <header id="banner" class="body">
+                <h1><a href="."><img src="./theme/images/brainacle_logo.png" alt="Brainacle "/></a></h1>
+                <nav><ul>
+                    <li><a href=".">Home</a></li>
+                
+                
+                
+                    <li><a href="./pages/about.html">About</a></li>
+                
+                
+                
+                    <li ><a href="./category/Sys.html">Sys</a></li>
+                
+                    <li ><a href="./category/Coding.html">Coding</a></li>
+                
+                    <li class="active"><a href="./category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                <li><a href="./archives.html">Archives</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+                
+<section id="content" class="body">    
+<article>
+        <header> <h1 class="entry-title"><a href="how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html"
+        rel="bookmark" title="Permalink to How to easily enable r600g Gallium3D in Ubuntu and Ubuntu derivatives for radeon">How to easily enable r600g Gallium3D in Ubuntu and Ubuntu derivatives for radeon</a></h1> 
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dekomote">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+ </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2011-01-05T01:47:00">
+                    Wed 05 January 2011
+                </abbr>
+                
+                <address class="vcard author">
+                        By <a class="url fn" href="#">Dejan Noveski</a>
+                </address>
+                
+                <p>In <a href="./category/Miscellaneous.html">Miscellaneous</a>. 
+        <p>tags: <a href="./tag/linux.html">linux</a> <a href="./tag/ati.html">ati</a> <a href="./tag/drivers.html">drivers</a> </p>
+</p>
+        </footer><!-- /.post-info -->
+        <p>Gallium3D is a software library for 3D graphics device drivers developed by VMware. It's the next big thing in linux graphic drivers world. At the moment, it drives the old (sub r300) ATI graphic cards
+and it is in a very active development for NVidia and newer ATI(AMD) hardware. You can read more about Gallium <a class="reference external" href="http://wiki.freedesktop.org/wiki/Software/gallium">here</a></p>
+<p>Last three weeks I became obsessed with the open source radeon driver. There is a lot of buzz going on there, a lot of optimizations and development (much expected in kernel 2.6.38) which is pretty much covered on the forums of
+<a class="reference external" href="http://phoronix.com">Phoronix</a>. I decided to take a spin on new drivers, the development versions of <a class="reference external" href="http://www.mesa3d.org/">Mesa</a> and a newer kernel 2.6.37 from the
+<a class="reference external" href="http://kernel.ubuntu.com/~kernel-ppa/mainline/">Ubuntu mainline builds</a>. I have an R700 based ATI HD4650. The gallium driver for this card is r600g. It shows many improvements and
+optimizations but it's still in development cycle, unlike the driver for older cards r300g which is pretty much the default driver in Meerkat. Because of it's status, r600g is tricky to install
+especially if you aren't comfortable with building git versions with compiler switches that enable gallium in mesa. But, thanks to the guys at <a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/ppa">Xorg-edgers PPA</a>
+the simple mortals can have gallium on Ubuntu as easy as installing a video player.</p>
+<p>Xorg-edgers PPA states that if you install the packages from the main PPA (ppa:xorg-edgers/ppa) and add Option &quot;ForceGallium&quot; &quot;true&quot; in xorg.conf, r600g will be used.
+However, if this doesn't work with the latest updates, check <a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/radeon">Xorg-edgers/radeon</a>. Packages from this PPA enable gallium
+by default. The only thing you need to do is add it:</p>
+<div class="highlight"><pre>sudo apt-add-repository ppa:xorg-edgers/radeon
+sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</pre></div>
+<p>Now if you installed the driver/gl stack from /radeon you should delete xorg.conf if you don't have any monitor specific lines there. If you used the main ppa, you should add that option &quot;ForceGallium&quot; inside the device section and <em>voila</em>, you have r600g driver running.</p>
+<p>I tested this with stock kernel 2.6.35 and updated 2.6.37 and it works pretty good. There is huge performance gain which I felt playing Penumbra Overture. On high settings, 1920x1200 resolution, the game is flying. Video is smooth, compiz works great and games play smoother.
+The 2.6.38 kernel brings even more good news for radeon users. Massive performance gain with the <a class="reference external" href="http://www.phoronix.com/scan.php?page=news_item&amp;px=OTAwNA">PageFlipping</a> and the CollorTilling implementations in the radeon driver give it a big boost.
+We just have to wait for a more stable version of the kernel. The kernel is at rc2 stage at the moment of writing.</p>
+<p>Anyway, Kudos to the open source driver developers, better make that to ALL open source developers involved in Linux.</p>
+<p><strong>Disclaimer:</strong> This post is a general guideline for installing the
+Gallium3D radeon driver for linux practiced by the author. The author
+will not accept any liability for any damages/data-loss caused using
+the technique described above.</p>
+
+        </div><!-- /.entry-content -->
+        
+        <div class="comments">
+        <h2>Comments !</h2>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+               var disqus_identifier = "how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html";
+               (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = 'http://Brainacle.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+        </div>
+        
+
+</article>
+</section>
+
+        <section id="extras" class="body">
+        
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                        
+                            <li><a href="http://atomidata.com/">Atomidata</a></li>
+                        
+                            <li><a href="http://pressedweb.com/">Pressed Web</a></li>
+                        
+                            <li><a href="http://flyeyedesign.com">Flyeye Design</a></li>
+                        
+                            <li><a href="/archives.html">Archives</a></li>
+                        
+                        </ul>
+                </div><!-- /.blogroll -->
+        
+        
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="./feeds/all.atom.xml" rel="alternate">atom feed</a></li>
+                            
+
+                        
+                            <li><a href="http://twitter.com/dekomote">@dekomote</a></li>
+                        
+                            <li><a href="http://twitter.com/itarpeyo">@ItarPeyo</a></li>
+                        
+                            <li><a href="https://bitbucket.org/vvangelovski/">Vasil's Bitbucket</a></li>
+                        
+                            <li><a href="https://bitbucket.org/dekomote/">Dejan's Bitbucket</a></li>
+                        
+                            <li><a href="https://github.com/dekomote">Dejan's Github</a></li>
+                        
+                            <li><a href="https://github.com/vvangelovski">Vasil's Github</a></li>
+                        
+                            <li><a href="mailto:info@atomidata.com">Mail Us</a></li>
+                        
+                        </ul>
+                </div><!-- /.social -->
+        
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                &copy; Brainacle 2011 | Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+
+
+</body>
+</html>

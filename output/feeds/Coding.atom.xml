@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Coding.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-01-23T00:55:00Z</updated><entry><title>W3cValidate.vim</title><link href="http://brainacle.com/w3cvalidatevim.html" rel="alternate"></link><updated>2011-01-23T00:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-23:/w3cvalidatevim.html/</id><summary type="html">&lt;p&gt;W3cValidate.vim is a plugin that enables buffer/url validation using the &lt;a class="reference external" href="http://validator.w3.org"&gt;W3 Validator&lt;/a&gt; API.&lt;/p&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;:W3cValidate to validate the current buffer&lt;/p&gt;
+&lt;p&gt;:W3cValidate &amp;quot;[url_here]&amp;quot; to validate a hosted page&lt;/p&gt;
+&lt;p&gt;:W3cValidateDT &amp;quot;[doctype]&amp;quot; to validate the buffer using the [doctype] override. Make sure the doctype is a valid doctype&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The validator service url can be changed if you run an instance of it localy by setting  g:w3_validator_url  in .vimrc&lt;/p&gt;
+&lt;p&gt;The script has API timeout default to 20 seconds. You can change it by setting  g:w3_apicall_timeout  in .vimrc&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/w3cvalidate.vim"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/w3cvalidate.vim"&gt;GitHub&lt;/a&gt;
+&lt;a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=3416"&gt;Vim Scripts&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="vim"></category><category term="plugin"></category><category term="coding"></category></entry><entry><title>Generate960.py</title><link href="http://brainacle.com/generate960py.html" rel="alternate"></link><updated>2011-01-15T12:06:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-15:/generate960py.html/</id><summary type="html">&lt;p&gt;Command line utility script for generating custom &lt;a class="reference external" href="http://960.gs"&gt;960gs&lt;/a&gt; grids (css). It can generate grids will custom width, column number and gutter width. Outputs to file or stdout.&lt;/p&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python generate960.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="optional-arguments"&gt;
+&lt;h2&gt;Optional Arguments&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;table class="docutils option-list" frame="void" rules="none"&gt;
+&lt;col class="option" /&gt;
+&lt;col class="description" /&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="option-group"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-h&lt;/span&gt;, &lt;span class="option"&gt;--help&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;td&gt;show help message and exit&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-w &lt;var&gt;WIDTH&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--width &lt;var&gt;WIDTH&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Content width in px. Defaults to 960px.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-c &lt;var&gt;COLUMNS&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--columns &lt;var&gt;COLUMNS&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Number of columns. Defaults to 12.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-g &lt;var&gt;GUTTER&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--gutter &lt;var&gt;GUTTER&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Gutter width in px. Defaults to 20px.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="option-group" colspan="2"&gt;
+&lt;kbd&gt;&lt;span class="option"&gt;-f &lt;var&gt;FILE&lt;/var&gt;&lt;/span&gt;, &lt;span class="option"&gt;--file &lt;var&gt;FILE&lt;/var&gt;&lt;/span&gt;&lt;/kbd&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;Name of the file to be saved. If this is not specified the css will be printed to stdout&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To generate 1024 grid with 15px gutters and 10 columns:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python generate960.py -w 1024 -c 10 -g 15
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="requirements"&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt; and &lt;a class="reference external" href="http://code.google.com/p/argparse/"&gt;Argparse&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/generate960.py"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/generate960.py"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="960gs"></category><category term="grids"></category><category term="design"></category></entry><entry><title>PyFaceDetect</title><link href="http://brainacle.com/pyfacedetect.html" rel="alternate"></link><updated>2010-12-28T18:00:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-12-28:/pyfacedetect.html/</id><summary type="html">&lt;p&gt;PyFaceDetect is a thin wrapper around &lt;a class="reference external" href="http://opencv.willowgarage.com"&gt;OpenCV&lt;/a&gt; for detection and marking faces in images.&lt;/p&gt;
+&lt;p&gt;The module can be used as an API or in console for testing purposes. For usage and options:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;python pyfacedetect.py -h
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="sample-input"&gt;
+&lt;h2&gt;Sample input&lt;/h2&gt;
+&lt;img alt="http://i.imgur.com/5Lq4O.jpg" src="http://i.imgur.com/5Lq4O.jpg" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sample-output"&gt;
+&lt;h2&gt;Sample output&lt;/h2&gt;
+&lt;img alt="http://i.imgur.com/56aTg.jpg" src="http://i.imgur.com/56aTg.jpg" /&gt;
+&lt;p&gt;The module consists of 2 classes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OcvDetector that wraps OpenCV Api for face detection and can be used bare
+without the helper methods for loading images, marking faces, or getting
+human friendly output&lt;/p&gt;
+&lt;p&gt;FaceDetect - full feature class that extends OcvDetector and adds helper
+methods for loading/marking/outputing/saving images and dumping faces in
+json.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;You can enable scaning for profiles for quantity of faces by setting
+SCAN_FOR_PROFILES to True. That, however will give some overlapping rectangles.&lt;/p&gt;
+&lt;p&gt;Try and tweak MIN_FACE_SIZE, HAAR_SCALE and MIN_NEIGHBORS so you can change the
+accuracy of the detection. For more info, read
+&lt;a class="reference external" href="http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html"&gt;http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For speed, all images above 1000width or 1000h are scaled to 1000w or 1000h max.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="api-usage"&gt;
+&lt;h2&gt;API Usage&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;face_detect = new FaceDetect()
+
+face_detect.image_from_file(file_name)#load from file
+
+face_detect.image_from_input(input_id)#load 1 frame from video input
+
+face_detect.detect_faces()#stores faces in local list
+
+face_detect.overlay_image(rgb_border = (255,0,0), width = 2) #overlays original image with rectangles around detected faces.
+
+face_detect.to_json()#returns json string with faces rectangles
+
+face_detect.output_image()#shows image in window
+
+face_detect.save_image(file_name)#saves overlaid image to file_name
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dependencies"&gt;
+&lt;h2&gt;Dependencies&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://opencv.willowgarage.com/wiki/"&gt;OpenCV 2.1+&lt;/a&gt; and Argparse&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source"&gt;
+&lt;h2&gt;Source&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://bitbucket.org/dekomote/pyfacedetect"&gt;Bitbucket&lt;/a&gt;
+&lt;a class="reference external" href="https://github.com/dekomote/pyfacedetect"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="opencv"></category><category term="face-detection"></category></entry><entry><title>Calculating image entropy with Python, How and Why?</title><link href="http://brainacle.com/calculating-image-entropy-with-python-how-and-why.html" rel="alternate"></link><updated>2010-10-04T12:20:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-10-04:/calculating-image-entropy-with-python-how-and-why.html/</id><summary type="html">&lt;div class="section" id="the-why"&gt;
+&lt;h2&gt;The Why?&lt;/h2&gt;
+&lt;p&gt;Lets say you are developing a video portal, kinda like youtube/vimeo
+and you want to have an automated way of making thumbnails. Since
+video manipulation in python is a bit tricky, you might as well make
+the thumbnails with &lt;strong&gt;ffmpeg&lt;/strong&gt; every [n] seconds. You need 10 thumbnails
+for each video, and you want those thumbnails to show parts of it.&lt;/p&gt;
+&lt;p&gt;If you leave it random, you might end up having thumbnails that show
+a black scene or some scene that barely shows anything. Using the
+image
+entropy, you can sort out the thumbnails based on the &lt;a class="reference external" href="http://www.astro.cornell.edu/research/projects/compression/entropy.html"&gt;&amp;quot;business&amp;quot;&lt;/a&gt; of
+the scene they depict. The technique can be implemented as follows:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Generate n&amp;gt;[thumbnails_needed] thumbnails&lt;/li&gt;
+&lt;li&gt;Calculate the image entropy for each of them&lt;/li&gt;
+&lt;li&gt;Sort them by their entropy&lt;/li&gt;
+&lt;li&gt;Use the first [thumbnails_needed] thumbnails&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-how"&gt;
+&lt;h2&gt;The How?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Entropy&lt;/strong&gt; H of a sampled signal of length N samples is calculated:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;H(X) = -1 * sum_1_to_N ( p_i log( p_i ) )
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;p_i is the probability of the i-th sample of the signal and can be calculated:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;p_i = Histogram(sample)[i]/Length(Histogram(sample))
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All we need to do is to get the histogram list and we can calculate
+the entropy.&lt;/p&gt;
+&lt;p&gt;On a first sight, this sounds like a complex mathematical problem. And
+it is, but we will make a little shortcut. We will use the &lt;a class="reference external" href="http://www.pythonware.com/products/pil/"&gt;Python
+imaging library&lt;/a&gt; or &lt;strong&gt;PIL&lt;/strong&gt;. This package is de facto standard package for
+image manipulation in Python. It is one of the first packages I
+install when preparing my development environment (before making
+virtualenvs). PIL provides a method for calculating the histogram of
+the image and solves most of our problems. The function for
+calculating the entropy looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;import Image
+import math
+
+
+def image_entropy(img):
+    &amp;quot;&amp;quot;&amp;quot;calculate the entropy of an image&amp;quot;&amp;quot;&amp;quot;
+    histogram = img.histogram()
+    histogram_length = sum(histogram)
+
+    samples_probability = [float(h) / histogram_length for h in histogram]
+
+    return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
+
+img = Image.open(&amp;#39;headshot.jpg&amp;#39;)
+print image_entropy(img)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, PIL’s method for calculating the histogram really
+simplifies things and makes the functions seem slim and simple. All
+its left is iterating through set of thumbnails, calculating the
+entropy and sorting them.&lt;/p&gt;
+&lt;p&gt;Remember: &lt;strong&gt;Bigger entropy means more
+noise/liveliness/color/business.*&lt;/strong&gt; You will usually need the thumbnails
+with greater entropy.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="development"></category><category term="entropy"></category><category term="image"></category><category term="pil"></category><category term="python"></category></entry><entry><title>Django Toolbox for Komodo</title><link href="http://brainacle.com/django-toolbox-for-komodo.html" rel="alternate"></link><updated>2010-05-03T16:08:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2010-05-03:/django-toolbox-for-komodo.html/</id><summary type="html">&lt;p&gt;If you’re using TextMate for Django development you’ve probably came
+across the &lt;a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/"&gt;Python Django&lt;/a&gt;
+and Python &lt;a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/"&gt;Django Template&lt;/a&gt; bundles.&lt;/p&gt;
+&lt;p&gt;The Django Toolbox for Komodo does most of what the TextMate bundles
+do, plus integrated shortcuts for the most important links in the
+Django docs. Builtin template filter support is still a work in
+progress.&lt;/p&gt;
+&lt;p&gt;To get the most out of the toolbox, first install the &lt;a class="reference external" href="http://community.activestate.com/xpi/tab-abbreviations"&gt;Tab
+Abbreviations&lt;/a&gt;
+add-on and set a keyboard shortcut (eg. TAB) to the
+command “Insert Abbreviation Snippet By Name”.&lt;/p&gt;
+&lt;p&gt;Download link: &lt;a class="reference external" href="/static/downloads/DjangoKomodoToolbox-0.1.kpz"&gt;DjangoKomodoToolbox-0.1.kpz&lt;/a&gt;&lt;/p&gt;
+</summary><category term="development"></category><category term="editors"></category><category term="komodo"></category><category term="django"></category></entry><entry><title>JqCarousel Three-D</title><link href="http://brainacle.com/jqcarousel-three-d.html" rel="alternate"></link><updated>2010-01-27T19:59:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-01-27:/jqcarousel-three-d.html/</id><summary type="html">&lt;p&gt;This plugin was coded to prove a point. We saw another similar plugin like this,
+but it was only for sale with obfuscated code, so I decided to write it and opensource it.
+It doesn't have the limited functionality and the custom implementation of the paid ones,
+it is easy to implement and highly customizable. Works with images and other HTML containers.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/static/uploads/jqcarousel3d/index.html"&gt;Here&lt;/a&gt; you can check out a demo of
+the carousel. The JS embed code is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#carouselthreed&amp;#39;).carousel3D({
+    speed: 900,
+    perspectiveZoom: 70,
+    sideOffset: 80,
+    topOffset:0,
+    secondaryOpacity: .35,
+    emClass:&amp;#39;tdc-element&amp;#39;
+})
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And here is the HTML:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;div id=&amp;quot;carouselthreed&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;fly.jpg&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;gates.jpg&amp;quot;&amp;gt;
+    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;penguins.jpg&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The settings object attributes are:
+- speed - Speed of animation in milliseconds (default 350)
+- perspectiveZoom - Percentage of secondary element's sizes relative to primary element (default 80)
+- sideOffset - Offset of secondary elements (default 70)
+- topOffset - Offset from top of secondary elements (default 0)
+- secondaryOpacity - Opacity of secondary elements (default 0.8)
+- emClass - CSS class of elements that will rotate (images/dom) (default &amp;quot;tdc-element&amp;quot;)&lt;/p&gt;
+&lt;p&gt;Any of those attributes can be omitted and default values will be used.
+For reference, the second element in the container is taken, it is the
+central element and all other elements are resized relative to it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It works with unlimited number of elements.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/static/uploads/jqcarousel3d/Carousel3D3.js"&gt;Download&lt;/a&gt; the plugin and get a
+fresh copy of &lt;a class="reference external" href="http://jquery.com/"&gt;JQuery&lt;/a&gt; and you're set.&lt;/p&gt;
+&lt;p&gt;Enjoy&lt;/p&gt;
+</summary><category term="javascript"></category><category term="jquery"></category><category term="plugin"></category><category term="ui"></category></entry><entry><title>Announcing Django-audit-log</title><link href="http://brainacle.com/announcing-django-audit-log.html" rel="alternate"></link><updated>2009-12-22T21:39:00Z</updated><author><name>Vasil Vangelovski</name></author><id>tag:brainacle.com,2009-12-22:/announcing-django-audit-log.html/</id><summary type="html">&lt;p&gt;For those unfamiliar with the term, a definition from Wikipedia:&lt;/p&gt;
+&lt;blockquote&gt;
+Audit trail or audit log is a chronological sequence of audit records, each
+of which contains evidence directly pertaining to and resulting from the
+execution of a business process or system function.&lt;/blockquote&gt;
+&lt;p&gt;How does this come into play in a web application?&lt;/p&gt;
+&lt;p&gt;Lets examine the case of a simple application for keeping track of a store's
+inventory:&lt;/p&gt;
+&lt;p&gt;In the most simple case there would be a single database table in which
+we'd keep details on different products in the store. In the case where
+multiple users would have access to INSERT/UPDATE/DELETE records in the
+products table, one user could insert a product with name, description
+and price, later another user could change the description or even delete
+the whole record. If at some later point we wanted to restore the original
+record or see who made the latest changes we'd have to ask all the users to
+remember what they did. An audit log for this table would provide the means
+of keeping track of all the changes that were made to it and who made the
+changes in a chronological order.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://code.google.com/p/django-audit-log/"&gt;django-audit-log&lt;/a&gt; provides such
+facilities for your Django models. It's designed to be very simple to add
+chronological tracking to any django model with the least amount of changes
+to your existing code. Adding an audit log for your models is done in
+three steps:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Add a middleware class in settings.py.&lt;/li&gt;
+&lt;li&gt;Add a manager property to every model you need to keep track of.&lt;/li&gt;
+&lt;li&gt;Execute the syncdb management command.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To keep track of all the changes a separate table will be created for
+each tracked model. This table would have the same column structure as
+the original model plus columns for tracking the time, type of action
+(create, change or delete) and user who did the action. Queries on the
+audit log for a model are made via the manager added in step 2.&lt;/p&gt;
+&lt;p&gt;The project is still under heavy development and there's no
+official release yet. Keep that in mind if you consider using it in
+production. The code can be downloaded from the mercurial repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;hg clone https://django-audit-log.googlecode.com/hg/ django-audit-log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basic usage instructions can be found on
+&lt;a class="reference external" href="https://code.google.com/p/django-audit-log/wiki/UsageInstructions"&gt;this wiki page&lt;/a&gt; .
+&lt;strong&gt;Feature requests are always welcome.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Details on how it works and extension points will be coming up on
+the project wiki page soon.&lt;/p&gt;
+</summary><category term="django"></category><category term="python"></category><category term="audit-log"></category></entry><entry><title>Livescape jQuery Live Landscape</title><link href="http://brainacle.com/livescape-jquery-live-landscape.html" rel="alternate"></link><updated>2009-12-15T19:56:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2009-12-15:/livescape-jquery-live-landscape.html/</id><summary type="html">&lt;p&gt;The idea behind this plugin is to have some kind of landscape container that
+will contain objects moving inside of it e.g. sky with the clouds moving.
+The plugin is built simple, has simple implementation, it is very easy to
+use, yet very flexible. You only need the landscape image, the object images
+and one container.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#livescape&amp;#39;).livescape({
+    //height of the landscape (can be omitted)
+    height : &amp;#39;360px&amp;#39;,
+    //width of the landscape (can be omitted)
+    width : &amp;#39;1000px&amp;#39;,
+    //background image (can be omitted)
+    background_image : &amp;#39;img/bg.jpg&amp;#39;,
+
+    // Next define the objects that are moving:
+    objects : [
+        {
+            //the positions are relative to the landscape
+            //if omitted, random assumed - same for duration
+
+            //x of start position
+            start_x : &amp;quot;1700px&amp;quot;,
+            //y of start position
+            start_y : &amp;quot;190px&amp;quot;,
+            //x of end position
+            end_x : &amp;quot;-4000px&amp;quot;,
+             //y of end position
+            end_y : &amp;quot;190px&amp;quot;,
+            //image of the object (url)
+            image : &amp;#39;img/car.png&amp;#39;,
+            // duration of the animation
+            duration : 18000,
+            // the animation loops
+            loop : true,
+            //the object is anchor
+            href : &amp;quot;ThisisBatCountry.png&amp;quot;,
+            //pause in between loops in ms
+            pause: 1000,
+            //the objects fade in on start and out on end
+            fade : true
+        },
+        //another object
+        {
+            start_x : &amp;quot;-250px&amp;quot;,
+            start_y : &amp;quot;5px&amp;quot;,
+            end_x : &amp;quot;1250px&amp;quot;,
+            end_y : &amp;quot;5px&amp;quot;,
+            duration : 49000,
+            image : &amp;#39;img/cloud1.png&amp;#39;,
+            loop : true,
+            fade : true
+        }
+    ]
+})
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is setup is for 2 objects. The implementation is pretty intuitive and i
+think you will get a hold of it very fast.&lt;/p&gt;
+&lt;div class="section" id="update"&gt;
+&lt;h2&gt;Update&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;The objects now turn towards the direction of movement using CSS3 rotation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;dl class="first docutils"&gt;
+&lt;dt&gt;For every object you can define a random starting and ending range using the attrubutes:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first simple"&gt;
+&lt;li&gt;range_sx_min (start_x min range)&lt;/li&gt;
+&lt;li&gt;range_sx_max (start_x max range)&lt;/li&gt;
+&lt;li&gt;range_ex_min&lt;/li&gt;
+&lt;li&gt;range_ex_max&lt;/li&gt;
+&lt;li&gt;range_sy_min&lt;/li&gt;
+&lt;li&gt;range_sy_max&lt;/li&gt;
+&lt;li&gt;range_ey_min&lt;/li&gt;
+&lt;li&gt;range_ey_max&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="last"&gt;all these attributes can be omitted and random will be used.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;The plugin is still beta and needs refactoring.&lt;/strong&gt; Nevertheless you will
+have access to an early access version.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="source-and-example"&gt;
+&lt;h2&gt;Source and example&lt;/h2&gt;
+&lt;p&gt;You can check this plugin in action &lt;a class="reference external" href="/static/uploads/livescape/index.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Get the &lt;a class="reference external" href="/static/uploads/livescape/jqLiveScape.js"&gt;source&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="javascript"></category><category term="jquery"></category><category term="plugin"></category><category term="code"></category><category term="ui"></category></entry></feed>

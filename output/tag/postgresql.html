@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Brainacle - postgresql</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href=".././theme/css/main.css" type="text/css" />
+        <link href=".././feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Brainacle ATOM Feed" />
+        
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie.css"/>
+                <script src=".././js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+    <a href="#index" id="goto-top">TOP</a>
+    <a href="#extras" id="goto-bottom">Links/Blogroll</a>
+
+        <header id="banner" class="body">
+                <h1><a href="../."><img src=".././theme/images/brainacle_logo.png" alt="Brainacle "/></a></h1>
+                <nav><ul>
+                    <li><a href="../.">Home</a></li>
+                
+                
+                
+                    <li><a href=".././pages/about.html">About</a></li>
+                
+                
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
+                
+                    <li ><a href=".././category/Coding.html">Coding</a></li>
+                
+                    <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                <li><a href=".././archives.html">Archives</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+                
+
+        
+    
+        <aside id="featured" class="body"><article>
+                <h1 class="entry-title"><a href=".././pgbouncer-makes-a-difference.html">Pgbouncer Makes a Difference</a></h1> 
+                <footer class="post-info">
+                        <abbr class="published" title="2010-06-15T23:17:00">
+                                Tue 15 June 2010
+                        </abbr>
+
+                        
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Vasil Vangelovski</a>
+                        </address>
+                        
+                <p>In <a href=".././category/Sys.html">Sys</a>. </p>
+                <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/pgbouncer.html">pgbouncer</a> <a href=".././tag/pgpool.html">pgpool</a> <a href=".././tag/postgresql.html">postgresql</a> </p>
+</p>
+                </footer><!-- /.post-info -->
+                <p>Last week I was building VMware images for database and web server
+appliances that would host a fairly large Django application. The
+application is backed by a PostgreSQL database and I was looking for
+some info on compiling/configuring pgpool on Debian (I like to compile
+stuff when I can, especially when the last version of Debian is 2
+years old). Googling around I came across some very interesting posts
+on mailing lists and SO regarding Django, PostgeSQL and connection
+pooling.</p>
+<p>Among other things, people seem to have a notion that using pooling
+middleware won’t accomplish much as the web server still needs to open
+a TCP connection and that is the source of a noticeable overhead for
+each request. So they’ve come up with solutions to avoid opening TCP
+connections as much as possible, trying to accomplish something
+similar to what SQLAlchemy’s connection pool does, keeping the web
+server connected to the database with multiple connections at all
+times. These solutions of course range from changing the code in
+django.db.backends.... to monkey-patching it.</p>
+<p>When you change Django’s code you’ve just created a fork of a growing
+and evolving open source project and based your own project around
+that fork you have to maintain yourself. Monkey-patching is not as
+bad, but comes very close regarding maintenance problems. And is all
+that really necessary?</p>
+<div class="section" id="the-overhead-doesnt-stem-from-opening-tcp-connections">
+<h2>The Overhead Doesn’t Stem From Opening TCP Connections</h2>
+<p>Every time you open a database connection (session) to execute some
+SQL on a Postgres database the Postgres server spawns a new process
+and upon closing the connection (session) from your application that
+process is shut down. With the way Django handles database sessions
+this is repeated for every request. Which means for every request
+Postgres will have to spawn a new worker process that will last for
+the duration of the database session involved in responding to that
+HTTP request. The overhead involved in opening a TCP connection to a
+process running on the same machine or on the same network is not much
+compared to the overhead involved in spawning a new process.</p>
+</div>
+<div class="section" id="solutions-do-exist">
+<h2>Solutions Do Exist</h2>
+<p>So if the overhead for each request comes from spawning new processes
+then the obvious solution would be to keep that at a minimum level. If
+you keep the connections to the database server open and reuse them
+for every request then the processes spawned at the time the
+connections were established would be reused as the connections are
+reused.</p>
+<p>But you don’t have to keep your web server connected to the database
+server to achieve this. Two more popular solutions are pgpool II and
+pgbouncer. Both are designed as sort of middleware proxies that sit
+between your application and your database. Pgpool is more of a
+replication and load balancing solution than a connection pool. It
+works as a connection pool because at each connection opened by your
+application to pgpool it will have a separate process handling that
+connection, but it will keep those processes alive and connected to
+the Postgres server even after your application closes those
+connections. So using it would have the effect of lowering the net
+amount of new processes created to serve a certain number of requests
+to your web application. Pgbouncer on the other hand handles all the
+requests between your application and Postgres in a highly efficient
+asynchronous manner by utilizing libevent and not using
+multiprocessing at all, and it will keep the initially opened
+connections for a longer time after your application closes them, so
+making a new connection to pgbouncer will rarely result in Postges
+spawning a process.</p>
+</div>
+<div class="section" id="the-proof">
+<h2>The Proof</h2>
+<p>To prove that solutions like pgbouncer do make a difference I created
+a simple test scenario. A very small Django project with one page
+displaying 5 rows from a table in a PostgreSQL database. Both the
+database server and the web server (Apache with mod-wsgi in daemon
+mode) running on one small VM with 1GB of RAM and 4 CPU cores
+assigned.</p>
+<p>In the first test I configured the application to connect to the
+database server directly and put the page under
+<a class="reference external" href="http://www.joedog.org/index/siege-home">siege</a> with 1, 5, 15,</p>
+<p>50, 100 and 200 concurrent requests, each session lasting for 1
+minute. Then I repeated the process with the application configured to
+connect to pgbouncer instead. The results show something close to a
+50% increase in responsiveness:</p>
+<img alt="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;oid=2&amp;zx=8zp184e7ixus" src="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;oid=2&amp;zx=8zp184e7ixus" />
+</div>
+
+        </article></aside><!-- /#featured -->
+        
+    
+
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+
+
+        <section id="extras" class="body">
+        
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                        
+                            <li><a href="http://atomidata.com/">Atomidata</a></li>
+                        
+                            <li><a href="http://pressedweb.com/">Pressed Web</a></li>
+                        
+                            <li><a href="http://flyeyedesign.com">Flyeye Design</a></li>
+                        
+                            <li><a href="/archives.html">Archives</a></li>
+                        
+                        </ul>
+                </div><!-- /.blogroll -->
+        
+        
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href=".././feeds/all.atom.xml" rel="alternate">atom feed</a></li>
+                            
+
+                        
+                            <li><a href="http://twitter.com/dekomote">@dekomote</a></li>
+                        
+                            <li><a href="http://twitter.com/itarpeyo">@ItarPeyo</a></li>
+                        
+                            <li><a href="https://bitbucket.org/vvangelovski/">Vasil's Bitbucket</a></li>
+                        
+                            <li><a href="https://bitbucket.org/dekomote/">Dejan's Bitbucket</a></li>
+                        
+                            <li><a href="https://github.com/dekomote">Dejan's Github</a></li>
+                        
+                            <li><a href="https://github.com/vvangelovski">Vasil's Github</a></li>
+                        
+                            <li><a href="mailto:info@atomidata.com">Mail Us</a></li>
+                        
+                        </ul>
+                </div><!-- /.social -->
+        
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                &copy; Brainacle 2011 | Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+
+
+</body>
+</html>

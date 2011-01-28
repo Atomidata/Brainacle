@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Brainacle - face-detection</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href=".././theme/css/main.css" type="text/css" />
+        <link href=".././feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Brainacle ATOM Feed" />
+        
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie.css"/>
+                <script src=".././js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+    <a href="#index" id="goto-top">TOP</a>
+    <a href="#extras" id="goto-bottom">Links/Blogroll</a>
+
+        <header id="banner" class="body">
+                <h1><a href="../."><img src=".././theme/images/brainacle_logo.png" alt="Brainacle "/></a></h1>
+                <nav><ul>
+                    <li><a href="../.">Home</a></li>
+                
+                
+                
+                    <li><a href=".././pages/about.html">About</a></li>
+                
+                
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
+                
+                    <li ><a href=".././category/Coding.html">Coding</a></li>
+                
+                    <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                <li><a href=".././archives.html">Archives</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+                
+
+        
+    
+        <aside id="featured" class="body"><article>
+                <h1 class="entry-title"><a href=".././pyfacedetect.html">PyFaceDetect</a></h1> 
+                <footer class="post-info">
+                        <abbr class="published" title="2010-12-28T18:00:00">
+                                Tue 28 December 2010
+                        </abbr>
+
+                        
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        
+                <p>In <a href=".././category/Coding.html">Coding</a>. </p>
+                <p>tags: <a href=".././tag/python.html">python</a> <a href=".././tag/opencv.html">opencv</a> <a href=".././tag/face-detection.html">face-detection</a> </p>
+</p>
+                </footer><!-- /.post-info -->
+                <p>PyFaceDetect is a thin wrapper around <a class="reference external" href="http://opencv.willowgarage.com">OpenCV</a> for detection and marking faces in images.</p>
+<p>The module can be used as an API or in console for testing purposes. For usage and options:</p>
+<div class="highlight"><pre>python pyfacedetect.py -h
+</pre></div>
+<div class="section" id="sample-input">
+<h2>Sample input</h2>
+<img alt="http://i.imgur.com/5Lq4O.jpg" src="http://i.imgur.com/5Lq4O.jpg" />
+</div>
+<div class="section" id="sample-output">
+<h2>Sample output</h2>
+<img alt="http://i.imgur.com/56aTg.jpg" src="http://i.imgur.com/56aTg.jpg" />
+<p>The module consists of 2 classes:</p>
+<blockquote>
+<p>OcvDetector that wraps OpenCV Api for face detection and can be used bare
+without the helper methods for loading images, marking faces, or getting
+human friendly output</p>
+<p>FaceDetect - full feature class that extends OcvDetector and adds helper
+methods for loading/marking/outputing/saving images and dumping faces in
+json.</p>
+</blockquote>
+<p>You can enable scaning for profiles for quantity of faces by setting
+SCAN_FOR_PROFILES to True. That, however will give some overlapping rectangles.</p>
+<p>Try and tweak MIN_FACE_SIZE, HAAR_SCALE and MIN_NEIGHBORS so you can change the
+accuracy of the detection. For more info, read
+<a class="reference external" href="http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html">http://opencv.willowgarage.com/documentation/python/objdetect_cascade_classification.html</a></p>
+<p>For speed, all images above 1000width or 1000h are scaled to 1000w or 1000h max.</p>
+</div>
+<div class="section" id="api-usage">
+<h2>API Usage</h2>
+<div class="highlight"><pre>face_detect = new FaceDetect()
+
+face_detect.image_from_file(file_name)#load from file
+
+face_detect.image_from_input(input_id)#load 1 frame from video input
+
+face_detect.detect_faces()#stores faces in local list
+
+face_detect.overlay_image(rgb_border = (255,0,0), width = 2) #overlays original image with rectangles around detected faces.
+
+face_detect.to_json()#returns json string with faces rectangles
+
+face_detect.output_image()#shows image in window
+
+face_detect.save_image(file_name)#saves overlaid image to file_name
+</pre></div>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies</h2>
+<p><a class="reference external" href="http://opencv.willowgarage.com/wiki/">OpenCV 2.1+</a> and Argparse</p>
+</div>
+<div class="section" id="source">
+<h2>Source</h2>
+<p><a class="reference external" href="https://bitbucket.org/dekomote/pyfacedetect">Bitbucket</a>
+<a class="reference external" href="https://github.com/dekomote/pyfacedetect">GitHub</a></p>
+</div>
+
+        </article></aside><!-- /#featured -->
+        
+    
+
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+
+
+        <section id="extras" class="body">
+        
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                        
+                            <li><a href="http://atomidata.com/">Atomidata</a></li>
+                        
+                            <li><a href="http://pressedweb.com/">Pressed Web</a></li>
+                        
+                            <li><a href="http://flyeyedesign.com">Flyeye Design</a></li>
+                        
+                            <li><a href="/archives.html">Archives</a></li>
+                        
+                        </ul>
+                </div><!-- /.blogroll -->
+        
+        
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href=".././feeds/all.atom.xml" rel="alternate">atom feed</a></li>
+                            
+
+                        
+                            <li><a href="http://twitter.com/dekomote">@dekomote</a></li>
+                        
+                            <li><a href="http://twitter.com/itarpeyo">@ItarPeyo</a></li>
+                        
+                            <li><a href="https://bitbucket.org/vvangelovski/">Vasil's Bitbucket</a></li>
+                        
+                            <li><a href="https://bitbucket.org/dekomote/">Dejan's Bitbucket</a></li>
+                        
+                            <li><a href="https://github.com/dekomote">Dejan's Github</a></li>
+                        
+                            <li><a href="https://github.com/vvangelovski">Vasil's Github</a></li>
+                        
+                            <li><a href="mailto:info@atomidata.com">Mail Us</a></li>
+                        
+                        </ul>
+                </div><!-- /.social -->
+        
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                &copy; Brainacle 2011 | Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+
+
+</body>
+</html>

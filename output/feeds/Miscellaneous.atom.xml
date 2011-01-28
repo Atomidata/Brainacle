@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Miscellaneous.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-01-05T01:47:00Z</updated><entry><title>How to easily enable r600g Gallium3D in Ubuntu and Ubuntu derivatives for radeon</title><link href="http://brainacle.com/how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html" rel="alternate"></link><updated>2011-01-05T01:47:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-05:/how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html/</id><summary type="html">&lt;p&gt;Gallium3D is a software library for 3D graphics device drivers developed by VMware. It's the next big thing in linux graphic drivers world. At the moment, it drives the old (sub r300) ATI graphic cards
+and it is in a very active development for NVidia and newer ATI(AMD) hardware. You can read more about Gallium &lt;a class="reference external" href="http://wiki.freedesktop.org/wiki/Software/gallium"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Last three weeks I became obsessed with the open source radeon driver. There is a lot of buzz going on there, a lot of optimizations and development (much expected in kernel 2.6.38) which is pretty much covered on the forums of
+&lt;a class="reference external" href="http://phoronix.com"&gt;Phoronix&lt;/a&gt;. I decided to take a spin on new drivers, the development versions of &lt;a class="reference external" href="http://www.mesa3d.org/"&gt;Mesa&lt;/a&gt; and a newer kernel 2.6.37 from the
+&lt;a class="reference external" href="http://kernel.ubuntu.com/~kernel-ppa/mainline/"&gt;Ubuntu mainline builds&lt;/a&gt;. I have an R700 based ATI HD4650. The gallium driver for this card is r600g. It shows many improvements and
+optimizations but it's still in development cycle, unlike the driver for older cards r300g which is pretty much the default driver in Meerkat. Because of it's status, r600g is tricky to install
+especially if you aren't comfortable with building git versions with compiler switches that enable gallium in mesa. But, thanks to the guys at &lt;a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/ppa"&gt;Xorg-edgers PPA&lt;/a&gt;
+the simple mortals can have gallium on Ubuntu as easy as installing a video player.&lt;/p&gt;
+&lt;p&gt;Xorg-edgers PPA states that if you install the packages from the main PPA (ppa:xorg-edgers/ppa) and add Option &amp;quot;ForceGallium&amp;quot; &amp;quot;true&amp;quot; in xorg.conf, r600g will be used.
+However, if this doesn't work with the latest updates, check &lt;a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/radeon"&gt;Xorg-edgers/radeon&lt;/a&gt;. Packages from this PPA enable gallium
+by default. The only thing you need to do is add it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-add-repository ppa:xorg-edgers/radeon
+sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now if you installed the driver/gl stack from /radeon you should delete xorg.conf if you don't have any monitor specific lines there. If you used the main ppa, you should add that option &amp;quot;ForceGallium&amp;quot; inside the device section and &lt;em&gt;voila&lt;/em&gt;, you have r600g driver running.&lt;/p&gt;
+&lt;p&gt;I tested this with stock kernel 2.6.35 and updated 2.6.37 and it works pretty good. There is huge performance gain which I felt playing Penumbra Overture. On high settings, 1920x1200 resolution, the game is flying. Video is smooth, compiz works great and games play smoother.
+The 2.6.38 kernel brings even more good news for radeon users. Massive performance gain with the &lt;a class="reference external" href="http://www.phoronix.com/scan.php?page=news_item&amp;amp;px=OTAwNA"&gt;PageFlipping&lt;/a&gt; and the CollorTilling implementations in the radeon driver give it a big boost.
+We just have to wait for a more stable version of the kernel. The kernel is at rc2 stage at the moment of writing.&lt;/p&gt;
+&lt;p&gt;Anyway, Kudos to the open source driver developers, better make that to ALL open source developers involved in Linux.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This post is a general guideline for installing the
+Gallium3D radeon driver for linux practiced by the author. The author
+will not accept any liability for any damages/data-loss caused using
+the technique described above.&lt;/p&gt;
+</summary><category term="linux"></category><category term="ati"></category><category term="drivers"></category></entry><entry><title>Install Proprietary ATI 10.8 drivers on Ubuntu Lucid / Linux Mint</title><link href="http://brainacle.com/install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html" rel="alternate"></link><updated>2010-09-09T20:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2010-09-09:/install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html/</id><summary type="html">&lt;p&gt;I will digress a bit from the theme of the blog, but seeing a lot of
+people having issues with installing the ATI drivers on Ubuntu, I
+decided to put my thoughts and experience with it here.&lt;/p&gt;
+&lt;p&gt;I have experimented with the drivers quite a bit. I own Sapphire
+Radeon HD 4650, and always try out games on Wine(i wish all of them
+worked in Gnu/Linux) which is the reason I need updated drivers on my
+rig. Two weeks ago, AMD(then ATI) updated the drivers to 10.8
+version. By their claims, these drivers introduce some performance
+gain, bugfixes and general stability. I installed the driver 30
+minutes before writing this post and it actually works pretty good.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Now for the technical part:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;What you need is a rig with AMD graphic card powered by a &lt;a class="reference external" href="http://linuxmint.com/"&gt;Linux Mint&lt;/a&gt;
+or &lt;a class="reference external" href="http://ubuntu.org/"&gt;Ubuntu Lucid distro&lt;/a&gt; with installed
+build-essential. Driver (which
+in fact is shell script) can be downloaded &lt;a class="reference external" href="http://support.amd.com/us/gpudownload/Pages/index.aspx"&gt;Here&lt;/a&gt;. The script is called
+ati-driver-installer-[version]-[CPU architecture].run. Download it to
+new empty folder - lets call it ati in home folder.&lt;/p&gt;
+&lt;p&gt;Now we have the driver and we can start with installation. Before we
+actually commence the installation, we have to purge/remove the old
+ati driver from the system. You should try these commands to remove
+it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-get purge fglrx
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo sh /usr/share/fglrx/fglrx-uninstall.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After the removing is done, reboot the PC. You could be asked to turn
+the graphics to low details (safe mode). Do that. Next, open a
+terminal and navigate to the folder with the driver.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd ~/ati/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add permissions for execution to the script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;chmod +x ati-driver-installer-[version]-[CPU architecture].run
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Generate distro-specific packages(for lucid or mint 9):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –buildpkg Ubuntu/lucid
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or list all available distro builds:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –listpkg
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After this operation (if everything went ok) you will have several
+.deb packages. Install them with the next command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo dpkg -i *.deb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The drivers are installed. If this is your first ATI driver
+installation, invoke next command to make the initial config:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo aticonfig –initial
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reboot the PC, and you’ll have the drivers installed. If you have any
+problems, refer to the Installation Instructions on the driver’s
+download page.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This post is a general guideline for installing the
+proprietary ati drivers for linux practiced by the author. The author
+will not accept any liability for any damages/data-loss caused using
+the technique described above.&lt;/p&gt;
+</summary><category term="linux"></category><category term="ati"></category><category term="drivers"></category></entry></feed>

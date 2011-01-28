@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <title></title>
+    <script src="jquery.js" type="text/javascript" charset="utf-8">
+        
+    </script>   
+    <script src="Carousel3D3.js" type="text/javascript" charset="utf-8">
+        
+    </script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function(){
+               $('#carouselthreed').carousel3D({
+                    speed: 900,
+                    perspectiveZoom: 70,
+                    sideOffset: 80,
+                    topOffset:0,
+                    secondaryOpacity: .35,
+                    emClass:'tdc-element'
+                }); 
+    </script>
+</head>
+<body>
+   <div style="height:200px;" id="carouselthreed"><p>                
+                <img src="fly1.jpg" style="cursor:pointer" alt="" class="tdc-element">
+                <img src="gates1.jpg" style="cursor:pointer;width:250px;height:164px;" alt="" class="tdc-element">
+                <img src="penguins1.jpg" style="cursor:pointer" alt="" class="tdc-element">
+</div> 
+</body>
+</html>
