@@ -1,5 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Coding.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-01-23T00:55:00Z</updated><entry><title>W3cValidate.vim</title><link href="http://brainacle.com/w3cvalidatevim.html" rel="alternate"></link><updated>2011-01-23T00:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-23:/w3cvalidatevim.html/</id><summary type="html">&lt;p&gt;W3cValidate.vim is a plugin that enables buffer/url validation using the &lt;a class="reference external" href="http://validator.w3.org"&gt;W3 Validator&lt;/a&gt; API.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Coding.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-02-03T14:58:00Z</updated><entry><title>How to write vim plugins with python</title><link href="http://brainacle.com/how-to-write-vim-plugins-with-python.html" rel="alternate"></link><updated>2011-02-03T14:58:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-02-03:/how-to-write-vim-plugins-with-python.html/</id><summary type="html">&lt;p&gt;I'm not going to dive into how good or extendible Vim is. If you are reading this
+article, you probably know that. The thing that makes Vim so good, is the
+scripting environment behind it called VimL. Using this scripting language,
+you can write any functionality/plugin you need for Vim. Each plugin you use
+is written in this language. Here's the best part. You only need very little
+knowledge of VimL to be able to write plugins, if you know Python (or Ruby).&lt;/p&gt;
+&lt;div class="section" id="what-s-a-vim-plugin-anyway"&gt;
+&lt;h2&gt;What's a vim plugin anyway&lt;/h2&gt;
+&lt;p&gt;A Vim plugin is a .vim script that defines functions, mappings, syntax rules,
+commands that may, or may
+not, manipulate the windows, buffers, lines. It is a complete piece of code with
+some specific functionality. Usually, a plugin consists of several functions
+mappings command definitions and event hooks. When writing vim plugins with Python, often, everything
+outside the functions is written in VimL. But those are vim commands and they
+can be learned fast. In fact, VimL can be learned fast, but using python gives
+so much flexibility. Think about using urllib/httplib/simplejson for accessing
+some web service that helps editing in Vim. This is why most of the plugins that
+work with web services are usually done in VimL+Python.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="any-prerequisites"&gt;
+&lt;h2&gt;Any prerequisites?&lt;/h2&gt;
+&lt;p&gt;You must have vim compiled with +python support. You can check that using the
+command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim --version | grep +python
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Vim package in Ubuntu and it's derivatives comes with +python support.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="to-work-vimmit-vim"&gt;
+&lt;h2&gt;To Work - Vimmit.vim&lt;/h2&gt;
+&lt;p&gt;What's better than starting with a simple example? This is a plugin that,
+when called, will retrieve the homepage of &lt;a class="reference external" href="http://reddit.com"&gt;Reddit&lt;/a&gt;
+and will display it in the current buffer.&lt;/p&gt;
+&lt;p&gt;Start by opening &amp;quot;vimmit.vim&amp;quot; file (in vim). Since we are writing python code,
+its good to check if Vim supports Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;if !has(&amp;#39;python&amp;#39;)
+    echo &amp;quot;Error: Required vim compiled with +python&amp;quot;
+    finish
+endif
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This piece is writen in VimL. It's best if we stick to VimL for things like this,
+mappings and event hooks. This function will check if Vim has python support or
+it will end the script with an error message.&lt;/p&gt;
+&lt;p&gt;We continue with the main function Reddit(). This is where we use Python and do
+the main functionality:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;quot; Vim comments start with a double quote.
+&amp;quot; Function definition is VimL. We can mix VimL and Python in
+&amp;quot; function definition.
+function! Reddit()
+
+&amp;quot; We start the python code like the next line.
+
+python &amp;lt;&amp;lt; EOF
+# the vim module contains everything we need to interface with vim from
+# python. We need urllib2 for the web service consumer.
+import vim, urllib2
+# we need json for parsing the response
+import json
+
+# we define a timeout that we&amp;#39;ll use in the API call. We don&amp;#39;t want
+# users to wait much.
+TIMEOUT = 20
+URL = &amp;quot;http://reddit.com/.json&amp;quot;
+
+try:
+    # Get the posts and parse the json response
+    response = urllib2.urlopen(URL, None, TIMEOUT).read()
+    json_response = json.loads(response)
+
+    posts = json_response.get(&amp;quot;data&amp;quot;, &amp;quot;&amp;quot;).get(&amp;quot;children&amp;quot;, &amp;quot;&amp;quot;)
+
+    # vim.current.buffer is the current buffer. It&amp;#39;s list-like object.
+    # each line is an item in the list. We can loop through them delete
+    # them, alter them etc.
+    # Here we delete all lines in the current buffer
+    del vim.current.buffer[:]
+
+    # Here we append some lines above. Aesthetics.
+    vim.current.buffer[0] = 80*&amp;quot;-&amp;quot;
+
+    for post in posts:
+        # In the next few lines, we get the post details
+        post_data = post.get(&amp;quot;data&amp;quot;, {})
+        up = post_data.get(&amp;quot;ups&amp;quot;, 0)
+        down = post_data.get(&amp;quot;downs&amp;quot;, 0)
+        title = post_data.get(&amp;quot;title&amp;quot;, &amp;quot;NO TITLE&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
+        score = post_data.get(&amp;quot;score&amp;quot;, 0)
+        permalink = post_data.get(&amp;quot;permalink&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
+        url = post_data.get(&amp;quot;url&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
+        comments = post_data.get(&amp;quot;num_comments&amp;quot;)
+
+        # And here we append line by line to the buffer.
+        # First the upvotes
+        vim.current.buffer.append(&amp;quot;↑ %s&amp;quot;%up)
+        # Then the title and the url
+        vim.current.buffer.append(&amp;quot;    %s [%s]&amp;quot;%(title, url,))
+        # Then the downvotes and number of comments
+        vim.current.buffer.append(&amp;quot;↓ %s    | comments: %s [%s]&amp;quot;%(down, comments, permalink,))
+        # And last we append some &amp;quot;-&amp;quot; for visual appeal.
+        vim.current.buffer.append(80*&amp;quot;-&amp;quot;)
+
+except Exception, e:
+    print e
+
+EOF
+&amp;quot; Here the python code is closed. We can continue writing VimL or python again.
+endfunction
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Save the file, source it in vim (:source vimmit.vim) and:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;:call Reddit()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, the way we call the function is not so elegant. So we define a command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;command! -nargs=0 Reddit call Reddit()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We define the command :Reddit to call the function. After adding this, open a
+new bufer and do :Reddit . Home page will be loaded in the buffer. The -nargs
+argument states how many arguments the command will take.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="function-arguments-eval-and-command"&gt;
+&lt;h2&gt;Function Arguments, Eval and Command&lt;/h2&gt;
+&lt;p&gt;Q: How does one access functional arguments?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;function! SomeName(arg1, arg2, arg3)
+    &amp;quot; Get the first argument by name in VimL
+    let firstarg=a:arg1
+
+    &amp;quot; Get the second argument by position in Viml
+    let secondarg=a:1
+
+    &amp;quot; Get the arguments in python
+
+    python &amp;lt;&amp;lt; EOF
+    import vim
+
+    first_argument = vim.eval(&amp;quot;a:arg1&amp;quot;) #or vim.eval(&amp;quot;a:0&amp;quot;)
+    second_argument = vim.eval(&amp;quot;a:arg2&amp;quot;) #or vim.eval(&amp;quot;a:1&amp;quot;)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can define a function with arbitrary number of arguments by putting &amp;quot;...&amp;quot;
+instead of argument names. You can access these arguments only by position,
+and you can mix them with named arguments (arg1, arg2, ...)&lt;/p&gt;
+&lt;p&gt;Q: How can I call Vim commands from Python?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vim.command(&amp;quot;[vim-command-here]&amp;quot;)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Q: How to define global variables and access them in VimL and Python?&lt;/p&gt;
+&lt;p&gt;Global vars are prefixed with g:. If you want to define one in your script,
+best thing to do is check if it exists and if doesn't define it and assign some
+default value to it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;if !exists(&amp;quot;g:reddit_apicall_timeout&amp;quot;)
+    let g:reddit_apicall_timeout=40
+endif
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can access it from python using the vim module:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;TIMEOUT = vim.eval(&amp;quot;g:reddit_apicall_timeout&amp;quot;)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you want to override this setting, you can write:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;let g:reddit_apicall_timeout=60
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;in .vimrc .&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="additional-notes"&gt;
+&lt;h2&gt;Additional Notes&lt;/h2&gt;
+&lt;p&gt;VimL is pretty easy once you try it. Remember that print works and
+everything you can do with python, you can do in here. &lt;a class="reference external" href="http://vimdoc.sourceforge.net/htmldoc/if_pyth.html#python-vim"&gt;Here&lt;/a&gt;
+you can find the documentation for the vim python module. Vimdoc is the possibly
+the only resource you will need when writing vim plugins.&lt;/p&gt;
+&lt;p&gt;You can also check this &lt;a class="reference external" href="https://www.ibm.com/developerworks/aix/library/au-vimplugin/"&gt;IBM developerWorks article&lt;/a&gt; .&lt;/p&gt;
+&lt;p&gt;Now, try to extend &amp;quot;vimmit.vim&amp;quot; so the user is able to choose a subreddit (as a
+first functional argument).&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="plugin"></category><category term="vim"></category><category term="coding"></category></entry><entry><title>W3cValidate.vim</title><link href="http://brainacle.com/w3cvalidatevim.html" rel="alternate"></link><updated>2011-01-23T00:55:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-01-23:/w3cvalidatevim.html/</id><summary type="html">&lt;p&gt;W3cValidate.vim is a plugin that enables buffer/url validation using the &lt;a class="reference external" href="http://validator.w3.org"&gt;W3 Validator&lt;/a&gt; API.&lt;/p&gt;
 &lt;div class="section" id="usage"&gt;
 &lt;h2&gt;Usage&lt;/h2&gt;
 &lt;p&gt;Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use&lt;/p&gt;

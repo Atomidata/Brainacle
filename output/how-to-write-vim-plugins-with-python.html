@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>How to write vim plugins with python</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Brainacle ATOM Feed" />
+        
+
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+    <a href="#index" id="goto-top">TOP</a>
+    <a href="#extras" id="goto-bottom">Links/Blogroll</a>
+
+<a href="https://github.com/dekomote/Brainacle">
+
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+
+</a>
+
+        <header id="banner" class="body">
+                <h1><a href="."><img src="./theme/images/brainacle_logo.png" alt="Brainacle "/></a></h1>
+                <nav><ul>
+                    <li><a href=".">Home</a></li>
+                
+                
+                
+                    <li><a href="./pages/about.html">About</a></li>
+                
+                
+                
+                    <li ><a href="./category/Sys.html">Sys</a></li>
+                
+                    <li class="active"><a href="./category/Coding.html">Coding</a></li>
+                
+                    <li ><a href="./category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                <li><a href="./archives.html">Archives</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+                
+<section id="content" class="body">    
+<article>
+        <header> <h1 class="entry-title"><a href="how-to-write-vim-plugins-with-python.html"
+        rel="bookmark" title="Permalink to How to write vim plugins with python">How to write vim plugins with python</a></h1> 
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dekomote">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+ </header>
+        <div class="entry-content">
+        <footer class="post-info">
+                <abbr class="published" title="2011-02-03T14:58:00">
+                    Thu 03 February 2011
+                </abbr>
+                
+                <address class="vcard author">
+                        By <a class="url fn" href="#">Dejan Noveski</a>
+                </address>
+                
+                <p>In <a href="./category/Coding.html">Coding</a>. 
+        <p>tags: <a href="./tag/python.html">python</a> <a href="./tag/plugin.html">plugin</a> <a href="./tag/vim.html">vim</a> <a href="./tag/coding.html">coding</a> </p>
+</p>
+        </footer><!-- /.post-info -->
+        <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
+article, you probably know that. The thing that makes Vim so good, is the
+scripting environment behind it called VimL. Using this scripting language,
+you can write any functionality/plugin you need for Vim. Each plugin you use
+is written in this language. Here's the best part. You only need very little
+knowledge of VimL to be able to write plugins, if you know Python (or Ruby).</p>
+<div class="section" id="what-s-a-vim-plugin-anyway">
+<h2>What's a vim plugin anyway</h2>
+<p>A Vim plugin is a .vim script that defines functions, mappings, syntax rules,
+commands that may, or may
+not, manipulate the windows, buffers, lines. It is a complete piece of code with
+some specific functionality. Usually, a plugin consists of several functions
+mappings command definitions and event hooks. When writing vim plugins with Python, often, everything
+outside the functions is written in VimL. But those are vim commands and they
+can be learned fast. In fact, VimL can be learned fast, but using python gives
+so much flexibility. Think about using urllib/httplib/simplejson for accessing
+some web service that helps editing in Vim. This is why most of the plugins that
+work with web services are usually done in VimL+Python.</p>
+</div>
+<div class="section" id="any-prerequisites">
+<h2>Any prerequisites?</h2>
+<p>You must have vim compiled with +python support. You can check that using the
+command:</p>
+<div class="highlight"><pre>vim --version | grep +python
+</pre></div>
+<p>Vim package in Ubuntu and it's derivatives comes with +python support.</p>
+</div>
+<div class="section" id="to-work-vimmit-vim">
+<h2>To Work - Vimmit.vim</h2>
+<p>What's better than starting with a simple example? This is a plugin that,
+when called, will retrieve the homepage of <a class="reference external" href="http://reddit.com">Reddit</a>
+and will display it in the current buffer.</p>
+<p>Start by opening &quot;vimmit.vim&quot; file (in vim). Since we are writing python code,
+its good to check if Vim supports Python:</p>
+<div class="highlight"><pre>if !has(&#39;python&#39;)
+    echo &quot;Error: Required vim compiled with +python&quot;
+    finish
+endif
+</pre></div>
+<p>This piece is writen in VimL. It's best if we stick to VimL for things like this,
+mappings and event hooks. This function will check if Vim has python support or
+it will end the script with an error message.</p>
+<p>We continue with the main function Reddit(). This is where we use Python and do
+the main functionality:</p>
+<div class="highlight"><pre>&quot; Vim comments start with a double quote.
+&quot; Function definition is VimL. We can mix VimL and Python in
+&quot; function definition.
+function! Reddit()
+
+&quot; We start the python code like the next line.
+
+python &lt;&lt; EOF
+# the vim module contains everything we need to interface with vim from
+# python. We need urllib2 for the web service consumer.
+import vim, urllib2
+# we need json for parsing the response
+import json
+
+# we define a timeout that we&#39;ll use in the API call. We don&#39;t want
+# users to wait much.
+TIMEOUT = 20
+URL = &quot;http://reddit.com/.json&quot;
+
+try:
+    # Get the posts and parse the json response
+    response = urllib2.urlopen(URL, None, TIMEOUT).read()
+    json_response = json.loads(response)
+
+    posts = json_response.get(&quot;data&quot;, &quot;&quot;).get(&quot;children&quot;, &quot;&quot;)
+
+    # vim.current.buffer is the current buffer. It&#39;s list-like object.
+    # each line is an item in the list. We can loop through them delete
+    # them, alter them etc.
+    # Here we delete all lines in the current buffer
+    del vim.current.buffer[:]
+
+    # Here we append some lines above. Aesthetics.
+    vim.current.buffer[0] = 80*&quot;-&quot;
+
+    for post in posts:
+        # In the next few lines, we get the post details
+        post_data = post.get(&quot;data&quot;, {})
+        up = post_data.get(&quot;ups&quot;, 0)
+        down = post_data.get(&quot;downs&quot;, 0)
+        title = post_data.get(&quot;title&quot;, &quot;NO TITLE&quot;).encode(&quot;utf-8&quot;)
+        score = post_data.get(&quot;score&quot;, 0)
+        permalink = post_data.get(&quot;permalink&quot;).encode(&quot;utf-8&quot;)
+        url = post_data.get(&quot;url&quot;).encode(&quot;utf-8&quot;)
+        comments = post_data.get(&quot;num_comments&quot;)
+
+        # And here we append line by line to the buffer.
+        # First the upvotes
+        vim.current.buffer.append(&quot;↑ %s&quot;%up)
+        # Then the title and the url
+        vim.current.buffer.append(&quot;    %s [%s]&quot;%(title, url,))
+        # Then the downvotes and number of comments
+        vim.current.buffer.append(&quot;↓ %s    | comments: %s [%s]&quot;%(down, comments, permalink,))
+        # And last we append some &quot;-&quot; for visual appeal.
+        vim.current.buffer.append(80*&quot;-&quot;)
+
+except Exception, e:
+    print e
+
+EOF
+&quot; Here the python code is closed. We can continue writing VimL or python again.
+endfunction
+</pre></div>
+<p>Save the file, source it in vim (:source vimmit.vim) and:</p>
+<div class="highlight"><pre>:call Reddit()
+</pre></div>
+<p>Now, the way we call the function is not so elegant. So we define a command:</p>
+<div class="highlight"><pre>command! -nargs=0 Reddit call Reddit()
+</pre></div>
+<p>We define the command :Reddit to call the function. After adding this, open a
+new bufer and do :Reddit . Home page will be loaded in the buffer. The -nargs
+argument states how many arguments the command will take.</p>
+</div>
+<div class="section" id="function-arguments-eval-and-command">
+<h2>Function Arguments, Eval and Command</h2>
+<p>Q: How does one access functional arguments?</p>
+<div class="highlight"><pre>function! SomeName(arg1, arg2, arg3)
+    &quot; Get the first argument by name in VimL
+    let firstarg=a:arg1
+
+    &quot; Get the second argument by position in Viml
+    let secondarg=a:1
+
+    &quot; Get the arguments in python
+
+    python &lt;&lt; EOF
+    import vim
+
+    first_argument = vim.eval(&quot;a:arg1&quot;) #or vim.eval(&quot;a:0&quot;)
+    second_argument = vim.eval(&quot;a:arg2&quot;) #or vim.eval(&quot;a:1&quot;)
+</pre></div>
+<p>You can define a function with arbitrary number of arguments by putting &quot;...&quot;
+instead of argument names. You can access these arguments only by position,
+and you can mix them with named arguments (arg1, arg2, ...)</p>
+<p>Q: How can I call Vim commands from Python?</p>
+<div class="highlight"><pre>vim.command(&quot;[vim-command-here]&quot;)
+</pre></div>
+<p>Q: How to define global variables and access them in VimL and Python?</p>
+<p>Global vars are prefixed with g:. If you want to define one in your script,
+best thing to do is check if it exists and if doesn't define it and assign some
+default value to it:</p>
+<div class="highlight"><pre>if !exists(&quot;g:reddit_apicall_timeout&quot;)
+    let g:reddit_apicall_timeout=40
+endif
+</pre></div>
+<p>You can access it from python using the vim module:</p>
+<div class="highlight"><pre>TIMEOUT = vim.eval(&quot;g:reddit_apicall_timeout&quot;)
+</pre></div>
+<p>If you want to override this setting, you can write:</p>
+<div class="highlight"><pre>let g:reddit_apicall_timeout=60
+</pre></div>
+<p>in .vimrc .</p>
+</div>
+<div class="section" id="additional-notes">
+<h2>Additional Notes</h2>
+<p>VimL is pretty easy once you try it. Remember that print works and
+everything you can do with python, you can do in here. <a class="reference external" href="http://vimdoc.sourceforge.net/htmldoc/if_pyth.html#python-vim">Here</a>
+you can find the documentation for the vim python module. Vimdoc is the possibly
+the only resource you will need when writing vim plugins.</p>
+<p>You can also check this <a class="reference external" href="https://www.ibm.com/developerworks/aix/library/au-vimplugin/">IBM developerWorks article</a> .</p>
+<p>Now, try to extend &quot;vimmit.vim&quot; so the user is able to choose a subreddit (as a
+first functional argument).</p>
+</div>
+
+        </div><!-- /.entry-content -->
+        
+        <div class="comments">
+        <h2>Comments !</h2>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+               var disqus_identifier = "how-to-write-vim-plugins-with-python.html";
+               (function() {
+               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+               dsq.src = 'http://Brainacle.disqus.com/embed.js';
+               (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+        </div>
+        
+
+</article>
+</section>
+
+        <section id="extras" class="body">
+        
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                        
+                            <li><a href="http://atomidata.com/">Atomidata</a></li>
+                        
+                            <li><a href="http://pressedweb.com/">Pressed Web</a></li>
+                        
+                            <li><a href="http://flyeyedesign.com">Flyeye Design</a></li>
+                        
+                            <li><a href="/archives.html">Archives</a></li>
+                        
+                        </ul>
+                </div><!-- /.blogroll -->
+        
+        
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="./feeds/all.atom.xml" rel="alternate">atom feed</a></li>
+                            
+
+                        
+                            <li><a href="http://twitter.com/dekomote">@dekomote</a></li>
+                        
+                            <li><a href="http://twitter.com/itarpeyo">@ItarPeyo</a></li>
+                        
+                            <li><a href="https://bitbucket.org/vvangelovski/">Vasil's Bitbucket</a></li>
+                        
+                            <li><a href="https://bitbucket.org/dekomote/">Dejan's Bitbucket</a></li>
+                        
+                            <li><a href="https://github.com/dekomote">Dejan's Github</a></li>
+                        
+                            <li><a href="https://github.com/vvangelovski">Vasil's Github</a></li>
+                        
+                            <li><a href="mailto:info@atomidata.com">Mail Us</a></li>
+                        
+                        </ul>
+                </div><!-- /.social -->
+        
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                &copy; Brainacle 2011 | Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+
+
+</body>
+</html>
