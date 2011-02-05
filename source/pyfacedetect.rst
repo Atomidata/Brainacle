@@ -11,7 +11,7 @@ PyFaceDetect is a thin wrapper around `OpenCV <http://opencv.willowgarage.com>`_
 
 The module can be used as an API or in console for testing purposes. For usage and options: 
 
-.. code-block:: Bash
+.. code-block:: bash
 
     python pyfacedetect.py -h
 
@@ -47,7 +47,7 @@ For speed, all images above 1000width or 1000h are scaled to 1000w or 1000h max.
 API Usage
 ---------
 
-.. code-block:: Python
+.. code-block:: python
 
     face_detect = new FaceDetect()
 

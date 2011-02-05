@@ -15,7 +15,7 @@ it is easy to implement and highly customizable. Works with images and other HTM
 `Here </static/uploads/jqcarousel3d/index.html>`_ you can check out a demo of
 the carousel. The JS embed code is:
 
-.. code-block:: Javascript
+.. code-block:: javascript
 
     $('#carouselthreed').carousel3D({
         speed: 900,
@@ -28,7 +28,7 @@ the carousel. The JS embed code is:
 
 And here is the HTML:
 
-.. code-block:: HTML
+.. code-block:: html
 
     <div id="carouselthreed">
         <img class="tdc-element" src="fly.jpg">

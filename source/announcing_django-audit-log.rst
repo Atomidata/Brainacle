@@ -48,7 +48,7 @@ The project is still under heavy development and there's no
 official release yet. Keep that in mind if you consider using it in
 production. The code can be downloaded from the mercurial repository:
 
-.. code-block:: Bash
+.. code-block:: bash
 
     hg clone https://django-audit-log.googlecode.com/hg/ django-audit-log
 

@@ -21,7 +21,7 @@ Xorg-edgers PPA states that if you install the packages from the main PPA (ppa:x
 However, if this doesn't work with the latest updates, check `Xorg-edgers/radeon <https://launchpad.net/~xorg-edgers/+archive/radeon>`_. Packages from this PPA enable gallium 
 by default. The only thing you need to do is add it: 
 
-.. code-block:: Bash
+.. code-block:: bash
 
     sudo apt-add-repository ppa:xorg-edgers/radeon
     sudo apt-get update && sudo apt-get upgrade

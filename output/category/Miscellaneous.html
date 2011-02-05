@@ -82,7 +82,7 @@ the simple mortals can have gallium on Ubuntu as easy as installing a video play
 However, if this doesn't work with the latest updates, check <a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/radeon">Xorg-edgers/radeon</a>. Packages from this PPA enable gallium
 by default. The only thing you need to do is add it:</p>
 <div class="highlight"><pre>sudo apt-add-repository ppa:xorg-edgers/radeon
-sudo apt-get update &amp;&amp; sudo apt-get upgrade
+sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
 </pre></div>
 <p>Now if you installed the driver/gl stack from /radeon you should delete xorg.conf if you don't have any monitor specific lines there. If you used the main ppa, you should add that option &quot;ForceGallium&quot; inside the device section and <em>voila</em>, you have r600g driver running.</p>
 <p>I tested this with stock kernel 2.6.35 and updated 2.6.37 and it works pretty good. There is huge performance gain which I felt playing Penumbra Overture. On high settings, 1920x1200 resolution, the game is flying. Video is smooth, compiz works great and games play smoother.

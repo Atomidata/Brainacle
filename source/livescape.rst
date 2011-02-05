@@ -13,7 +13,7 @@ The plugin is built simple, has simple implementation, it is very easy to
 use, yet very flexible. You only need the landscape image, the object images
 and one container.
 
-.. code-block:: Javascript
+.. code-block:: javascript
 
     $('#livescape').livescape({
         //height of the landscape (can be omitted)

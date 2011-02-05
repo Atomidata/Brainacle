@@ -107,21 +107,21 @@ install when preparing my development environment (before making
 virtualenvs). PIL provides a method for calculating the histogram of
 the image and solves most of our problems. The function for
 calculating the entropy looks like this:</p>
-<div class="highlight"><pre>import Image
-import math
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">Image</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
 
-def image_entropy(img):
-    &quot;&quot;&quot;calculate the entropy of an image&quot;&quot;&quot;
-    histogram = img.histogram()
-    histogram_length = sum(histogram)
+<span class="k">def</span> <span class="nf">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;calculate the entropy of an image&quot;&quot;&quot;</span>
+    <span class="n">histogram</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">histogram</span><span class="p">()</span>
+    <span class="n">histogram_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">histogram</span><span class="p">)</span>
 
-    samples_probability = [float(h) / histogram_length for h in histogram]
+    <span class="n">samples_probability</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">histogram_length</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">histogram</span><span class="p">]</span>
 
-    return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
+    <span class="k">return</span> <span class="o">-</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">samples_probability</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
 
-img = Image.open(&#39;headshot.jpg&#39;)
-print image_entropy(img)
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;headshot.jpg&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 <p>As you can see, PIL’s method for calculating the histogram really
 simplifies things and makes the functions seem slim and simple. All

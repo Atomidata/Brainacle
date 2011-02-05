@@ -34,7 +34,7 @@ Any prerequisites?
 You must have vim compiled with +python support. You can check that using the
 command:
 
-.. code-block:: Bash
+.. code-block:: bash
 
     vim --version | grep +python
 
@@ -50,7 +50,7 @@ and will display it in the current buffer.
 Start by opening "vimmit.vim" file (in vim). Since we are writing python code,
 its good to check if Vim supports Python:
 
-.. code-block:: VimL
+.. code-block:: vim
 
     if !has('python')
         echo "Error: Required vim compiled with +python"
@@ -64,7 +64,7 @@ it will end the script with an error message.
 We continue with the main function Reddit(). This is where we use Python and do
 the main functionality:
 
-.. code-block:: Python
+.. code-block:: python
 
     " Vim comments start with a double quote.
     " Function definition is VimL. We can mix VimL and Python in
@@ -131,13 +131,13 @@ the main functionality:
 
 Save the file, source it in vim (:source vimmit.vim) and:
 
-.. code-block:: Bash
+.. code-block:: bash
 
     :call Reddit()
 
 Now, the way we call the function is not so elegant. So we define a command:
 
-.. code-block:: VimL
+.. code-block:: vim 
 
     command! -nargs=0 Reddit call Reddit()
 
@@ -150,7 +150,7 @@ Function Arguments, Eval and Command
 
 Q: How does one access functional arguments?
 
-.. code-block:: VimL
+.. code-block:: vim 
 
     function! SomeName(arg1, arg2, arg3)
         " Get the first argument by name in VimL
@@ -173,7 +173,7 @@ and you can mix them with named arguments (arg1, arg2, ...)
 
 Q: How can I call Vim commands from Python?
 
-.. code-block:: VimL
+.. code-block:: vim
     
     vim.command("[vim-command-here]")
 
@@ -183,7 +183,7 @@ Global vars are prefixed with g:. If you want to define one in your script,
 best thing to do is check if it exists and if doesn't define it and assign some
 default value to it:
 
-.. code-block:: VimL
+.. code-block:: vim 
 
     if !exists("g:reddit_apicall_timeout")
         let g:reddit_apicall_timeout=40
@@ -191,13 +191,13 @@ default value to it:
 
 You can access it from python using the vim module:
 
-.. code-block:: Python
+.. code-block:: python
 
     TIMEOUT = vim.eval("g:reddit_apicall_timeout")
 
 If you want to override this setting, you can write:
 
-.. code-block:: VimL
+.. code-block:: vim
 
     let g:reddit_apicall_timeout=60
 

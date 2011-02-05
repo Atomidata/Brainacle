@@ -33,84 +33,84 @@ when called, will retrieve the homepage of &lt;a class="reference external" href
 and will display it in the current buffer.&lt;/p&gt;
 &lt;p&gt;Start by opening &amp;quot;vimmit.vim&amp;quot; file (in vim). Since we are writing python code,
 its good to check if Vim supports Python:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;if !has(&amp;#39;python&amp;#39;)
-    echo &amp;quot;Error: Required vim compiled with +python&amp;quot;
-    finish
-endif
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;!&lt;/span&gt;has&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    echo &lt;span class="c"&gt;&amp;quot;Error: Required vim compiled with +python&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;finish&lt;/span&gt;
+&lt;span class="k"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This piece is writen in VimL. It's best if we stick to VimL for things like this,
 mappings and event hooks. This function will check if Vim has python support or
 it will end the script with an error message.&lt;/p&gt;
 &lt;p&gt;We continue with the main function Reddit(). This is where we use Python and do
 the main functionality:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;quot; Vim comments start with a double quote.
-&amp;quot; Function definition is VimL. We can mix VimL and Python in
-&amp;quot; function definition.
-function! Reddit()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s"&gt;&amp;quot; Vim comments start with a double quote.&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot; Function definition is VimL. We can mix VimL and Python in&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot; function definition.&lt;/span&gt;
+&lt;span class="n"&gt;function&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt; &lt;span class="n"&gt;Reddit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&amp;quot; We start the python code like the next line.
+&lt;span class="s"&gt;&amp;quot; We start the python code like the next line.&lt;/span&gt;
 
-python &amp;lt;&amp;lt; EOF
-# the vim module contains everything we need to interface with vim from
-# python. We need urllib2 for the web service consumer.
-import vim, urllib2
-# we need json for parsing the response
-import json
+&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;EOF&lt;/span&gt;
+&lt;span class="c"&gt;# the vim module contains everything we need to interface with vim from&lt;/span&gt;
+&lt;span class="c"&gt;# python. We need urllib2 for the web service consumer.&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;urllib2&lt;/span&gt;
+&lt;span class="c"&gt;# we need json for parsing the response&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
 
-# we define a timeout that we&amp;#39;ll use in the API call. We don&amp;#39;t want
-# users to wait much.
-TIMEOUT = 20
-URL = &amp;quot;http://reddit.com/.json&amp;quot;
+&lt;span class="c"&gt;# we define a timeout that we&amp;#39;ll use in the API call. We don&amp;#39;t want&lt;/span&gt;
+&lt;span class="c"&gt;# users to wait much.&lt;/span&gt;
+&lt;span class="n"&gt;TIMEOUT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="n"&gt;URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;http://reddit.com/.json&amp;quot;&lt;/span&gt;
 
-try:
-    # Get the posts and parse the json response
-    response = urllib2.urlopen(URL, None, TIMEOUT).read()
-    json_response = json.loads(response)
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c"&gt;# Get the posts and parse the json response&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;URL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TIMEOUT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;json_response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    posts = json_response.get(&amp;quot;data&amp;quot;, &amp;quot;&amp;quot;).get(&amp;quot;children&amp;quot;, &amp;quot;&amp;quot;)
+    &lt;span class="n"&gt;posts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;children&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    # vim.current.buffer is the current buffer. It&amp;#39;s list-like object.
-    # each line is an item in the list. We can loop through them delete
-    # them, alter them etc.
-    # Here we delete all lines in the current buffer
-    del vim.current.buffer[:]
+    &lt;span class="c"&gt;# vim.current.buffer is the current buffer. It&amp;#39;s list-like object.&lt;/span&gt;
+    &lt;span class="c"&gt;# each line is an item in the list. We can loop through them delete&lt;/span&gt;
+    &lt;span class="c"&gt;# them, alter them etc.&lt;/span&gt;
+    &lt;span class="c"&gt;# Here we delete all lines in the current buffer&lt;/span&gt;
+    &lt;span class="k"&gt;del&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;[:]&lt;/span&gt;
 
-    # Here we append some lines above. Aesthetics.
-    vim.current.buffer[0] = 80*&amp;quot;-&amp;quot;
+    &lt;span class="c"&gt;# Here we append some lines above. Aesthetics.&lt;/span&gt;
+    &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;-&amp;quot;&lt;/span&gt;
 
-    for post in posts:
-        # In the next few lines, we get the post details
-        post_data = post.get(&amp;quot;data&amp;quot;, {})
-        up = post_data.get(&amp;quot;ups&amp;quot;, 0)
-        down = post_data.get(&amp;quot;downs&amp;quot;, 0)
-        title = post_data.get(&amp;quot;title&amp;quot;, &amp;quot;NO TITLE&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
-        score = post_data.get(&amp;quot;score&amp;quot;, 0)
-        permalink = post_data.get(&amp;quot;permalink&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
-        url = post_data.get(&amp;quot;url&amp;quot;).encode(&amp;quot;utf-8&amp;quot;)
-        comments = post_data.get(&amp;quot;num_comments&amp;quot;)
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c"&gt;# In the next few lines, we get the post details&lt;/span&gt;
+        &lt;span class="n"&gt;post_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
+        &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ups&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;down&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;downs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;NO TITLE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;score&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;permalink&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;permalink&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;comments&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;num_comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-        # And here we append line by line to the buffer.
-        # First the upvotes
-        vim.current.buffer.append(&amp;quot;↑ %s&amp;quot;%up)
-        # Then the title and the url
-        vim.current.buffer.append(&amp;quot;    %s [%s]&amp;quot;%(title, url,))
-        # Then the downvotes and number of comments
-        vim.current.buffer.append(&amp;quot;↓ %s    | comments: %s [%s]&amp;quot;%(down, comments, permalink,))
-        # And last we append some &amp;quot;-&amp;quot; for visual appeal.
-        vim.current.buffer.append(80*&amp;quot;-&amp;quot;)
+        &lt;span class="c"&gt;# And here we append line by line to the buffer.&lt;/span&gt;
+        &lt;span class="c"&gt;# First the upvotes&lt;/span&gt;
+        &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;↑ &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;up&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c"&gt;# Then the title and the url&lt;/span&gt;
+        &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; [&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;]&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+        &lt;span class="c"&gt;# Then the downvotes and number of comments&lt;/span&gt;
+        &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;↓ &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;    | comments: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; [&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;]&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;down&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comments&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;permalink&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+        &lt;span class="c"&gt;# And last we append some &amp;quot;-&amp;quot; for visual appeal.&lt;/span&gt;
+        &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;-&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-except Exception, e:
-    print e
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
 
-EOF
-&amp;quot; Here the python code is closed. We can continue writing VimL or python again.
-endfunction
+&lt;span class="n"&gt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot; Here the python code is closed. We can continue writing VimL or python again.&lt;/span&gt;
+&lt;span class="n"&gt;endfunction&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Save the file, source it in vim (:source vimmit.vim) and:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;:call Reddit()
+&lt;div class="highlight"&gt;&lt;pre&gt;:call Reddit&lt;span class="o"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now, the way we call the function is not so elegant. So we define a command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;command! -nargs=0 Reddit call Reddit()
+&lt;div class="highlight"&gt;&lt;pre&gt;command&lt;span class="p"&gt;!&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;nargs&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; Reddit &lt;span class="k"&gt;call&lt;/span&gt; Reddit&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We define the command :Reddit to call the function. After adding this, open a
 new bufer and do :Reddit . Home page will be loaded in the buffer. The -nargs
@@ -119,40 +119,40 @@ argument states how many arguments the command will take.&lt;/p&gt;
 &lt;div class="section" id="function-arguments-eval-and-command"&gt;
 &lt;h2&gt;Function Arguments, Eval and Command&lt;/h2&gt;
 &lt;p&gt;Q: How does one access functional arguments?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;function! SomeName(arg1, arg2, arg3)
-    &amp;quot; Get the first argument by name in VimL
-    let firstarg=a:arg1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; SomeName&lt;span class="p"&gt;(&lt;/span&gt;arg1&lt;span class="p"&gt;,&lt;/span&gt; arg2&lt;span class="p"&gt;,&lt;/span&gt; arg3&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;    &amp;quot; Get the first argument by name in VimL&lt;/span&gt;
+    &lt;span class="k"&gt;let&lt;/span&gt; firstarg&lt;span class="p"&gt;=&lt;/span&gt;a:arg1
 
-    &amp;quot; Get the second argument by position in Viml
-    let secondarg=a:1
+&lt;span class="c"&gt;    &amp;quot; Get the second argument by position in Viml&lt;/span&gt;
+    &lt;span class="k"&gt;let&lt;/span&gt; secondarg&lt;span class="p"&gt;=&lt;/span&gt;a:&lt;span class="m"&gt;1&lt;/span&gt;
 
-    &amp;quot; Get the arguments in python
+&lt;span class="c"&gt;    &amp;quot; Get the arguments in python&lt;/span&gt;
 
-    python &amp;lt;&amp;lt; EOF
-    import vim
+    python &lt;span class="p"&gt;&amp;lt;&amp;lt;&lt;/span&gt; EOF
+    import &lt;span class="k"&gt;vim&lt;/span&gt;
 
-    first_argument = vim.eval(&amp;quot;a:arg1&amp;quot;) #or vim.eval(&amp;quot;a:0&amp;quot;)
-    second_argument = vim.eval(&amp;quot;a:arg2&amp;quot;) #or vim.eval(&amp;quot;a:1&amp;quot;)
+    first_argument &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;vim&lt;/span&gt;.eval&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a:arg1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; #or &lt;span class="k"&gt;vim&lt;/span&gt;.eval&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a:0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    second_argument &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;vim&lt;/span&gt;.eval&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a:arg2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; #or &lt;span class="k"&gt;vim&lt;/span&gt;.eval&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a:1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can define a function with arbitrary number of arguments by putting &amp;quot;...&amp;quot;
 instead of argument names. You can access these arguments only by position,
 and you can mix them with named arguments (arg1, arg2, ...)&lt;/p&gt;
 &lt;p&gt;Q: How can I call Vim commands from Python?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vim.command(&amp;quot;[vim-command-here]&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;vim&lt;/span&gt;.command&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[vim-command-here]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Q: How to define global variables and access them in VimL and Python?&lt;/p&gt;
 &lt;p&gt;Global vars are prefixed with g:. If you want to define one in your script,
 best thing to do is check if it exists and if doesn't define it and assign some
 default value to it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;if !exists(&amp;quot;g:reddit_apicall_timeout&amp;quot;)
-    let g:reddit_apicall_timeout=40
-endif
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;!&lt;/span&gt;exists&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;g:reddit_apicall_timeout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;let&lt;/span&gt; g:reddit_apicall_timeout&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;40&lt;/span&gt;
+&lt;span class="k"&gt;endif&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can access it from python using the vim module:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;TIMEOUT = vim.eval(&amp;quot;g:reddit_apicall_timeout&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;TIMEOUT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;g:reddit_apicall_timeout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you want to override this setting, you can write:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;let g:reddit_apicall_timeout=60
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;let&lt;/span&gt; g:reddit_apicall_timeout&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="m"&gt;60&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;in .vimrc .&lt;/p&gt;
 &lt;/div&gt;
@@ -244,7 +244,7 @@ the simple mortals can have gallium on Ubuntu as easy as installing a video play
 However, if this doesn't work with the latest updates, check &lt;a class="reference external" href="https://launchpad.net/~xorg-edgers/+archive/radeon"&gt;Xorg-edgers/radeon&lt;/a&gt;. Packages from this PPA enable gallium
 by default. The only thing you need to do is add it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;sudo apt-add-repository ppa:xorg-edgers/radeon
-sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+sudo apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get upgrade
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now if you installed the driver/gl stack from /radeon you should delete xorg.conf if you don't have any monitor specific lines there. If you used the main ppa, you should add that option &amp;quot;ForceGallium&amp;quot; inside the device section and &lt;em&gt;voila&lt;/em&gt;, you have r600g driver running.&lt;/p&gt;
 &lt;p&gt;I tested this with stock kernel 2.6.35 and updated 2.6.37 and it works pretty good. There is huge performance gain which I felt playing Penumbra Overture. On high settings, 1920x1200 resolution, the game is flying. Video is smooth, compiz works great and games play smoother.
@@ -284,21 +284,21 @@ accuracy of the detection. For more info, read
 &lt;/div&gt;
 &lt;div class="section" id="api-usage"&gt;
 &lt;h2&gt;API Usage&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;face_detect = new FaceDetect()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;face_detect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;FaceDetect&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-face_detect.image_from_file(file_name)#load from file
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_from_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="c"&gt;#load from file&lt;/span&gt;
 
-face_detect.image_from_input(input_id)#load 1 frame from video input
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image_from_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="c"&gt;#load 1 frame from video input&lt;/span&gt;
 
-face_detect.detect_faces()#stores faces in local list
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detect_faces&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="c"&gt;#stores faces in local list&lt;/span&gt;
 
-face_detect.overlay_image(rgb_border = (255,0,0), width = 2) #overlays original image with rectangles around detected faces.
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;overlay_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rgb_border&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#overlays original image with rectangles around detected faces.&lt;/span&gt;
 
-face_detect.to_json()#returns json string with faces rectangles
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="c"&gt;#returns json string with faces rectangles&lt;/span&gt;
 
-face_detect.output_image()#shows image in window
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output_image&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="c"&gt;#shows image in window&lt;/span&gt;
 
-face_detect.save_image(file_name)#saves overlaid image to file_name
+&lt;span class="n"&gt;face_detect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="c"&gt;#saves overlaid image to file_name&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dependencies"&gt;
@@ -347,21 +347,21 @@ install when preparing my development environment (before making
 virtualenvs). PIL provides a method for calculating the histogram of
 the image and solves most of our problems. The function for
 calculating the entropy looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;import Image
-import math
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;Image&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt;
 
 
-def image_entropy(img):
-    &amp;quot;&amp;quot;&amp;quot;calculate the entropy of an image&amp;quot;&amp;quot;&amp;quot;
-    histogram = img.histogram()
-    histogram_length = sum(histogram)
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;image_entropy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;calculate the entropy of an image&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;histogram&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;histogram&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;histogram_length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;histogram&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    samples_probability = [float(h) / histogram_length for h in histogram]
+    &lt;span class="n"&gt;samples_probability&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;histogram_length&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;histogram&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-    return -sum([p * math.log(p, 2) for p in samples_probability if p != 0])
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;math&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;samples_probability&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
-img = Image.open(&amp;#39;headshot.jpg&amp;#39;)
-print image_entropy(img)
+&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;headshot.jpg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;image_entropy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As you can see, PIL’s method for calculating the histogram really
 simplifies things and makes the functions seem slim and simple. All
@@ -400,16 +400,16 @@ it:&lt;/p&gt;
 &lt;p&gt;After the removing is done, reboot the PC. You could be asked to turn
 the graphics to low details (safe mode). Do that. Next, open a
 terminal and navigate to the folder with the driver.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;cd ~/ati/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/ati/
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Add permissions for execution to the script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;chmod +x ati-driver-installer-[version]-[CPU architecture].run
+&lt;div class="highlight"&gt;&lt;pre&gt;chmod +x ati-driver-installer-&lt;span class="o"&gt;[&lt;/span&gt;version&lt;span class="o"&gt;]&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;CPU architecture&lt;span class="o"&gt;]&lt;/span&gt;.run
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Generate distro-specific packages(for lucid or mint 9):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –buildpkg Ubuntu/lucid
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-&lt;span class="o"&gt;[&lt;/span&gt;version&lt;span class="o"&gt;]&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;CPU architecture&lt;span class="o"&gt;]&lt;/span&gt;.run –buildpkg Ubuntu/lucid
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;or list all available distro builds:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-[version]-[CPU architecture].run –listpkg
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo ./ati-driver-installer-&lt;span class="o"&gt;[&lt;/span&gt;version&lt;span class="o"&gt;]&lt;/span&gt;-&lt;span class="o"&gt;[&lt;/span&gt;CPU architecture&lt;span class="o"&gt;]&lt;/span&gt;.run –listpkg
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After this operation (if everything went ok) you will have several
 .deb packages. Install them with the next command:&lt;/p&gt;
@@ -523,21 +523,21 @@ It doesn't have the limited functionality and the custom implementation of the p
 it is easy to implement and highly customizable. Works with images and other HTML containers.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="/static/uploads/jqcarousel3d/index.html"&gt;Here&lt;/a&gt; you can check out a demo of
 the carousel. The JS embed code is:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#carouselthreed&amp;#39;).carousel3D({
-    speed: 900,
-    perspectiveZoom: 70,
-    sideOffset: 80,
-    topOffset:0,
-    secondaryOpacity: .35,
-    emClass:&amp;#39;tdc-element&amp;#39;
-})
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#carouselthreed&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;carousel3D&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="nx"&gt;speed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;perspectiveZoom&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;70&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;sideOffset&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;topOffset&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;secondaryOpacity&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;35&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;emClass&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tdc-element&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And here is the HTML:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;div id=&amp;quot;carouselthreed&amp;quot;&amp;gt;
-    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;fly.jpg&amp;quot;&amp;gt;
-    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;gates.jpg&amp;quot;&amp;gt;
-    &amp;lt;img class=&amp;quot;tdc-element&amp;quot; src=&amp;quot;penguins.jpg&amp;quot;&amp;gt;
-&amp;lt;/div&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;carouselthreed&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tdc-element&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;fly.jpg&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tdc-element&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;gates.jpg&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tdc-element&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;penguins.jpg&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The settings object attributes are:
 - speed - Speed of animation in milliseconds (default 350)
@@ -756,54 +756,54 @@ will contain objects moving inside of it e.g. sky with the clouds moving.
 The plugin is built simple, has simple implementation, it is very easy to
 use, yet very flexible. You only need the landscape image, the object images
 and one container.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;$(&amp;#39;#livescape&amp;#39;).livescape({
-    //height of the landscape (can be omitted)
-    height : &amp;#39;360px&amp;#39;,
-    //width of the landscape (can be omitted)
-    width : &amp;#39;1000px&amp;#39;,
-    //background image (can be omitted)
-    background_image : &amp;#39;img/bg.jpg&amp;#39;,
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;#livescape&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;livescape&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="c1"&gt;//height of the landscape (can be omitted)&lt;/span&gt;
+    &lt;span class="nx"&gt;height&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;360px&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;//width of the landscape (can be omitted)&lt;/span&gt;
+    &lt;span class="nx"&gt;width&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1000px&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;//background image (can be omitted)&lt;/span&gt;
+    &lt;span class="nx"&gt;background_image&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;img/bg.jpg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 
-    // Next define the objects that are moving:
-    objects : [
-        {
-            //the positions are relative to the landscape
-            //if omitted, random assumed - same for duration
+    &lt;span class="c1"&gt;// Next define the objects that are moving:&lt;/span&gt;
+    &lt;span class="nx"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="c1"&gt;//the positions are relative to the landscape&lt;/span&gt;
+            &lt;span class="c1"&gt;//if omitted, random assumed - same for duration&lt;/span&gt;
 
-            //x of start position
-            start_x : &amp;quot;1700px&amp;quot;,
-            //y of start position
-            start_y : &amp;quot;190px&amp;quot;,
-            //x of end position
-            end_x : &amp;quot;-4000px&amp;quot;,
-             //y of end position
-            end_y : &amp;quot;190px&amp;quot;,
-            //image of the object (url)
-            image : &amp;#39;img/car.png&amp;#39;,
-            // duration of the animation
-            duration : 18000,
-            // the animation loops
-            loop : true,
-            //the object is anchor
-            href : &amp;quot;ThisisBatCountry.png&amp;quot;,
-            //pause in between loops in ms
-            pause: 1000,
-            //the objects fade in on start and out on end
-            fade : true
-        },
-        //another object
-        {
-            start_x : &amp;quot;-250px&amp;quot;,
-            start_y : &amp;quot;5px&amp;quot;,
-            end_x : &amp;quot;1250px&amp;quot;,
-            end_y : &amp;quot;5px&amp;quot;,
-            duration : 49000,
-            image : &amp;#39;img/cloud1.png&amp;#39;,
-            loop : true,
-            fade : true
-        }
-    ]
-})
+            &lt;span class="c1"&gt;//x of start position&lt;/span&gt;
+            &lt;span class="nx"&gt;start_x&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1700px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//y of start position&lt;/span&gt;
+            &lt;span class="nx"&gt;start_y&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;190px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//x of end position&lt;/span&gt;
+            &lt;span class="nx"&gt;end_x&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;-4000px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="c1"&gt;//y of end position&lt;/span&gt;
+            &lt;span class="nx"&gt;end_y&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;190px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//image of the object (url)&lt;/span&gt;
+            &lt;span class="nx"&gt;image&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;img/car.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;// duration of the animation&lt;/span&gt;
+            &lt;span class="nx"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;18000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;// the animation loops&lt;/span&gt;
+            &lt;span class="nx"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//the object is anchor&lt;/span&gt;
+            &lt;span class="nx"&gt;href&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ThisisBatCountry.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//pause in between loops in ms&lt;/span&gt;
+            &lt;span class="nx"&gt;pause&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="c1"&gt;//the objects fade in on start and out on end&lt;/span&gt;
+            &lt;span class="nx"&gt;fade&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="c1"&gt;//another object&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nx"&gt;start_x&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;-250px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;start_y&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;end_x&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;1250px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;end_y&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;5px&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;49000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;image&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;img/cloud1.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;loop&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nx"&gt;fade&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is setup is for 2 objects. The implementation is pretty intuitive and i
 think you will get a hold of it very fast.&lt;/p&gt;

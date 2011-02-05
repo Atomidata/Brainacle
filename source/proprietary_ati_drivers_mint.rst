@@ -33,13 +33,13 @@ actually commence the installation, we have to purge/remove the old
 ati driver from the system. You should try these commands to remove
 it:
 
-.. code-block:: Bash
+.. code-block:: bash
    
    sudo apt-get purge fglrx 
 
 or
 
-.. code-block:: Bash
+.. code-block:: bash
    
    sudo sh /usr/share/fglrx/fglrx-uninstall.sh
 
@@ -47,25 +47,25 @@ After the removing is done, reboot the PC. You could be asked to turn
 the graphics to low details (safe mode). Do that. Next, open a
 terminal and navigate to the folder with the driver.
 
-.. code-block:: Bash
+.. code-block:: bash
    
    cd ~/ati/
 
 Add permissions for execution to the script:
 
-.. code-block:: Bash
+.. code-block:: bash
    
    chmod +x ati-driver-installer-[version]-[CPU architecture].run
 
 Generate distro-specific packages(for lucid or mint 9):
 
-.. code-block:: Bash
+.. code-block:: bash
 
    sudo ./ati-driver-installer-[version]-[CPU architecture].run –buildpkg Ubuntu/lucid
 
 or list all available distro builds:
 
-.. code-block:: Bash
+.. code-block:: bash
 
    sudo ./ati-driver-installer-[version]-[CPU architecture].run –listpkg
 
@@ -73,7 +73,7 @@ After this operation (if everything went ok) you will have several
 .deb packages. Install them with the next command:
 
 
-.. code-block:: Bash   
+.. code-block:: bash   
 
    sudo dpkg -i *.deb
 
@@ -82,7 +82,7 @@ The drivers are installed. If this is your first ATI driver
 installation, invoke next command to make the initial config:
 
 
-.. code-block:: Bash
+.. code-block:: bash
 
    sudo aticonfig –initial
 

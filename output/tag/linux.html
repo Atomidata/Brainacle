@@ -99,16 +99,16 @@ it:</p>
 <p>After the removing is done, reboot the PC. You could be asked to turn
 the graphics to low details (safe mode). Do that. Next, open a
 terminal and navigate to the folder with the driver.</p>
-<div class="highlight"><pre>cd ~/ati/
+<div class="highlight"><pre><span class="nb">cd</span> ~/ati/
 </pre></div>
 <p>Add permissions for execution to the script:</p>
-<div class="highlight"><pre>chmod +x ati-driver-installer-[version]-[CPU architecture].run
+<div class="highlight"><pre>chmod +x ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run
 </pre></div>
 <p>Generate distro-specific packages(for lucid or mint 9):</p>
-<div class="highlight"><pre>sudo ./ati-driver-installer-[version]-[CPU architecture].run –buildpkg Ubuntu/lucid
+<div class="highlight"><pre>sudo ./ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run –buildpkg Ubuntu/lucid
 </pre></div>
 <p>or list all available distro builds:</p>
-<div class="highlight"><pre>sudo ./ati-driver-installer-[version]-[CPU architecture].run –listpkg
+<div class="highlight"><pre>sudo ./ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run –listpkg
 </pre></div>
 <p>After this operation (if everything went ok) you will have several
 .deb packages. Install them with the next command:</p>

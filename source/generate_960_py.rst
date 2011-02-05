@@ -11,7 +11,7 @@ Command line utility script for generating custom `960gs <http://960.gs>`_ grids
 Usage
 -----
 
-.. code-block:: Bash
+.. code-block:: bash
 
     python generate960.py
 
@@ -30,7 +30,7 @@ Optional Arguments
 
 To generate 1024 grid with 15px gutters and 10 columns:
 
-.. code-block:: Bash
+.. code-block:: bash
 
     python generate960.py -w 1024 -c 10 -g 15
 

@@ -99,21 +99,21 @@ accuracy of the detection. For more info, read
 </div>
 <div class="section" id="api-usage">
 <h2>API Usage</h2>
-<div class="highlight"><pre>face_detect = new FaceDetect()
+<div class="highlight"><pre><span class="n">face_detect</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FaceDetect</span><span class="p">()</span>
 
-face_detect.image_from_file(file_name)#load from file
+<span class="n">face_detect</span><span class="o">.</span><span class="n">image_from_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="c">#load from file</span>
 
-face_detect.image_from_input(input_id)#load 1 frame from video input
+<span class="n">face_detect</span><span class="o">.</span><span class="n">image_from_input</span><span class="p">(</span><span class="n">input_id</span><span class="p">)</span><span class="c">#load 1 frame from video input</span>
 
-face_detect.detect_faces()#stores faces in local list
+<span class="n">face_detect</span><span class="o">.</span><span class="n">detect_faces</span><span class="p">()</span><span class="c">#stores faces in local list</span>
 
-face_detect.overlay_image(rgb_border = (255,0,0), width = 2) #overlays original image with rectangles around detected faces.
+<span class="n">face_detect</span><span class="o">.</span><span class="n">overlay_image</span><span class="p">(</span><span class="n">rgb_border</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="c">#overlays original image with rectangles around detected faces.</span>
 
-face_detect.to_json()#returns json string with faces rectangles
+<span class="n">face_detect</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span><span class="c">#returns json string with faces rectangles</span>
 
-face_detect.output_image()#shows image in window
+<span class="n">face_detect</span><span class="o">.</span><span class="n">output_image</span><span class="p">()</span><span class="c">#shows image in window</span>
 
-face_detect.save_image(file_name)#saves overlaid image to file_name
+<span class="n">face_detect</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="c">#saves overlaid image to file_name</span>
 </pre></div>
 </div>
 <div class="section" id="dependencies">

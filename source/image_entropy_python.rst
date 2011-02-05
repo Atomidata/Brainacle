@@ -56,7 +56,7 @@ virtualenvs). PIL provides a method for calculating the histogram of
 the image and solves most of our problems. The function for
 calculating the entropy looks like this:
 
-.. code-block:: Python
+.. code-block:: python
 
    import Image
    import math
