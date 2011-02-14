@@ -80,14 +80,18 @@ wait for a moment, and your default browser will open on the gallery page.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation</h2>
+<div class="section" id="automatic-installation">
+<h3>Automatic installation</h3>
+<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
+It should take care of all dependencies etc. If this method fails, try manual installation:</p>
+</div>
+<div class="section" id="manual-installation">
+<h3>Manual installation</h3>
 <p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
 Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
 directory, create it with your user. Extract the tarball so that the script
 <em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
 and not subfolders.</p>
-</div>
-<div class="section" id="requirements">
-<h2>Requirements</h2>
 <p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
 package. On Ubuntus or Debians, install it using apt:</p>
 <blockquote>
@@ -97,11 +101,9 @@ and some Debians. If that's not there, it falls back to zenity, which is in
 standard gnome installation. Try to get at least one of these packages so you
 can be notified of eventual errors/ updates.</p>
 </div>
+</div>
 <div class="section" id="future">
 <h2>Future</h2>
-<p>If theres an interest for the extension, I will build a deb package which will
-install all dependencies. I'll be happy if someone does this :). The extension
-is BSD licenced with exception to <em>minus_utils/multipart.py</em> which is LGPL (sorry).</p>
 <p>I would love to hear some comments, critique, feature requests etc. You can fork it,
 request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
 </div>

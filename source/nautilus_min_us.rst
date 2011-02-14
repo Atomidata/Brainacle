@@ -21,14 +21,20 @@ wait for a moment, and your default browser will open on the gallery page.
 Installation
 ############
 
+Automatic installation
+======================
+
+You can install the extension from `this deb file <https://github.com/dekomote/nautilus-min.us/downloads>`_.
+It should take care of all dependencies etc. If this method fails, try manual installation:
+
+Manual installation
+===================
+
 Get the tarball with the latest source `here <https://github.com/dekomote/nautilus-min.us/tarball/master>`_,
 Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
 directory, create it with your user. Extract the tarball so that the script
 *upload_to_minus.py* and the dir *minus_utils* are directly in *python-extensions/*
 and not subfolders.
-
-Requirements
-############
 
 The extension needs `python-nautilus <http://projects.gnome.org/nautilus-python/>`_
 package. On Ubuntus or Debians, install it using apt:
@@ -42,10 +48,6 @@ can be notified of eventual errors/ updates.
 
 Future
 ######
-
-If theres an interest for the extension, I will build a deb package which will
-install all dependencies. I'll be happy if someone does this :). The extension
-is BSD licenced with exception to *minus_utils/multipart.py* which is LGPL (sorry).
 
 I would love to hear some comments, critique, feature requests etc. You can fork it,
 request pulls and comment on `GitHub <https://github.com/dekomote/nautilus-min.us/>`_.

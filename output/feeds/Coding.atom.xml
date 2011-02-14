@@ -8,14 +8,18 @@ wait for a moment, and your default browser will open on the gallery page.&lt;/p
 &lt;/div&gt;
 &lt;div class="section" id="installation"&gt;
 &lt;h2&gt;Installation&lt;/h2&gt;
+&lt;div class="section" id="automatic-installation"&gt;
+&lt;h3&gt;Automatic installation&lt;/h3&gt;
+&lt;p&gt;You can install the extension from &lt;a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads"&gt;this deb file&lt;/a&gt;.
+It should take care of all dependencies etc. If this method fails, try manual installation:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="manual-installation"&gt;
+&lt;h3&gt;Manual installation&lt;/h3&gt;
 &lt;p&gt;Get the tarball with the latest source &lt;a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master"&gt;here&lt;/a&gt;,
 Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
 directory, create it with your user. Extract the tarball so that the script
 &lt;em&gt;upload_to_minus.py&lt;/em&gt; and the dir &lt;em&gt;minus_utils&lt;/em&gt; are directly in &lt;em&gt;python-extensions/&lt;/em&gt;
 and not subfolders.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="requirements"&gt;
-&lt;h2&gt;Requirements&lt;/h2&gt;
 &lt;p&gt;The extension needs &lt;a class="reference external" href="http://projects.gnome.org/nautilus-python/"&gt;python-nautilus&lt;/a&gt;
 package. On Ubuntus or Debians, install it using apt:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -25,11 +29,9 @@ and some Debians. If that's not there, it falls back to zenity, which is in
 standard gnome installation. Try to get at least one of these packages so you
 can be notified of eventual errors/ updates.&lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="future"&gt;
 &lt;h2&gt;Future&lt;/h2&gt;
-&lt;p&gt;If theres an interest for the extension, I will build a deb package which will
-install all dependencies. I'll be happy if someone does this :). The extension
-is BSD licenced with exception to &lt;em&gt;minus_utils/multipart.py&lt;/em&gt; which is LGPL (sorry).&lt;/p&gt;
 &lt;p&gt;I would love to hear some comments, critique, feature requests etc. You can fork it,
 request pulls and comment on &lt;a class="reference external" href="https://github.com/dekomote/nautilus-min.us/"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
