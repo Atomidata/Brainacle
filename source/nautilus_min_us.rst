@@ -25,7 +25,12 @@ Automatic installation
 ======================
 
 You can install the extension from `this deb file <https://github.com/dekomote/nautilus-min.us/downloads>`_.
-It should take care of all dependencies etc. If this method fails, try manual installation:
+It should take care of all dependencies etc. Remember to restart nautilus after installation:
+
+    nautilus -q or
+    killall nautilus
+
+If this method fails, try manual installation:
 
 Manual installation
 ===================
