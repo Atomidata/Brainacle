@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/all.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-02-03T14:58:00Z</updated><entry><title>How to write vim plugins with python</title><link href="http://brainacle.com/how-to-write-vim-plugins-with-python.html" rel="alternate"></link><updated>2011-02-03T14:58:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-02-03:/how-to-write-vim-plugins-with-python.html/</id><summary type="html">&lt;p&gt;I'm not going to dive into how good or extendible Vim is. If you are reading this
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/all.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-02-14T19:01:00Z</updated><entry><title>Nautilus-minus extension</title><link href="http://brainacle.com/nautilus-minus-extension.html" rel="alternate"></link><updated>2011-02-14T19:01:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-02-14:/nautilus-minus-extension.html/</id><summary type="html">&lt;p&gt;&lt;strong&gt;nautilus-min.us&lt;/strong&gt; is an &lt;em&gt;extension&lt;/em&gt; for nautilus that makes uploading images
+and galleries to &lt;a class="reference external" href="http://min.us"&gt;http://min.us&lt;/a&gt; easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &amp;quot;Upload to min.us&amp;quot;,
+wait for a moment, and your default browser will open on the gallery page.&lt;/p&gt;
+&lt;div class="center-align container"&gt;
+&lt;img alt="/static/uploads/minus-menu.png" src="/static/uploads/minus-menu.png" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation"&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Get the tarball with the latest source &lt;a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master"&gt;here&lt;/a&gt;,
+Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
+directory, create it with your user. Extract the tarball so that the script
+&lt;em&gt;upload_to_minus.py&lt;/em&gt; and the dir &lt;em&gt;minus_utils&lt;/em&gt; are directly in &lt;em&gt;python-extensions/&lt;/em&gt;
+and not subfolders.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="requirements"&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;The extension needs &lt;a class="reference external" href="http://projects.gnome.org/nautilus-python/"&gt;python-nautilus&lt;/a&gt;
+package. On Ubuntus or Debians, install it using apt:&lt;/p&gt;
+&lt;blockquote&gt;
+sudo apt-get install python-nautilus&lt;/blockquote&gt;
+&lt;p&gt;The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
+and some Debians. If that's not there, it falls back to zenity, which is in
+standard gnome installation. Try to get at least one of these packages so you
+can be notified of eventual errors/ updates.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="future"&gt;
+&lt;h2&gt;Future&lt;/h2&gt;
+&lt;p&gt;If theres an interest for the extension, I will build a deb package which will
+install all dependencies. I'll be happy if someone does this :). The extension
+is BSD licenced with exception to &lt;em&gt;minus_utils/multipart.py&lt;/em&gt; which is LGPL (sorry).&lt;/p&gt;
+&lt;p&gt;I would love to hear some comments, critique, feature requests etc. You can fork it,
+request pulls and comment on &lt;a class="reference external" href="https://github.com/dekomote/nautilus-min.us/"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="linux"></category><category term="coding"></category><category term="python"></category><category term="gnome"></category><category term="nautilus"></category></entry><entry><title>How to write vim plugins with python</title><link href="http://brainacle.com/how-to-write-vim-plugins-with-python.html" rel="alternate"></link><updated>2011-02-03T14:58:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-02-03:/how-to-write-vim-plugins-with-python.html/</id><summary type="html">&lt;p&gt;I'm not going to dive into how good or extendible Vim is. If you are reading this
 article, you probably know that. The thing that makes Vim so good, is the
 scripting environment behind it called VimL. Using this scripting language,
 you can write any functionality/plugin you need for Vim. Each plugin you use

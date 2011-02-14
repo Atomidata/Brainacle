@@ -55,10 +55,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href="./how-to-write-vim-plugins-with-python.html">How to write vim plugins with python</a></h1> 
+                <h1 class="entry-title"><a href="./nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-02-03T14:58:00">
-                                Thu 03 February 2011
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
                         </abbr>
 
                         
@@ -67,175 +67,42 @@
                         </address>
                         
                 <p>In <a href="./category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href="./tag/python.html">python</a> <a href="./tag/plugin.html">plugin</a> <a href="./tag/vim.html">vim</a> <a href="./tag/coding.html">coding</a> </p>
+                <p>tags: <a href="./tag/linux.html">linux</a> <a href="./tag/coding.html">coding</a> <a href="./tag/python.html">python</a> <a href="./tag/gnome.html">gnome</a> <a href="./tag/nautilus.html">nautilus</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
-article, you probably know that. The thing that makes Vim so good, is the
-scripting environment behind it called VimL. Using this scripting language,
-you can write any functionality/plugin you need for Vim. Each plugin you use
-is written in this language. Here's the best part. You only need very little
-knowledge of VimL to be able to write plugins, if you know Python (or Ruby).</p>
-<div class="section" id="what-s-a-vim-plugin-anyway">
-<h2>What's a vim plugin anyway</h2>
-<p>A Vim plugin is a .vim script that defines functions, mappings, syntax rules,
-commands that may, or may
-not, manipulate the windows, buffers, lines. It is a complete piece of code with
-some specific functionality. Usually, a plugin consists of several functions
-mappings command definitions and event hooks. When writing vim plugins with Python, often, everything
-outside the functions is written in VimL. But those are vim commands and they
-can be learned fast. In fact, VimL can be learned fast, but using python gives
-so much flexibility. Think about using urllib/httplib/simplejson for accessing
-some web service that helps editing in Vim. This is why most of the plugins that
-work with web services are usually done in VimL+Python.</p>
+                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
+and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
+wait for a moment, and your default browser will open on the gallery page.</p>
+<div class="center-align container">
+<img alt="/static/uploads/minus-menu.png" src="/static/uploads/minus-menu.png" />
 </div>
-<div class="section" id="any-prerequisites">
-<h2>Any prerequisites?</h2>
-<p>You must have vim compiled with +python support. You can check that using the
-command:</p>
-<div class="highlight"><pre>vim --version | grep +python
-</pre></div>
-<p>Vim package in Ubuntu and it's derivatives comes with +python support.</p>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
+Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
+directory, create it with your user. Extract the tarball so that the script
+<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
+and not subfolders.</p>
 </div>
-<div class="section" id="to-work-vimmit-vim">
-<h2>To Work - Vimmit.vim</h2>
-<p>What's better than starting with a simple example? This is a plugin that,
-when called, will retrieve the homepage of <a class="reference external" href="http://reddit.com">Reddit</a>
-and will display it in the current buffer.</p>
-<p>Start by opening &quot;vimmit.vim&quot; file (in vim). Since we are writing python code,
-its good to check if Vim supports Python:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">!</span>has<span class="p">(</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
-    echo <span class="c">&quot;Error: Required vim compiled with +python&quot;</span>
-    <span class="k">finish</span>
-<span class="k">endif</span>
-</pre></div>
-<p>This piece is writen in VimL. It's best if we stick to VimL for things like this,
-mappings and event hooks. This function will check if Vim has python support or
-it will end the script with an error message.</p>
-<p>We continue with the main function Reddit(). This is where we use Python and do
-the main functionality:</p>
-<div class="highlight"><pre><span class="s">&quot; Vim comments start with a double quote.</span>
-<span class="s">&quot; Function definition is VimL. We can mix VimL and Python in</span>
-<span class="s">&quot; function definition.</span>
-<span class="n">function</span><span class="err">!</span> <span class="n">Reddit</span><span class="p">()</span>
-
-<span class="s">&quot; We start the python code like the next line.</span>
-
-<span class="n">python</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
-<span class="c"># the vim module contains everything we need to interface with vim from</span>
-<span class="c"># python. We need urllib2 for the web service consumer.</span>
-<span class="kn">import</span> <span class="nn">vim</span><span class="o">,</span> <span class="nn">urllib2</span>
-<span class="c"># we need json for parsing the response</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="c"># we define a timeout that we&#39;ll use in the API call. We don&#39;t want</span>
-<span class="c"># users to wait much.</span>
-<span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">URL</span> <span class="o">=</span> <span class="s">&quot;http://reddit.com/.json&quot;</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="c"># Get the posts and parse the json response</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">TIMEOUT</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">json_response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-
-    <span class="n">posts</span> <span class="o">=</span> <span class="n">json_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;children&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-
-    <span class="c"># vim.current.buffer is the current buffer. It&#39;s list-like object.</span>
-    <span class="c"># each line is an item in the list. We can loop through them delete</span>
-    <span class="c"># them, alter them etc.</span>
-    <span class="c"># Here we delete all lines in the current buffer</span>
-    <span class="k">del</span> <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="p">[:]</span>
-
-    <span class="c"># Here we append some lines above. Aesthetics.</span>
-    <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span><span class="o">*</span><span class="s">&quot;-&quot;</span>
-
-    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
-        <span class="c"># In the next few lines, we get the post details</span>
-        <span class="n">post_data</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;ups&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">down</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;downs&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="s">&quot;NO TITLE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
-        <span class="n">score</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;score&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">permalink</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;permalink&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;url&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
-        <span class="n">comments</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;num_comments&quot;</span><span class="p">)</span>
-
-        <span class="c"># And here we append line by line to the buffer.</span>
-        <span class="c"># First the upvotes</span>
-        <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;↑ </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">up</span><span class="p">)</span>
-        <span class="c"># Then the title and the url</span>
-        <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;    </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">url</span><span class="p">,))</span>
-        <span class="c"># Then the downvotes and number of comments</span>
-        <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;↓ </span><span class="si">%s</span><span class="s">    | comments: </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">down</span><span class="p">,</span> <span class="n">comments</span><span class="p">,</span> <span class="n">permalink</span><span class="p">,))</span>
-        <span class="c"># And last we append some &quot;-&quot; for visual appeal.</span>
-        <span class="n">vim</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">80</span><span class="o">*</span><span class="s">&quot;-&quot;</span><span class="p">)</span>
-
-<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">e</span>
-
-<span class="n">EOF</span>
-<span class="s">&quot; Here the python code is closed. We can continue writing VimL or python again.</span>
-<span class="n">endfunction</span>
-</pre></div>
-<p>Save the file, source it in vim (:source vimmit.vim) and:</p>
-<div class="highlight"><pre>:call Reddit<span class="o">()</span>
-</pre></div>
-<p>Now, the way we call the function is not so elegant. So we define a command:</p>
-<div class="highlight"><pre>command<span class="p">!</span> <span class="p">-</span>nargs<span class="p">=</span><span class="m">0</span> Reddit <span class="k">call</span> Reddit<span class="p">()</span>
-</pre></div>
-<p>We define the command :Reddit to call the function. After adding this, open a
-new bufer and do :Reddit . Home page will be loaded in the buffer. The -nargs
-argument states how many arguments the command will take.</p>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
+package. On Ubuntus or Debians, install it using apt:</p>
+<blockquote>
+sudo apt-get install python-nautilus</blockquote>
+<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
+and some Debians. If that's not there, it falls back to zenity, which is in
+standard gnome installation. Try to get at least one of these packages so you
+can be notified of eventual errors/ updates.</p>
 </div>
-<div class="section" id="function-arguments-eval-and-command">
-<h2>Function Arguments, Eval and Command</h2>
-<p>Q: How does one access functional arguments?</p>
-<div class="highlight"><pre><span class="k">function</span><span class="p">!</span> SomeName<span class="p">(</span>arg1<span class="p">,</span> arg2<span class="p">,</span> arg3<span class="p">)</span>
-<span class="c">    &quot; Get the first argument by name in VimL</span>
-    <span class="k">let</span> firstarg<span class="p">=</span>a:arg1
-
-<span class="c">    &quot; Get the second argument by position in Viml</span>
-    <span class="k">let</span> secondarg<span class="p">=</span>a:<span class="m">1</span>
-
-<span class="c">    &quot; Get the arguments in python</span>
-
-    python <span class="p">&lt;&lt;</span> EOF
-    import <span class="k">vim</span>
-
-    first_argument <span class="p">=</span> <span class="k">vim</span>.eval<span class="p">(</span><span class="s2">&quot;a:arg1&quot;</span><span class="p">)</span> #or <span class="k">vim</span>.eval<span class="p">(</span><span class="s2">&quot;a:0&quot;</span><span class="p">)</span>
-    second_argument <span class="p">=</span> <span class="k">vim</span>.eval<span class="p">(</span><span class="s2">&quot;a:arg2&quot;</span><span class="p">)</span> #or <span class="k">vim</span>.eval<span class="p">(</span><span class="s2">&quot;a:1&quot;</span><span class="p">)</span>
-</pre></div>
-<p>You can define a function with arbitrary number of arguments by putting &quot;...&quot;
-instead of argument names. You can access these arguments only by position,
-and you can mix them with named arguments (arg1, arg2, ...)</p>
-<p>Q: How can I call Vim commands from Python?</p>
-<div class="highlight"><pre><span class="k">vim</span>.command<span class="p">(</span><span class="s2">&quot;[vim-command-here]&quot;</span><span class="p">)</span>
-</pre></div>
-<p>Q: How to define global variables and access them in VimL and Python?</p>
-<p>Global vars are prefixed with g:. If you want to define one in your script,
-best thing to do is check if it exists and if doesn't define it and assign some
-default value to it:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="p">!</span>exists<span class="p">(</span><span class="s2">&quot;g:reddit_apicall_timeout&quot;</span><span class="p">)</span>
-    <span class="k">let</span> g:reddit_apicall_timeout<span class="p">=</span><span class="m">40</span>
-<span class="k">endif</span>
-</pre></div>
-<p>You can access it from python using the vim module:</p>
-<div class="highlight"><pre><span class="n">TIMEOUT</span> <span class="o">=</span> <span class="n">vim</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s">&quot;g:reddit_apicall_timeout&quot;</span><span class="p">)</span>
-</pre></div>
-<p>If you want to override this setting, you can write:</p>
-<div class="highlight"><pre><span class="k">let</span> g:reddit_apicall_timeout<span class="p">=</span><span class="m">60</span>
-</pre></div>
-<p>in .vimrc .</p>
-</div>
-<div class="section" id="additional-notes">
-<h2>Additional Notes</h2>
-<p>VimL is pretty easy once you try it. Remember that print works and
-everything you can do with python, you can do in here. <a class="reference external" href="http://vimdoc.sourceforge.net/htmldoc/if_pyth.html#python-vim">Here</a>
-you can find the documentation for the vim python module. Vimdoc is the possibly
-the only resource you will need when writing vim plugins.</p>
-<p>You can also check this <a class="reference external" href="https://www.ibm.com/developerworks/aix/library/au-vimplugin/">IBM developerWorks article</a> .</p>
-<p>Now, try to extend &quot;vimmit.vim&quot; so the user is able to choose a subreddit (as a
-first functional argument).</p>
+<div class="section" id="future">
+<h2>Future</h2>
+<p>If theres an interest for the extension, I will build a deb package which will
+install all dependencies. I'll be happy if someone does this :). The extension
+is BSD licenced with exception to <em>minus_utils/multipart.py</em> which is LGPL (sorry).</p>
+<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
+request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -245,6 +112,35 @@ first functional argument).</p>
                 <hr />
                     <ol id="posts-list" class="hfeed">
         
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href="./how-to-write-vim-plugins-with-python.html" rel="bookmark" title="Permalink to How to write vim plugins with python">How to write vim plugins with python</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2011-02-03T14:58:00">
+                                Thu 03 February 2011
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        <p> In <a href="./category/Coding.html">Coding</a></p>
+                        <p>tags: <a href="./tag/python.html">python</a> <a href="./tag/plugin.html">plugin</a> <a href="./tag/vim.html">vim</a> <a href="./tag/coding.html">coding</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
+article, you probably know that. The thing that makes Vim so good, is the
+scripting environment behind it called VimL. Using this scripting language,
+you can write any functionality/plugin you need ...</p>
+                <a class="readmore" href="./how-to-write-vim-plugins-with-python.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
     
         
      
