@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li ><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,10 +53,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././w3cvalidatevim.html">W3cValidate.vim</a></h1> 
+                <h1 class="entry-title"><a href=".././nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-01-23T00:55:00">
-                                Sun 23 January 2011
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
                         </abbr>
 
                         
@@ -67,26 +65,48 @@
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/vim.html">vim</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/coding.html">coding</a> </p>
+                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p>W3cValidate.vim is a plugin that enables buffer/url validation using the <a class="reference external" href="http://validator.w3.org">W3 Validator</a> API.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<p>Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use</p>
-<blockquote>
-<p>:W3cValidate to validate the current buffer</p>
-<p>:W3cValidate &quot;[url_here]&quot; to validate a hosted page</p>
-<p>:W3cValidateDT &quot;[doctype]&quot; to validate the buffer using the [doctype] override. Make sure the doctype is a valid doctype</p>
-</blockquote>
-<p>The validator service url can be changed if you run an instance of it localy by setting  g:w3_validator_url  in .vimrc</p>
-<p>The script has API timeout default to 20 seconds. You can change it by setting  g:w3_apicall_timeout  in .vimrc</p>
+                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
+and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
+wait for a moment, and your default browser will open on the gallery page.</p>
+<div class="center-align container">
+<img alt=".././static//static/uploads/minus-menu.png" src=".././static//static/uploads/minus-menu.png" />
 </div>
-<div class="section" id="source">
-<h2>Source</h2>
-<p><a class="reference external" href="https://bitbucket.org/dekomote/w3cvalidate.vim">Bitbucket</a>
-<a class="reference external" href="https://github.com/dekomote/w3cvalidate.vim">GitHub</a>
-<a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=3416">Vim Scripts</a></p>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<div class="section" id="automatic-installation">
+<h3>Automatic installation</h3>
+<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
+It should take care of all dependencies etc. Remember to restart nautilus after installation:</p>
+<blockquote>
+nautilus -q or
+killall nautilus</blockquote>
+<p>If this method fails, try manual installation:</p>
+</div>
+<div class="section" id="manual-installation">
+<h3>Manual installation</h3>
+<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
+Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
+directory, create it with your user. Extract the tarball so that the script
+<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
+and not subfolders.</p>
+<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
+package. On Ubuntus or Debians, install it using apt:</p>
+<blockquote>
+sudo apt-get install python-nautilus</blockquote>
+<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
+and some Debians. If that's not there, it falls back to zenity, which is in
+standard gnome installation. Try to get at least one of these packages so you
+can be notified of eventual errors/ updates.</p>
+</div>
+</div>
+<div class="section" id="future">
+<h2>Future</h2>
+<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
+request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -101,28 +121,51 @@
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././nautilus-minus-extension.html" rel="bookmark" title="Permalink to Nautilus-minus extension">Nautilus-minus extension</a></h1>
+                        <h1><a href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html" rel="bookmark" title="Permalink to HOW-TO: Use multiple WMD editors on a same page">HOW-TO: Use multiple WMD editors on a same page</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2011-02-14T19:01:00">
-                                Mon 14 February 2011
+                        <abbr class="published" title="2011-10-27T15:30:00">
+                                Thu 27 October 2011
                         </abbr>
 
                         <address class="vcard author">
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
                         <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
+                        <p>tags: <a href=".././tag/wmd.html">wmd</a> <a href=".././tag/markdown.html">markdown</a> <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/how-to.html">how-to</a> <a href=".././tag/coding.html">coding</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
-and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
-context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
-wait for a moment, and your default ...</p>
-                <a class="readmore" href=".././nautilus-minus-extension.html">read more</a>
+                <property object at 0x29fe838>
+                <a class="readmore" href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././w3cvalidatevim.html" rel="bookmark" title="Permalink to W3cValidate.vim">W3cValidate.vim</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2011-01-23T00:55:00">
+                                Sun 23 January 2011
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/vim.html">vim</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/coding.html">coding</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <property object at 0x29fef18>
+                <a class="readmore" href=".././w3cvalidatevim.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -147,10 +190,7 @@ wait for a moment, and your default ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
-article, you probably know that. The thing that makes Vim so good, is the
-scripting environment behind it called VimL. Using this scripting language,
-you can write any functionality/plugin you need ...</p>
+                <property object at 0x222b0a8>
                 <a class="readmore" href=".././how-to-write-vim-plugins-with-python.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>

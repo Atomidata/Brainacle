@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li ><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,10 +53,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././calculating-image-entropy-with-python-how-and-why.html">Calculating image entropy with Python, How and Why?</a></h1> 
+                <h1 class="entry-title"><a href=".././nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2010-10-04T12:20:00">
-                                Mon 04 October 2010
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
                         </abbr>
 
                         
@@ -67,69 +65,48 @@
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/entropy.html">entropy</a> <a href=".././tag/image.html">image</a> <a href=".././tag/pil.html">pil</a> <a href=".././tag/python.html">python</a> </p>
+                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <div class="section" id="the-why">
-<h2>The Why?</h2>
-<p>Lets say you are developing a video portal, kinda like youtube/vimeo
-and you want to have an automated way of making thumbnails. Since
-video manipulation in python is a bit tricky, you might as well make
-the thumbnails with <strong>ffmpeg</strong> every [n] seconds. You need 10 thumbnails
-for each video, and you want those thumbnails to show parts of it.</p>
-<p>If you leave it random, you might end up having thumbnails that show
-a black scene or some scene that barely shows anything. Using the
-image
-entropy, you can sort out the thumbnails based on the <a class="reference external" href="http://www.astro.cornell.edu/research/projects/compression/entropy.html">&quot;business&quot;</a> of
-the scene they depict. The technique can be implemented as follows:</p>
-<ol class="arabic simple">
-<li>Generate n&gt;[thumbnails_needed] thumbnails</li>
-<li>Calculate the image entropy for each of them</li>
-<li>Sort them by their entropy</li>
-<li>Use the first [thumbnails_needed] thumbnails</li>
-</ol>
+                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
+and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
+wait for a moment, and your default browser will open on the gallery page.</p>
+<div class="center-align container">
+<img alt=".././static//static/uploads/minus-menu.png" src=".././static//static/uploads/minus-menu.png" />
 </div>
-<div class="section" id="the-how">
-<h2>The How?</h2>
-<p><strong>Entropy</strong> H of a sampled signal of length N samples is calculated:</p>
-<div class="highlight"><pre>H(X) = -1 * sum_1_to_N ( p_i log( p_i ) )
-</pre></div>
-<p>p_i is the probability of the i-th sample of the signal and can be calculated:</p>
-<div class="highlight"><pre>p_i = Histogram(sample)[i]/Length(Histogram(sample))
-</pre></div>
-<p>All we need to do is to get the histogram list and we can calculate
-the entropy.</p>
-<p>On a first sight, this sounds like a complex mathematical problem. And
-it is, but we will make a little shortcut. We will use the <a class="reference external" href="http://www.pythonware.com/products/pil/">Python
-imaging library</a> or <strong>PIL</strong>. This package is de facto standard package for
-image manipulation in Python. It is one of the first packages I
-install when preparing my development environment (before making
-virtualenvs). PIL provides a method for calculating the histogram of
-the image and solves most of our problems. The function for
-calculating the entropy looks like this:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">Image</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-
-<span class="k">def</span> <span class="nf">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;calculate the entropy of an image&quot;&quot;&quot;</span>
-    <span class="n">histogram</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">histogram</span><span class="p">()</span>
-    <span class="n">histogram_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">histogram</span><span class="p">)</span>
-
-    <span class="n">samples_probability</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">histogram_length</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">histogram</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="o">-</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">samples_probability</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;headshot.jpg&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-<p>As you can see, PIL’s method for calculating the histogram really
-simplifies things and makes the functions seem slim and simple. All
-its left is iterating through set of thumbnails, calculating the
-entropy and sorting them.</p>
-<p>Remember: <strong>Bigger entropy means more
-noise/liveliness/color/business.*</strong> You will usually need the thumbnails
-with greater entropy.</p>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<div class="section" id="automatic-installation">
+<h3>Automatic installation</h3>
+<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
+It should take care of all dependencies etc. Remember to restart nautilus after installation:</p>
+<blockquote>
+nautilus -q or
+killall nautilus</blockquote>
+<p>If this method fails, try manual installation:</p>
+</div>
+<div class="section" id="manual-installation">
+<h3>Manual installation</h3>
+<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
+Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
+directory, create it with your user. Extract the tarball so that the script
+<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
+and not subfolders.</p>
+<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
+package. On Ubuntus or Debians, install it using apt:</p>
+<blockquote>
+sudo apt-get install python-nautilus</blockquote>
+<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
+and some Debians. If that's not there, it falls back to zenity, which is in
+standard gnome installation. Try to get at least one of these packages so you
+can be notified of eventual errors/ updates.</p>
+</div>
+</div>
+<div class="section" id="future">
+<h2>Future</h2>
+<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
+request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -139,37 +116,6 @@ with greater entropy.</p>
                 <hr />
                     <ol id="posts-list" class="hfeed">
         
-    
-        
-     
-        <li><article class="hentry">    
-                <header>
-                        <h1><a href=".././announcing-django-audit-log.html" rel="bookmark" title="Permalink to Announcing Django-audit-log">Announcing Django-audit-log</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-                        <abbr class="published" title="2009-12-22T21:39:00">
-                                Tue 22 December 2009
-                        </abbr>
-
-                        <address class="vcard author">
-                                By <a class="url fn" href="#">Vasil Vangelovski</a>
-                        </address>
-                        <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/audit-log.html">audit-log</a> </p>
-</p>
-                    <p></p>
-                </footer><!-- /.post-info -->
-                <p>For those unfamiliar with the term, a definition from Wikipedia:</p>
-<blockquote>
-Audit trail or audit log is a chronological sequence of audit records, each
-of which contains evidence directly pertaining to and resulting from the
-execution of a business process or system function.</blockquote>
-<p>How does this come into play in a ...</p>
-                <a class="readmore" href=".././announcing-django-audit-log.html">read more</a>
-                </div><!-- /.entry-content -->
-        </article></li>
     
         
      
@@ -192,79 +138,8 @@ execution of a business process or system function.</blockquote>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>PyFaceDetect is a thin wrapper around <a class="reference external" href="http://opencv.willowgarage.com">OpenCV</a> for detection and marking faces in images.</p>
-<p>The module can be used as an API or in console for testing purposes. For usage and options:</p>
-<div class="highlight"><pre>python pyfacedetect.py -h
-</pre></div>
-<div class="section" id="sample-input">
-<h2>Sample input</h2>
-<img alt="http://i.imgur.com/5Lq4O.jpg" src="http://i.imgur.com/5Lq4O.jpg" />
-</div>
-<div class="section" id="sample-output">
-<h2>Sample output</h2>
-<img alt="http://i.imgur.com/56aTg.jpg" src="http://i.imgur.com/56aTg.jpg" />
-<p>The module consists of 2 classes:</p>
-<blockquote>
-<p>OcvDetector that wraps OpenCV ...</p></blockquote></div>
+                <property object at 0x2748418>
                 <a class="readmore" href=".././pyfacedetect.html">read more</a>
-                </div><!-- /.entry-content -->
-        </article></li>
-    
-        
-     
-        <li><article class="hentry">    
-                <header>
-                        <h1><a href=".././nautilus-minus-extension.html" rel="bookmark" title="Permalink to Nautilus-minus extension">Nautilus-minus extension</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-                        <abbr class="published" title="2011-02-14T19:01:00">
-                                Mon 14 February 2011
-                        </abbr>
-
-                        <address class="vcard author">
-                                By <a class="url fn" href="#">Dejan Noveski</a>
-                        </address>
-                        <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
-</p>
-                    <p></p>
-                </footer><!-- /.post-info -->
-                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
-and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
-context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
-wait for a moment, and your default ...</p>
-                <a class="readmore" href=".././nautilus-minus-extension.html">read more</a>
-                </div><!-- /.entry-content -->
-        </article></li>
-    
-        
-     
-        <li><article class="hentry">    
-                <header>
-                        <h1><a href=".././benchmark-of-django-deployment-techniques.html" rel="bookmark" title="Permalink to Benchmark of django deployment techniques">Benchmark of django deployment techniques</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-                        <abbr class="published" title="2010-01-19T19:55:00">
-                                Tue 19 January 2010
-                        </abbr>
-
-                        <address class="vcard author">
-                                By <a class="url fn" href="#">Vasil Vangelovski</a>
-                        </address>
-                        <p> In <a href=".././category/Sys.html">Sys</a></p>
-                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/deployment.html">deployment</a> <a href=".././tag/sys.html">sys</a> <a href=".././tag/benchmark.html">benchmark</a> </p>
-</p>
-                    <p></p>
-                </footer><!-- /.post-info -->
-                <p>I made a benchmark of different Django deployment techniques and configurations
-mostly for my personal purposes. The results are published in the hope that it
-would save others some time. The benchmark was not designed to test the speed
-of Django itself, only to give relative comparison between different techniques ...</p>
-                <a class="readmore" href=".././benchmark-of-django-deployment-techniques.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -289,27 +164,34 @@ of Django itself, only to give relative comparison between different techniques 
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>Command line utility script for generating custom <a class="reference external" href="http://960.gs">960gs</a> grids (css). It can generate grids will custom width, column number and gutter width. Outputs to file or stdout.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<div class="highlight"><pre>python generate960.py
-</pre></div>
-</div>
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments</h2>
-<blockquote>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
-<td>show help message and exit</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">-w <var>WIDTH</var></span>, <span class="option">--width <var>WIDTH</var></span></kbd></td>
-</tr>
-<tr><td>&nbsp;</td><td>Content width in px. Defaults to ...</td></tr></tbody></table></blockquote></div>
+                <property object at 0x29902b8>
                 <a class="readmore" href=".././generate960py.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././announcing-django-audit-log.html" rel="bookmark" title="Permalink to Announcing Django-audit-log">Announcing Django-audit-log</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2009-12-22T21:39:00">
+                                Tue 22 December 2009
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Vasil Vangelovski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/audit-log.html">audit-log</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <property object at 0x29fe158>
+                <a class="readmore" href=".././announcing-django-audit-log.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -334,11 +216,60 @@ of Django itself, only to give relative comparison between different techniques 
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
-article, you probably know that. The thing that makes Vim so good, is the
-scripting environment behind it called VimL. Using this scripting language,
-you can write any functionality/plugin you need ...</p>
+                <property object at 0x222b0a8>
                 <a class="readmore" href=".././how-to-write-vim-plugins-with-python.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././benchmark-of-django-deployment-techniques.html" rel="bookmark" title="Permalink to Benchmark of django deployment techniques">Benchmark of django deployment techniques</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2010-01-19T19:55:00">
+                                Tue 19 January 2010
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Vasil Vangelovski</a>
+                        </address>
+                        <p> In <a href=".././category/Sys.html">Sys</a></p>
+                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/deployment.html">deployment</a> <a href=".././tag/sys.html">sys</a> <a href=".././tag/benchmark.html">benchmark</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <property object at 0x222b940>
+                <a class="readmore" href=".././benchmark-of-django-deployment-techniques.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././calculating-image-entropy-with-python-how-and-why.html" rel="bookmark" title="Permalink to Calculating image entropy with Python, How and Why?">Calculating image entropy with Python, How and Why?</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2010-10-04T12:20:00">
+                                Mon 04 October 2010
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/entropy.html">entropy</a> <a href=".././tag/image.html">image</a> <a href=".././tag/pil.html">pil</a> <a href=".././tag/python.html">python</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <property object at 0x2bbd368>
+                <a class="readmore" href=".././calculating-image-entropy-with-python-how-and-why.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     

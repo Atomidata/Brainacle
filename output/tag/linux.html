@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li ><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,10 +53,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html">Install Proprietary ATI 10.8 drivers on Ubuntu Lucid / Linux Mint</a></h1> 
+                <h1 class="entry-title"><a href=".././nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2010-09-09T20:55:00">
-                                Thu 09 September 2010
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
                         </abbr>
 
                         
@@ -66,65 +64,50 @@
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
                         
-                <p>In <a href=".././category/Miscellaneous.html">Miscellaneous</a>. </p>
-                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/ati.html">ati</a> <a href=".././tag/drivers.html">drivers</a> </p>
+                <p>In <a href=".././category/Coding.html">Coding</a>. </p>
+                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p>I will digress a bit from the theme of the blog, but seeing a lot of
-people having issues with installing the ATI drivers on Ubuntu, I
-decided to put my thoughts and experience with it here.</p>
-<p>I have experimented with the drivers quite a bit. I own Sapphire
-Radeon HD 4650, and always try out games on Wine(i wish all of them
-worked in Gnu/Linux) which is the reason I need updated drivers on my
-rig. Two weeks ago, AMD(then ATI) updated the drivers to 10.8
-version. By their claims, these drivers introduce some performance
-gain, bugfixes and general stability. I installed the driver 30
-minutes before writing this post and it actually works pretty good.</p>
-<p><strong>Now for the technical part:</strong></p>
-<p>What you need is a rig with AMD graphic card powered by a <a class="reference external" href="http://linuxmint.com/">Linux Mint</a>
-or <a class="reference external" href="http://ubuntu.org/">Ubuntu Lucid distro</a> with installed
-build-essential. Driver (which
-in fact is shell script) can be downloaded <a class="reference external" href="http://support.amd.com/us/gpudownload/Pages/index.aspx">Here</a>. The script is called
-ati-driver-installer-[version]-[CPU architecture].run. Download it to
-new empty folder - lets call it ati in home folder.</p>
-<p>Now we have the driver and we can start with installation. Before we
-actually commence the installation, we have to purge/remove the old
-ati driver from the system. You should try these commands to remove
-it:</p>
-<div class="highlight"><pre>sudo apt-get purge fglrx
-</pre></div>
-<p>or</p>
-<div class="highlight"><pre>sudo sh /usr/share/fglrx/fglrx-uninstall.sh
-</pre></div>
-<p>After the removing is done, reboot the PC. You could be asked to turn
-the graphics to low details (safe mode). Do that. Next, open a
-terminal and navigate to the folder with the driver.</p>
-<div class="highlight"><pre><span class="nb">cd</span> ~/ati/
-</pre></div>
-<p>Add permissions for execution to the script:</p>
-<div class="highlight"><pre>chmod +x ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run
-</pre></div>
-<p>Generate distro-specific packages(for lucid or mint 9):</p>
-<div class="highlight"><pre>sudo ./ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run –buildpkg Ubuntu/lucid
-</pre></div>
-<p>or list all available distro builds:</p>
-<div class="highlight"><pre>sudo ./ati-driver-installer-<span class="o">[</span>version<span class="o">]</span>-<span class="o">[</span>CPU architecture<span class="o">]</span>.run –listpkg
-</pre></div>
-<p>After this operation (if everything went ok) you will have several
-.deb packages. Install them with the next command:</p>
-<div class="highlight"><pre>sudo dpkg -i *.deb
-</pre></div>
-<p>The drivers are installed. If this is your first ATI driver
-installation, invoke next command to make the initial config:</p>
-<div class="highlight"><pre>sudo aticonfig –initial
-</pre></div>
-<p>Reboot the PC, and you’ll have the drivers installed. If you have any
-problems, refer to the Installation Instructions on the driver’s
-download page.</p>
-<p><strong>Disclaimer:</strong> This post is a general guideline for installing the
-proprietary ati drivers for linux practiced by the author. The author
-will not accept any liability for any damages/data-loss caused using
-the technique described above.</p>
+                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
+and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
+wait for a moment, and your default browser will open on the gallery page.</p>
+<div class="center-align container">
+<img alt=".././static//static/uploads/minus-menu.png" src=".././static//static/uploads/minus-menu.png" />
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<div class="section" id="automatic-installation">
+<h3>Automatic installation</h3>
+<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
+It should take care of all dependencies etc. Remember to restart nautilus after installation:</p>
+<blockquote>
+nautilus -q or
+killall nautilus</blockquote>
+<p>If this method fails, try manual installation:</p>
+</div>
+<div class="section" id="manual-installation">
+<h3>Manual installation</h3>
+<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
+Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
+directory, create it with your user. Extract the tarball so that the script
+<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
+and not subfolders.</p>
+<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
+package. On Ubuntus or Debians, install it using apt:</p>
+<blockquote>
+sudo apt-get install python-nautilus</blockquote>
+<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
+and some Debians. If that's not there, it falls back to zenity, which is in
+standard gnome installation. Try to get at least one of these packages so you
+can be notified of eventual errors/ updates.</p>
+</div>
+</div>
+<div class="section" id="future">
+<h2>Future</h2>
+<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
+request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
+</div>
 
         </article></aside><!-- /#featured -->
         
@@ -155,8 +138,7 @@ the technique described above.</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>Gallium3D is a software library for 3D graphics device drivers developed by VMware. It's the next big thing in linux graphic drivers world. At the moment, it drives the old (sub r300) ATI graphic cards
-and it is in a very active development for NVidia and newer ATI(AMD ...</p>
+                <property object at 0x29fe0a8>
                 <a class="readmore" href=".././how-to-easily-enable-r600g-gallium3d-in-ubuntu-and-ubuntu-derivatives-for-radeon.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -165,28 +147,25 @@ and it is in a very active development for NVidia and newer ATI(AMD ...</p>
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././nautilus-minus-extension.html" rel="bookmark" title="Permalink to Nautilus-minus extension">Nautilus-minus extension</a></h1>
+                        <h1><a href=".././install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html" rel="bookmark" title="Permalink to Install Proprietary ATI 10.8 drivers on Ubuntu Lucid / Linux Mint">Install Proprietary ATI 10.8 drivers on Ubuntu Lucid / Linux Mint</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2011-02-14T19:01:00">
-                                Mon 14 February 2011
+                        <abbr class="published" title="2010-09-09T20:55:00">
+                                Thu 09 September 2010
                         </abbr>
 
                         <address class="vcard author">
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
-                        <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
+                        <p> In <a href=".././category/Miscellaneous.html">Miscellaneous</a></p>
+                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/ati.html">ati</a> <a href=".././tag/drivers.html">drivers</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
-and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
-context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
-wait for a moment, and your default ...</p>
-                <a class="readmore" href=".././nautilus-minus-extension.html">read more</a>
+                <property object at 0x222b2b8>
+                <a class="readmore" href=".././install-proprietary-ati-108-drivers-on-ubuntu-lucid-linux-mint.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     

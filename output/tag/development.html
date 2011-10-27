@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li ><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,82 +53,33 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././calculating-image-entropy-with-python-how-and-why.html">Calculating image entropy with Python, How and Why?</a></h1> 
+                <h1 class="entry-title"><a href=".././django-toolbox-for-komodo.html">Django Toolbox for Komodo</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2010-10-04T12:20:00">
-                                Mon 04 October 2010
+                        <abbr class="published" title="2010-05-03T16:08:00">
+                                Mon 03 May 2010
                         </abbr>
 
                         
                         <address class="vcard author">
-                                By <a class="url fn" href="#">Dejan Noveski</a>
+                                By <a class="url fn" href="#">Vasil Vangelovski</a>
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/entropy.html">entropy</a> <a href=".././tag/image.html">image</a> <a href=".././tag/pil.html">pil</a> <a href=".././tag/python.html">python</a> </p>
+                <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/editors.html">editors</a> <a href=".././tag/komodo.html">komodo</a> <a href=".././tag/django.html">django</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <div class="section" id="the-why">
-<h2>The Why?</h2>
-<p>Lets say you are developing a video portal, kinda like youtube/vimeo
-and you want to have an automated way of making thumbnails. Since
-video manipulation in python is a bit tricky, you might as well make
-the thumbnails with <strong>ffmpeg</strong> every [n] seconds. You need 10 thumbnails
-for each video, and you want those thumbnails to show parts of it.</p>
-<p>If you leave it random, you might end up having thumbnails that show
-a black scene or some scene that barely shows anything. Using the
-image
-entropy, you can sort out the thumbnails based on the <a class="reference external" href="http://www.astro.cornell.edu/research/projects/compression/entropy.html">&quot;business&quot;</a> of
-the scene they depict. The technique can be implemented as follows:</p>
-<ol class="arabic simple">
-<li>Generate n&gt;[thumbnails_needed] thumbnails</li>
-<li>Calculate the image entropy for each of them</li>
-<li>Sort them by their entropy</li>
-<li>Use the first [thumbnails_needed] thumbnails</li>
-</ol>
-</div>
-<div class="section" id="the-how">
-<h2>The How?</h2>
-<p><strong>Entropy</strong> H of a sampled signal of length N samples is calculated:</p>
-<div class="highlight"><pre>H(X) = -1 * sum_1_to_N ( p_i log( p_i ) )
-</pre></div>
-<p>p_i is the probability of the i-th sample of the signal and can be calculated:</p>
-<div class="highlight"><pre>p_i = Histogram(sample)[i]/Length(Histogram(sample))
-</pre></div>
-<p>All we need to do is to get the histogram list and we can calculate
-the entropy.</p>
-<p>On a first sight, this sounds like a complex mathematical problem. And
-it is, but we will make a little shortcut. We will use the <a class="reference external" href="http://www.pythonware.com/products/pil/">Python
-imaging library</a> or <strong>PIL</strong>. This package is de facto standard package for
-image manipulation in Python. It is one of the first packages I
-install when preparing my development environment (before making
-virtualenvs). PIL provides a method for calculating the histogram of
-the image and solves most of our problems. The function for
-calculating the entropy looks like this:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">Image</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-
-<span class="k">def</span> <span class="nf">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;calculate the entropy of an image&quot;&quot;&quot;</span>
-    <span class="n">histogram</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">histogram</span><span class="p">()</span>
-    <span class="n">histogram_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">histogram</span><span class="p">)</span>
-
-    <span class="n">samples_probability</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">histogram_length</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">histogram</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="o">-</span><span class="nb">sum</span><span class="p">([</span><span class="n">p</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">samples_probability</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;headshot.jpg&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image_entropy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-<p>As you can see, PIL’s method for calculating the histogram really
-simplifies things and makes the functions seem slim and simple. All
-its left is iterating through set of thumbnails, calculating the
-entropy and sorting them.</p>
-<p>Remember: <strong>Bigger entropy means more
-noise/liveliness/color/business.*</strong> You will usually need the thumbnails
-with greater entropy.</p>
-</div>
+                <p>If you’re using TextMate for Django development you’ve probably came
+across the <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Python Django</a>
+and Python <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Django Template</a> bundles.</p>
+<p>The Django Toolbox for Komodo does most of what the TextMate bundles
+do, plus integrated shortcuts for the most important links in the
+Django docs. Builtin template filter support is still a work in
+progress.</p>
+<p>To get the most out of the toolbox, first install the <a class="reference external" href="http://community.activestate.com/xpi/tab-abbreviations">Tab
+Abbreviations</a>
+add-on and set a keyboard shortcut (eg. TAB) to the
+command “Insert Abbreviation Snippet By Name”.</p>
+<p>Download link: <a class="reference external" href=".././static//static/downloads/DjangoKomodoToolbox-0.1.kpz">DjangoKomodoToolbox-0.1.kpz</a></p>
 
         </article></aside><!-- /#featured -->
         
@@ -144,30 +93,25 @@ with greater entropy.</p>
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././django-toolbox-for-komodo.html" rel="bookmark" title="Permalink to Django Toolbox for Komodo">Django Toolbox for Komodo</a></h1>
+                        <h1><a href=".././calculating-image-entropy-with-python-how-and-why.html" rel="bookmark" title="Permalink to Calculating image entropy with Python, How and Why?">Calculating image entropy with Python, How and Why?</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2010-05-03T16:08:00">
-                                Mon 03 May 2010
+                        <abbr class="published" title="2010-10-04T12:20:00">
+                                Mon 04 October 2010
                         </abbr>
 
                         <address class="vcard author">
-                                By <a class="url fn" href="#">Vasil Vangelovski</a>
+                                By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
                         <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/editors.html">editors</a> <a href=".././tag/komodo.html">komodo</a> <a href=".././tag/django.html">django</a> </p>
+                        <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/entropy.html">entropy</a> <a href=".././tag/image.html">image</a> <a href=".././tag/pil.html">pil</a> <a href=".././tag/python.html">python</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>If you’re using TextMate for Django development you’ve probably came
-across the <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Python Django</a>
-and Python <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Django Template</a> bundles.</p>
-<p>The Django Toolbox for Komodo does most of what the TextMate bundles
-do, plus integrated shortcuts for the most important links in the
-Django docs. Builtin template filter support ...</p>
-                <a class="readmore" href=".././django-toolbox-for-komodo.html">read more</a>
+                <property object at 0x2bbd368>
+                <a class="readmore" href=".././calculating-image-entropy-with-python-how-and-why.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     

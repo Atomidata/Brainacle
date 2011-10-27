@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li class="active"><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,10 +53,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
+                <h1 class="entry-title"><a href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html">HOW-TO: Use multiple WMD editors on a same page</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-02-14T19:01:00">
-                                Mon 14 February 2011
+                        <abbr class="published" title="2011-10-27T15:30:00">
+                                Thu 27 October 2011
                         </abbr>
 
                         
@@ -67,44 +65,54 @@
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
+                <p>tags: <a href=".././tag/wmd.html">wmd</a> <a href=".././tag/markdown.html">markdown</a> <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/how-to.html">how-to</a> <a href=".././tag/coding.html">coding</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
-and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
-context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
-wait for a moment, and your default browser will open on the gallery page.</p>
-<div class="center-align container">
-<img alt="/static/uploads/minus-menu.png" src="/static/uploads/minus-menu.png" />
-</div>
-<div class="section" id="installation">
-<h2>Installation</h2>
-<div class="section" id="automatic-installation">
-<h3>Automatic installation</h3>
-<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
-It should take care of all dependencies etc. If this method fails, try manual installation:</p>
-</div>
-<div class="section" id="manual-installation">
-<h3>Manual installation</h3>
-<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
-Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
-directory, create it with your user. Extract the tarball so that the script
-<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
-and not subfolders.</p>
-<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
-package. On Ubuntus or Debians, install it using apt:</p>
-<blockquote>
-sudo apt-get install python-nautilus</blockquote>
-<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
-and some Debians. If that's not there, it falls back to zenity, which is in
-standard gnome installation. Try to get at least one of these packages so you
-can be notified of eventual errors/ updates.</p>
-</div>
-</div>
-<div class="section" id="future">
-<h2>Future</h2>
-<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
-request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
+                <p><a class="reference external" href="http://code.google.com/p/wmd/">WMD</a> editor resembles Stackoverflow's Markdown editor and it's probably one of
+the best WYSIWYG editors that work with Markdown as input. Because of that, it's widely used in
+Stackoverflow clones (i.e. <a class="reference external" href="http://http://www.osqa.net/">OSQA</a>). It's easy to install and use (just tie it to a
+textarea), it supports the mostly used features, provided by this type of editors, but has 1 major flaw:
+It doesn't support multiple textareas/multiple editors per page.</p>
+<p>I've been working on an OSQA based platform recently when I stumbled across this issue. Since we didn't want to change
+the editor completely, I had to improvise.</p>
+<div class="section" id="javascript-to-the-rescue">
+<h2>Javascript to the rescue!</h2>
+<p>Going through WMD's code, I found a way to re-initialize the editor with different textarea. When that goes through, the
+tool bar will be bound to the newly marked textarea and it will edit it's content. The fix is pretty simple actually
+(my example uses jQuery, but i'm sure you will understand what it does):</p>
+<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.wmd-textarea&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">// Execute this when a textarea with a class .wmd-textarea gains focus</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#wmd-button-bar&quot;</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">));</span> <span class="c1">// Prepend the toolbox to the parent div of the textarea</span>
+
+    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">input</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// Set WMD&#39;s textarea input to this textarea</span>
+    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">editor</span><span class="p">();</span> <span class="c1">// Re-init the editor.</span>
+<span class="p">});</span>
+</pre></div>
+<p>What this block does is hook a function to the <em>focus</em> event of the textarea. Each time the textarea gains focus, it prepends
+the toolbox to the input's parent element, sets it as the input and reinitializes the WMD editor. That simple.</p>
+<p>If you don't want the toolbox to move -- i.e. you want a toolbox above each textarea, just paste the toolbox HTML as desired,
+point <em>Attacklab.panels.buttonBar</em> to the toolbox tied to the textarea with the focus on it, and re-init the editor:</p>
+<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.wmd-textarea&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">// Execute this when a textarea with a class .wmd-textarea gains focus</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#wmd-button-bar&quot;</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">));</span> <span class="c1">// Prepend the toolbox to the parent div of the textarea</span>
+    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">buttonBar</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.wmd-toolbox&quot;</span><span class="p">);</span> <span class="c1">// Set WMD&#39;s textarea toolbox</span>
+    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">input</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// Set WMD&#39;s textarea input to this textarea</span>
+    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">editor</span><span class="p">();</span> <span class="c1">// Re-init the editor.</span>
+<span class="p">});</span>
+</pre></div>
+<p><strong>Note</strong> The above code blocks would work with this markup:</p>
+<div class="highlight"><pre><span class="c">&lt;!-- HAVE A WMD EDITOR INITIALIZED SOMEWHERE IN YOUR HTML --&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wmd-toolbox&quot;</span><span class="nt">&gt;</span><span class="c">&lt;!-- HERE GOES TOOLBOX HTML - ONLY FOR PRESENTATION - REMOVE ID&#39;S. COPY IT FROM YOUR FULLY RENDERED PAGE SOURCE. --&gt;</span><span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;.wmd-textarea&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wmd-toolbox&quot;</span><span class="nt">&gt;</span><span class="c">&lt;!-- HERE GOES TOOLBOX HTML - ONLY FOR PRESENTATION - REMOVE ID&#39;S. COPY IT FROM YOUR FULLY RENDERED PAGE SOURCE. --&gt;</span><span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;.wmd-textarea&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -114,6 +122,32 @@ request pulls and comment on <a class="reference external" href="https://github.
                 <hr />
                     <ol id="posts-list" class="hfeed">
         
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././nautilus-minus-extension.html" rel="bookmark" title="Permalink to Nautilus-minus extension">Nautilus-minus extension</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <property object at 0x280a418>
+                <a class="readmore" href=".././nautilus-minus-extension.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
     
         
      
@@ -136,10 +170,7 @@ request pulls and comment on <a class="reference external" href="https://github.
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
-article, you probably know that. The thing that makes Vim so good, is the
-scripting environment behind it called VimL. Using this scripting language,
-you can write any functionality/plugin you need ...</p>
+                <property object at 0x222b0a8>
                 <a class="readmore" href=".././how-to-write-vim-plugins-with-python.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -165,14 +196,7 @@ you can write any functionality/plugin you need ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>W3cValidate.vim is a plugin that enables buffer/url validation using the <a class="reference external" href="http://validator.w3.org">W3 Validator</a> API.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<p>Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use</p>
-<blockquote>
-<p>:W3cValidate to validate the current buffer</p>
-<p>:W3cValidate &quot;[url_here]&quot; to validate a hosted page</p>
-<p>:W3cValidateDT &quot;[doctype]&quot; to validate the buffer using the ...</p></blockquote></div>
+                <property object at 0x29fef18>
                 <a class="readmore" href=".././w3cvalidatevim.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -198,26 +222,7 @@ you can write any functionality/plugin you need ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>Command line utility script for generating custom <a class="reference external" href="http://960.gs">960gs</a> grids (css). It can generate grids will custom width, column number and gutter width. Outputs to file or stdout.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<div class="highlight"><pre>python generate960.py
-</pre></div>
-</div>
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments</h2>
-<blockquote>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
-<td>show help message and exit</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">-w <var>WIDTH</var></span>, <span class="option">--width <var>WIDTH</var></span></kbd></td>
-</tr>
-<tr><td>&nbsp;</td><td>Content width in px. Defaults to ...</td></tr></tbody></table></blockquote></div>
+                <property object at 0x29902b8>
                 <a class="readmore" href=".././generate960py.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -243,20 +248,7 @@ you can write any functionality/plugin you need ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>PyFaceDetect is a thin wrapper around <a class="reference external" href="http://opencv.willowgarage.com">OpenCV</a> for detection and marking faces in images.</p>
-<p>The module can be used as an API or in console for testing purposes. For usage and options:</p>
-<div class="highlight"><pre>python pyfacedetect.py -h
-</pre></div>
-<div class="section" id="sample-input">
-<h2>Sample input</h2>
-<img alt="http://i.imgur.com/5Lq4O.jpg" src="http://i.imgur.com/5Lq4O.jpg" />
-</div>
-<div class="section" id="sample-output">
-<h2>Sample output</h2>
-<img alt="http://i.imgur.com/56aTg.jpg" src="http://i.imgur.com/56aTg.jpg" />
-<p>The module consists of 2 classes:</p>
-<blockquote>
-<p>OcvDetector that wraps OpenCV ...</p></blockquote></div>
+                <property object at 0x2748418>
                 <a class="readmore" href=".././pyfacedetect.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -282,12 +274,7 @@ you can write any functionality/plugin you need ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <div class="section" id="the-why">
-<h2>The Why?</h2>
-<p>Lets say you are developing a video portal, kinda like youtube/vimeo
-and you want to have an automated way of making thumbnails. Since
-video manipulation in python is a bit tricky, you might as well make
-the thumbnails with <strong>ffmpeg</strong> every [n] seconds. You need 10 thumbnails ...</p></div>
+                <property object at 0x2bbd368>
                 <a class="readmore" href=".././calculating-image-entropy-with-python-how-and-why.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -313,12 +300,7 @@ the thumbnails with <strong>ffmpeg</strong> every [n] seconds. You need 10 thumb
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>If you’re using TextMate for Django development you’ve probably came
-across the <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Python Django</a>
-and Python <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Django Template</a> bundles.</p>
-<p>The Django Toolbox for Komodo does most of what the TextMate bundles
-do, plus integrated shortcuts for the most important links in the
-Django docs. Builtin template filter support ...</p>
+                <property object at 0x2990940>
                 <a class="readmore" href=".././django-toolbox-for-komodo.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -344,10 +326,7 @@ Django docs. Builtin template filter support ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>This plugin was coded to prove a point. We saw another similar plugin like this,
-but it was only for sale with obfuscated code, so I decided to write it and opensource it.
-It doesn't have the limited functionality and the custom implementation of the paid ones,
-it is ...</p>
+                <property object at 0x222b260>
                 <a class="readmore" href=".././jqcarousel-three-d.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -373,12 +352,7 @@ it is ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>For those unfamiliar with the term, a definition from Wikipedia:</p>
-<blockquote>
-Audit trail or audit log is a chronological sequence of audit records, each
-of which contains evidence directly pertaining to and resulting from the
-execution of a business process or system function.</blockquote>
-<p>How does this come into play in a ...</p>
+                <property object at 0x29fe158>
                 <a class="readmore" href=".././announcing-django-audit-log.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -404,10 +378,7 @@ execution of a business process or system function.</blockquote>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>The idea behind this plugin is to have some kind of landscape container that
-will contain objects moving inside of it e.g. sky with the clouds moving.
-The plugin is built simple, has simple implementation, it is very easy to
-use, yet very flexible. You only need the landscape ...</p>
+                <property object at 0x2748aa0>
                 <a class="readmore" href=".././livescape-jquery-live-landscape.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>

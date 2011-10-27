@@ -37,15 +37,13 @@
                 
                 
                 
-                    <li><a href=".././pages/about.html">About</a></li>
                 
-                
-                
-                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                     <li ><a href=".././category/Coding.html">Coding</a></li>
                 
                     <li ><a href=".././category/Miscellaneous.html">Miscellaneous</a></li>
+                
+                    <li ><a href=".././category/Sys.html">Sys</a></li>
                 
                 <li><a href=".././archives.html">Archives</a></li>
                 </ul></nav>
@@ -55,10 +53,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././w3cvalidatevim.html">W3cValidate.vim</a></h1> 
+                <h1 class="entry-title"><a href=".././livescape-jquery-live-landscape.html">Livescape jQuery Live Landscape</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-01-23T00:55:00">
-                                Sun 23 January 2011
+                        <abbr class="published" title="2009-12-15T19:56:00">
+                                Tue 15 December 2009
                         </abbr>
 
                         
@@ -67,26 +65,94 @@
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/vim.html">vim</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/coding.html">coding</a> </p>
+                <p>tags: <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/jquery.html">jquery</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/code.html">code</a> <a href=".././tag/ui.html">ui</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p>W3cValidate.vim is a plugin that enables buffer/url validation using the <a class="reference external" href="http://validator.w3.org">W3 Validator</a> API.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<p>Copy w3cvalidate.vim file inside plugin directory, source it or restart Vim. Use</p>
-<blockquote>
-<p>:W3cValidate to validate the current buffer</p>
-<p>:W3cValidate &quot;[url_here]&quot; to validate a hosted page</p>
-<p>:W3cValidateDT &quot;[doctype]&quot; to validate the buffer using the [doctype] override. Make sure the doctype is a valid doctype</p>
-</blockquote>
-<p>The validator service url can be changed if you run an instance of it localy by setting  g:w3_validator_url  in .vimrc</p>
-<p>The script has API timeout default to 20 seconds. You can change it by setting  g:w3_apicall_timeout  in .vimrc</p>
+                <p>The idea behind this plugin is to have some kind of landscape container that
+will contain objects moving inside of it e.g. sky with the clouds moving.
+The plugin is built simple, has simple implementation, it is very easy to
+use, yet very flexible. You only need the landscape image, the object images
+and one container.</p>
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#livescape&#39;</span><span class="p">).</span><span class="nx">livescape</span><span class="p">({</span>
+    <span class="c1">//height of the landscape (can be omitted)</span>
+    <span class="nx">height</span> <span class="o">:</span> <span class="s1">&#39;360px&#39;</span><span class="p">,</span>
+    <span class="c1">//width of the landscape (can be omitted)</span>
+    <span class="nx">width</span> <span class="o">:</span> <span class="s1">&#39;1000px&#39;</span><span class="p">,</span>
+    <span class="c1">//background image (can be omitted)</span>
+    <span class="nx">background_image</span> <span class="o">:</span> <span class="s1">&#39;img/bg.jpg&#39;</span><span class="p">,</span>
+
+    <span class="c1">// Next define the objects that are moving:</span>
+    <span class="nx">objects</span> <span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1">//the positions are relative to the landscape</span>
+            <span class="c1">//if omitted, random assumed - same for duration</span>
+
+            <span class="c1">//x of start position</span>
+            <span class="nx">start_x</span> <span class="o">:</span> <span class="s2">&quot;1700px&quot;</span><span class="p">,</span>
+            <span class="c1">//y of start position</span>
+            <span class="nx">start_y</span> <span class="o">:</span> <span class="s2">&quot;190px&quot;</span><span class="p">,</span>
+            <span class="c1">//x of end position</span>
+            <span class="nx">end_x</span> <span class="o">:</span> <span class="s2">&quot;-4000px&quot;</span><span class="p">,</span>
+             <span class="c1">//y of end position</span>
+            <span class="nx">end_y</span> <span class="o">:</span> <span class="s2">&quot;190px&quot;</span><span class="p">,</span>
+            <span class="c1">//image of the object (url)</span>
+            <span class="nx">image</span> <span class="o">:</span> <span class="s1">&#39;img/car.png&#39;</span><span class="p">,</span>
+            <span class="c1">// duration of the animation</span>
+            <span class="nx">duration</span> <span class="o">:</span> <span class="mi">18000</span><span class="p">,</span>
+            <span class="c1">// the animation loops</span>
+            <span class="nx">loop</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="c1">//the object is anchor</span>
+            <span class="nx">href</span> <span class="o">:</span> <span class="s2">&quot;ThisisBatCountry.png&quot;</span><span class="p">,</span>
+            <span class="c1">//pause in between loops in ms</span>
+            <span class="nx">pause</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="c1">//the objects fade in on start and out on end</span>
+            <span class="nx">fade</span> <span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">//another object</span>
+        <span class="p">{</span>
+            <span class="nx">start_x</span> <span class="o">:</span> <span class="s2">&quot;-250px&quot;</span><span class="p">,</span>
+            <span class="nx">start_y</span> <span class="o">:</span> <span class="s2">&quot;5px&quot;</span><span class="p">,</span>
+            <span class="nx">end_x</span> <span class="o">:</span> <span class="s2">&quot;1250px&quot;</span><span class="p">,</span>
+            <span class="nx">end_y</span> <span class="o">:</span> <span class="s2">&quot;5px&quot;</span><span class="p">,</span>
+            <span class="nx">duration</span> <span class="o">:</span> <span class="mi">49000</span><span class="p">,</span>
+            <span class="nx">image</span> <span class="o">:</span> <span class="s1">&#39;img/cloud1.png&#39;</span><span class="p">,</span>
+            <span class="nx">loop</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">fade</span> <span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+<p>This is setup is for 2 objects. The implementation is pretty intuitive and i
+think you will get a hold of it very fast.</p>
+<div class="section" id="update">
+<h2>Update</h2>
+<ul>
+<li><p class="first">The objects now turn towards the direction of movement using CSS3 rotation.</p>
+</li>
+<li><dl class="first docutils">
+<dt>For every object you can define a random starting and ending range using the attrubutes:</dt>
+<dd><ul class="first simple">
+<li>range_sx_min (start_x min range)</li>
+<li>range_sx_max (start_x max range)</li>
+<li>range_ex_min</li>
+<li>range_ex_max</li>
+<li>range_sy_min</li>
+<li>range_sy_max</li>
+<li>range_ey_min</li>
+<li>range_ey_max</li>
+</ul>
+<p class="last">all these attributes can be omitted and random will be used.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>The plugin is still beta and needs refactoring.</strong> Nevertheless you will
+have access to an early access version.</p>
 </div>
-<div class="section" id="source">
-<h2>Source</h2>
-<p><a class="reference external" href="https://bitbucket.org/dekomote/w3cvalidate.vim">Bitbucket</a>
-<a class="reference external" href="https://github.com/dekomote/w3cvalidate.vim">GitHub</a>
-<a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=3416">Vim Scripts</a></p>
+<div class="section" id="source-and-example">
+<h2>Source and example</h2>
+<p>You can check this plugin in action <a class="reference external" href=".././static//static/uploads/livescape/index.html">here</a></p>
+<p>Get the <a class="reference external" href=".././static//static/uploads/livescape/jqLiveScape.js">source</a></p>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -101,28 +167,25 @@
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././livescape-jquery-live-landscape.html" rel="bookmark" title="Permalink to Livescape jQuery Live Landscape">Livescape jQuery Live Landscape</a></h1>
+                        <h1><a href=".././w3cvalidatevim.html" rel="bookmark" title="Permalink to W3cValidate.vim">W3cValidate.vim</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2009-12-15T19:56:00">
-                                Tue 15 December 2009
+                        <abbr class="published" title="2011-01-23T00:55:00">
+                                Sun 23 January 2011
                         </abbr>
 
                         <address class="vcard author">
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
                         <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/jquery.html">jquery</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/code.html">code</a> <a href=".././tag/ui.html">ui</a> </p>
+                        <p>tags: <a href=".././tag/vim.html">vim</a> <a href=".././tag/plugin.html">plugin</a> <a href=".././tag/coding.html">coding</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>The idea behind this plugin is to have some kind of landscape container that
-will contain objects moving inside of it e.g. sky with the clouds moving.
-The plugin is built simple, has simple implementation, it is very easy to
-use, yet very flexible. You only need the landscape ...</p>
-                <a class="readmore" href=".././livescape-jquery-live-landscape.html">read more</a>
+                <property object at 0x29fef18>
+                <a class="readmore" href=".././w3cvalidatevim.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -147,10 +210,7 @@ use, yet very flexible. You only need the landscape ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>This plugin was coded to prove a point. We saw another similar plugin like this,
-but it was only for sale with obfuscated code, so I decided to write it and opensource it.
-It doesn't have the limited functionality and the custom implementation of the paid ones,
-it is ...</p>
+                <property object at 0x222b260>
                 <a class="readmore" href=".././jqcarousel-three-d.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
@@ -176,10 +236,7 @@ it is ...</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <p>I'm not going to dive into how good or extendible Vim is. If you are reading this
-article, you probably know that. The thing that makes Vim so good, is the
-scripting environment behind it called VimL. Using this scripting language,
-you can write any functionality/plugin you need ...</p>
+                <property object at 0x222b0a8>
                 <a class="readmore" href=".././how-to-write-vim-plugins-with-python.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
