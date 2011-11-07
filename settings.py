@@ -17,3 +17,4 @@ STATIC_PATHS = ['downloads', 'uploads']
 DISPLAY_PAGES_ON_MENU = True
 REVERSE_ARCHIVE_ORDER = True
 GITHUB_URL = "https://github.com/dekomote/Brainacle"
+GOOGLE_ANALYTICS = 'UA-26853324-1'

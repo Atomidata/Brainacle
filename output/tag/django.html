@@ -55,10 +55,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././django-toolbox-for-komodo.html">Django Toolbox for Komodo</a></h1> 
+                <h1 class="entry-title"><a href=".././pgbouncer-makes-a-difference.html">Pgbouncer Makes a Difference</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2010-05-03T16:08:00">
-                                Mon 03 May 2010
+                        <abbr class="published" title="2010-06-15T23:17:00">
+                                Tue 15 June 2010
                         </abbr>
 
                         
@@ -66,22 +66,89 @@
                                 By <a class="url fn" href="#">Vasil Vangelovski</a>
                         </address>
                         
-                <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/editors.html">editors</a> <a href=".././tag/komodo.html">komodo</a> <a href=".././tag/django.html">django</a> </p>
+                <p>In <a href=".././category/Sys.html">Sys</a>. </p>
+                <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/pgbouncer.html">pgbouncer</a> <a href=".././tag/pgpool.html">pgpool</a> <a href=".././tag/postgresql.html">postgresql</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p>If you’re using TextMate for Django development you’ve probably came
-across the <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Python Django</a>
-and Python <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Django Template</a> bundles.</p>
-<p>The Django Toolbox for Komodo does most of what the TextMate bundles
-do, plus integrated shortcuts for the most important links in the
-Django docs. Builtin template filter support is still a work in
-progress.</p>
-<p>To get the most out of the toolbox, first install the <a class="reference external" href="http://community.activestate.com/xpi/tab-abbreviations">Tab
-Abbreviations</a>
-add-on and set a keyboard shortcut (eg. TAB) to the
-command “Insert Abbreviation Snippet By Name”.</p>
-<p>Download link: <a class="reference external" href=".././static//static/downloads/DjangoKomodoToolbox-0.1.kpz">DjangoKomodoToolbox-0.1.kpz</a></p>
+                <p>Last week I was building VMware images for database and web server
+appliances that would host a fairly large Django application. The
+application is backed by a PostgreSQL database and I was looking for
+some info on compiling/configuring pgpool on Debian (I like to compile
+stuff when I can, especially when the last version of Debian is 2
+years old). Googling around I came across some very interesting posts
+on mailing lists and SO regarding Django, PostgeSQL and connection
+pooling.</p>
+<p>Among other things, people seem to have a notion that using pooling
+middleware won’t accomplish much as the web server still needs to open
+a TCP connection and that is the source of a noticeable overhead for
+each request. So they’ve come up with solutions to avoid opening TCP
+connections as much as possible, trying to accomplish something
+similar to what SQLAlchemy’s connection pool does, keeping the web
+server connected to the database with multiple connections at all
+times. These solutions of course range from changing the code in
+django.db.backends.... to monkey-patching it.</p>
+<p>When you change Django’s code you’ve just created a fork of a growing
+and evolving open source project and based your own project around
+that fork you have to maintain yourself. Monkey-patching is not as
+bad, but comes very close regarding maintenance problems. And is all
+that really necessary?</p>
+<div class="section" id="the-overhead-doesnt-stem-from-opening-tcp-connections">
+<h2>The Overhead Doesn’t Stem From Opening TCP Connections</h2>
+<p>Every time you open a database connection (session) to execute some
+SQL on a Postgres database the Postgres server spawns a new process
+and upon closing the connection (session) from your application that
+process is shut down. With the way Django handles database sessions
+this is repeated for every request. Which means for every request
+Postgres will have to spawn a new worker process that will last for
+the duration of the database session involved in responding to that
+HTTP request. The overhead involved in opening a TCP connection to a
+process running on the same machine or on the same network is not much
+compared to the overhead involved in spawning a new process.</p>
+</div>
+<div class="section" id="solutions-do-exist">
+<h2>Solutions Do Exist</h2>
+<p>So if the overhead for each request comes from spawning new processes
+then the obvious solution would be to keep that at a minimum level. If
+you keep the connections to the database server open and reuse them
+for every request then the processes spawned at the time the
+connections were established would be reused as the connections are
+reused.</p>
+<p>But you don’t have to keep your web server connected to the database
+server to achieve this. Two more popular solutions are pgpool II and
+pgbouncer. Both are designed as sort of middleware proxies that sit
+between your application and your database. Pgpool is more of a
+replication and load balancing solution than a connection pool. It
+works as a connection pool because at each connection opened by your
+application to pgpool it will have a separate process handling that
+connection, but it will keep those processes alive and connected to
+the Postgres server even after your application closes those
+connections. So using it would have the effect of lowering the net
+amount of new processes created to serve a certain number of requests
+to your web application. Pgbouncer on the other hand handles all the
+requests between your application and Postgres in a highly efficient
+asynchronous manner by utilizing libevent and not using
+multiprocessing at all, and it will keep the initially opened
+connections for a longer time after your application closes them, so
+making a new connection to pgbouncer will rarely result in Postges
+spawning a process.</p>
+</div>
+<div class="section" id="the-proof">
+<h2>The Proof</h2>
+<p>To prove that solutions like pgbouncer do make a difference I created
+a simple test scenario. A very small Django project with one page
+displaying 5 rows from a table in a PostgreSQL database. Both the
+database server and the web server (Apache with mod-wsgi in daemon
+mode) running on one small VM with 1GB of RAM and 4 CPU cores
+assigned.</p>
+<p>In the first test I configured the application to connect to the
+database server directly and put the page under
+<a class="reference external" href="http://www.joedog.org/index/siege-home">siege</a> with 1, 5, 15,</p>
+<p>50, 100 and 200 concurrent requests, each session lasting for 1
+minute. Then I repeated the process with the application configured to
+connect to pgbouncer instead. The results show something close to a
+50% increase in responsiveness:</p>
+<img alt="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;oid=2&amp;zx=8zp184e7ixus" src="https://spreadsheets.google.com/oimg?key=0ApNjbkQcMGV4dGktNUpCUmtsbWFoWHc5WFRjQjFXV0E&amp;oid=2&amp;zx=8zp184e7ixus" />
+</div>
 
         </article></aside><!-- /#featured -->
         
@@ -95,51 +162,30 @@ command “Insert Abbreviation Snippet By Name”.</p>
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././announcing-django-audit-log.html" rel="bookmark" title="Permalink to Announcing Django-audit-log">Announcing Django-audit-log</a></h1>
+                        <h1><a href=".././django-toolbox-for-komodo.html" rel="bookmark" title="Permalink to Django Toolbox for Komodo">Django Toolbox for Komodo</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2009-12-22T21:39:00">
-                                Tue 22 December 2009
+                        <abbr class="published" title="2010-05-03T16:08:00">
+                                Mon 03 May 2010
                         </abbr>
 
                         <address class="vcard author">
                                 By <a class="url fn" href="#">Vasil Vangelovski</a>
                         </address>
                         <p> In <a href=".././category/Coding.html">Coding</a></p>
-                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/audit-log.html">audit-log</a> </p>
+                        <p>tags: <a href=".././tag/development.html">development</a> <a href=".././tag/editors.html">editors</a> <a href=".././tag/komodo.html">komodo</a> <a href=".././tag/django.html">django</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <property object at 0x326f158>
-                <a class="readmore" href=".././announcing-django-audit-log.html">read more</a>
-                </div><!-- /.entry-content -->
-        </article></li>
-    
-        
-     
-        <li><article class="hentry">    
-                <header>
-                        <h1><a href=".././pgbouncer-makes-a-difference.html" rel="bookmark" title="Permalink to Pgbouncer Makes a Difference">Pgbouncer Makes a Difference</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-                        <abbr class="published" title="2010-06-15T23:17:00">
-                                Tue 15 June 2010
-                        </abbr>
-
-                        <address class="vcard author">
-                                By <a class="url fn" href="#">Vasil Vangelovski</a>
-                        </address>
-                        <p> In <a href=".././category/Sys.html">Sys</a></p>
-                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/pgbouncer.html">pgbouncer</a> <a href=".././tag/pgpool.html">pgpool</a> <a href=".././tag/postgresql.html">postgresql</a> </p>
-</p>
-                    <p></p>
-                </footer><!-- /.post-info -->
-                <property object at 0x32e5100>
-                <a class="readmore" href=".././pgbouncer-makes-a-difference.html">read more</a>
+                <p>If you’re using TextMate for Django development you’ve probably came
+across the <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Python Django</a>
+and Python <a class="reference external" href="http://svn.textmate.org/trunk/Bundles/Python%20Django.tmbundle/">Django Template</a> bundles.</p>
+<p>The Django Toolbox for Komodo does most of what the TextMate bundles
+do, plus integrated shortcuts for the most important links in the
+Django docs. Builtin template filter support ...</p>
+                <a class="readmore" href=".././django-toolbox-for-komodo.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -164,8 +210,42 @@ command “Insert Abbreviation Snippet By Name”.</p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <property object at 0x32e5578>
+                <p>I made a benchmark of different Django deployment techniques and configurations
+mostly for my personal purposes. The results are published in the hope that it
+would save others some time. The benchmark was not designed to test the speed
+of Django itself, only to give relative comparison between different techniques ...</p>
                 <a class="readmore" href=".././benchmark-of-django-deployment-techniques.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././announcing-django-audit-log.html" rel="bookmark" title="Permalink to Announcing Django-audit-log">Announcing Django-audit-log</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2009-12-22T21:39:00">
+                                Tue 22 December 2009
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Vasil Vangelovski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/django.html">django</a> <a href=".././tag/python.html">python</a> <a href=".././tag/audit-log.html">audit-log</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <p>For those unfamiliar with the term, a definition from Wikipedia:</p>
+<blockquote>
+Audit trail or audit log is a chronological sequence of audit records, each
+of which contains evidence directly pertaining to and resulting from the
+execution of a business process or system function.</blockquote>
+<p>How does this come into play in a ...</p>
+                <a class="readmore" href=".././announcing-django-audit-log.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -224,6 +304,16 @@ command “Insert Abbreviation Snippet By Name”.</p>
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
 
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-26853324-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
 
 </body>
 </html>

@@ -55,10 +55,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././nautilus-minus-extension.html">Nautilus-minus extension</a></h1> 
+                <h1 class="entry-title"><a href=".././kde-vs-gnome-a-subjective-view.html">KDE vs. Gnome - A Subjective View</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-02-14T19:01:00">
-                                Mon 14 February 2011
+                        <abbr class="published" title="2011-10-29T21:03:00">
+                                Sat 29 October 2011
                         </abbr>
 
                         
@@ -66,49 +66,141 @@
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
                         
-                <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
+                <p>In <a href=".././category/Miscellaneous.html">Miscellaneous</a>. </p>
+                <p>tags: <a href=".././tag/kde.html">kde</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/lxde.html">lxde</a> <a href=".././tag/xfce.html">xfce</a> <a href=".././tag/desktop.html">desktop</a> <a href=".././tag/linux.html">linux</a> <a href=".././tag/miscellaneous.html">miscellaneous</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
-and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
-context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
-wait for a moment, and your default browser will open on the gallery page.</p>
+                <p>Past year, a lot has changed with the desktop environments for Linux. Gnome going 3,
+Ubuntu going Unity, people going nuts about that. I've been experimenting with all of them trying to
+find the one that will serve me good and will evolve at a slower pace. I, being an exclusive computer/Linux user for a
+long time, had tough time with the new UIs (I prefer the old style - 1 panel on the bottom, no wobbly-wobbly).
+My distro of choice is Arch, and my DE of choice was Gnome + Openbox as a window manager. That combo proved
+to be fast, usable, considerate to hardware yet elegant and (at this moment of time) old-school. I should disclose that
+I use my primary desktop for everything, not just work (multimedia, internet, gaming) and as such, tilling WMs are a no-no.</p>
+<p>Then, Gnome turned 3 and everything changed. Openbox was no longer an option (it has issues even on fall-back mode) so I was
+stuck with either metacity or mutter. At that moment I started looking into the alternatives. Spent some time on KDE,
+got LXDE on my netbook (and tried it on my desktop), even tried XFCE for a couple of weeks. This is my subjective
+view on why I stuck to Gnome 3 fall-back, what I hate about it, what I love and hate about KDE and why I can't work on KDE.</p>
+<div class="section" id="testing-ground">
+<h2>Testing Ground</h2>
+<p>Before I start, I have to specify my testing ground. You might think that it's irrelevant, but I assure you,
+hardware makes big difference. Also, graphic drivers matter too. So, my spec:</p>
+<blockquote>
+<p>C2D E4600 2.8GHz (2.4 stock)</p>
+<p>Asus P5P43TD-Pro</p>
+<p>8GB ddr3 ram</p>
+<p>NVidia GT440 OC-ed with Nvidia blob (binary driver)</p>
+<p>1x22&quot;&#64;1680x1050 + 1x24&quot;&#64;1920x1200 monitors</p>
+<p>Archlinux, latest updates</p>
+</blockquote>
+<p>One of the best things about Arch is that you get almost vanilla versions of the DE in question. Kubuntu's KDE is tainted
+with additions and configurations, and won't be fair to be judged like that.</p>
+<div class="section" id="kde">
+<h3>KDE</h3>
 <div class="center-align container">
-<img alt=".././static//static/uploads/minus-menu.png" src=".././static//static/uploads/minus-menu.png" />
+<img alt=".././static/../static/uploads/kde.png" src=".././static/../static/uploads/kde.png" />
 </div>
-<div class="section" id="installation">
-<h2>Installation</h2>
-<div class="section" id="automatic-installation">
-<h3>Automatic installation</h3>
-<p>You can install the extension from <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/downloads">this deb file</a>.
-It should take care of all dependencies etc. Remember to restart nautilus after installation:</p>
-<blockquote>
-nautilus -q or
-killall nautilus</blockquote>
-<p>If this method fails, try manual installation:</p>
+<p>Look at this beauty! KDE is my secret love. It's that good. It looks clean and good, it's the old way (one panel at bottom, desktop is working area),
+it is feature packed and it evolves possibly the best of all of the DEs. And I would gladly use it! I will install it and not look
+back right this moment, if it weren't for some annoying stuff that make me rage every time I work on KDE:</p>
+<div class="section" id="dolphin">
+<h4>Dolphin</h4>
+<p>No mouse back-button?! What's up with this! It's the 21st century. This has been implemented in almost every graphical file
+explorer since '98. And yeah... I know about the xautomation and xbindkeys fix, but I want this implemented out of the box.
+I really don't think it's hard to be implemented.</p>
 </div>
-<div class="section" id="manual-installation">
-<h3>Manual installation</h3>
-<p>Get the tarball with the latest source <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/tarball/master">here</a>,
-Extract it into $HOME/.nautilus/python-extensions/ . If there isn't such
-directory, create it with your user. Extract the tarball so that the script
-<em>upload_to_minus.py</em> and the dir <em>minus_utils</em> are directly in <em>python-extensions/</em>
-and not subfolders.</p>
-<p>The extension needs <a class="reference external" href="http://projects.gnome.org/nautilus-python/">python-nautilus</a>
-package. On Ubuntus or Debians, install it using apt:</p>
-<blockquote>
-sudo apt-get install python-nautilus</blockquote>
-<p>The extension notifies the user via libnotify (pynotify) which is present on Ubuntus
-and some Debians. If that's not there, it falls back to zenity, which is in
-standard gnome installation. Try to get at least one of these packages so you
-can be notified of eventual errors/ updates.</p>
+<div class="section" id="kio">
+<h4>KIO</h4>
+<p>So this is the KDE version of gvfs. NOT! It's not even implemented in every general-use software. My pain with this? If I want to
+open a movie from a samba share with VLC, I have to wait for it to be temporarily downloaded to my PC and then watch it. On gnome,
+I just open it, and watch it. The even funnier part is, if I use Kate in gnome, it automatically works with gvfs. Why don't you
+just integrate gvfs or make KIO work similarly?</p>
+</div>
+<div class="section" id="kde-wallet">
+<h4>KDE-Wallet</h4>
+<p>I don't like to input password every time I do a <em>git pull/push</em>, <em>sudo</em> etc. The KDE-wallet handles ssh auth poorly.
+There is a fix for it to work with ssh-agent, but why should I make fixes and patches when Gnome's keyring works out
+of the box?</p>
+</div>
+<div class="section" id="general-performance-bugs">
+<h4>General / Performance bugs</h4>
+<p>IMO, my configuration is pretty decent to run the DE on full power. Well, apparently, KDE wants a dual-SLI 580GTX.
+If I try to turn on the effects, KDE is unusable. If I turn them off, the interface shows random artifacts on screen.
+And this doesn't happen just on NV hardware. ATI story is worse! Same with sandybridge graphics.</p>
+<p>Often, it happens, when I click on the start menu, the menu starts at the top of the screen. Or the panel is positioned on the
+top half. When I try to reposition it, it slowly falls back to the original place. Happens every restart.</p>
+<p>That being said, KDE handles multiple monitors best of all DEs. I have to give credit for that.</p>
+<p>All in all, KDE is pretty decent DE. If they fix this few things, I will move back to it immediately and use it for good.</p>
 </div>
 </div>
-<div class="section" id="future">
-<h2>Future</h2>
-<p>I would love to hear some comments, critique, feature requests etc. You can fork it,
-request pulls and comment on <a class="reference external" href="https://github.com/dekomote/nautilus-min.us/">GitHub</a>.</p>
+<div class="section" id="gnome-3">
+<h3>Gnome 3</h3>
+<div class="center-align container">
+<img alt=".././static/../static/uploads/gnome.png" src=".././static/../static/uploads/gnome.png" />
+</div>
+<p>My current setup. Fallback mode. Never really settled for shell. It's hard for a man working years and years under one desktop
+model, to switch to something new. I'm fairly satisfied with Gnome3.2 fallback, but, i'm here to bash the things I don't like:</p>
+<div class="section" id="looks">
+<h4>Looks</h4>
+<p>Who thought that having a solid black bar for a panel was a good idea? Tint2 has better design out of the box. And, I was under
+the impression that Gnome had some good designers in their team. Well, compare Faenza icons to default gnome ones, and Adwaita to
+Zukitwo theme. You can do better than this Gnome. We care about the design too.</p>
+</div>
+<div class="section" id="gnome-settings">
+<h4>Gnome settings</h4>
+<p>Take a look at KDE's settings manager. Now, back to yours. KDE is superior in this matter and you should learn from it.
+I assume it's laziness that made you throw everything in a registry-like structure (gconf/dconf), but you could move some
+important stuff in the settings manager. Now, if I want to change your mediocre theme for something better, I have to
+install third party software for that. Or try to remember <em>Was it dconf or gconf?</em>; <em>Was it desktop/ or apps/</em>. Seriously,
+work on this. And don't even get me started on the screen-saver thing.</p>
+</div>
+<div class="section" id="plain-wrong-stuff">
+<h4>Plain Wrong stuff</h4>
+<p>Mutter in shell, metacity in fall-back. Did you stop to think that some people would want snap-to-edges in fall-back mode too?
+Do you punish us, fall-back users, and stick us with metacity? Metacity has an awful compositor. Out of the box, when minimizing
+the windows, you see this <strong>ugly</strong> black border. So, the fix is, put metacity in low resources. How is rendering a full window
+minimizing vs. rendering a black border use lower resources? If you, however, turn that on, you see a wireframe each time you drag
+a window. So you gotta turn on some other thing (I can't remember which was it and I never can!). It's not documented properly,
+and I have to google it every time I install a new machine.</p>
+<p>When I assign a primary monitor, that means I want that monitor to be PRIMARY! Not the one on the LEFT! KDE handles this better.
+Learn from it.</p>
+<p>QT apps looked good in Gnome. Now, the look good, but they don't work good. Menus flying all around.</p>
+<p>Theme manager.</p>
+<div class="section" id="bundle-bash">
+<h5>Bundle bash</h5>
+<p>Brasero sucks hard. K3b is much much better. If you don't trust me, I will show you my bag full of failed DVDs.</p>
+<p>Evince is good. But please... Bookmarks. A bit more functionality. You are trying to push Linux on a normal user.</p>
+<p>Seriously... Theme manager.</p>
+</div>
+</div>
+<div class="section" id="shell">
+<h4>Shell</h4>
+<p>Oh, my &quot;favorite&quot;. I gotta say this - it works better than Unity. Not good enough.</p>
+<ul class="simple">
+<li>It handles dual monitor poorly. Each time I open window preview, If I have a window on the other monitor, it's also shown in a preview.</li>
+<li>Notifications are far from noticeable - fallback mode handles notifications better.</li>
+<li>If you have Nautilus managing the desktop, you are in for headaches.</li>
+<li>Again, black bar?!</li>
+<li>How can I access Home folder without opening window preview?</li>
+<li>Constant crashes!</li>
+<li>Addons become incompatible fast.</li>
+<li>Ati blob issues.</li>
+<li>Wrong crash management. Shell crashes, I don't want to restart GDM. Show me ANYTHING. Just let me hit save before restarting X.</li>
+<li>And the worst part - Recent files in menu. When you open up the menu, If you don't <em>magically</em> disable (there's a hack for this) recent files, shell becomes awfully slow. Give me a checkbox where I can disable them.</li>
+<li>THEME MANAGER!</li>
+</ul>
+<p>With all this said, Gnome has less impact on productivity, and I can live with these issues. But as soon as KDE fixes it's quirks, I'm moving to it.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h3>Conclusion</h3>
+<p>Now, don't focus on the negative stuff I wrote above. It's subjective. Both DE's are good and both flawed. For me, there's a handful of issues that keep me from moving to KDE, and I really hope, they will be fixed soon.</p>
+<p>I salute the community for making things like KDE and Gnome. They rock and they should be praised for that. But,
+if we want Linux to be a choice of the normal (non-tech-savvy) user, you gotta get some things straight. Not everyone knows how
+to configure using gconf/dconf, or configure xautomation/xbindkeys. Make it perfect.</p>
+<p>What ticks you about this Desktop Environments?</p>
+<p>P.S. For the purists s/Linux/Gnu\/Linux/</p>
+</div>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -123,25 +215,28 @@ request pulls and comment on <a class="reference external" href="https://github.
      
         <li><article class="hentry">    
                 <header>
-                        <h1><a href=".././kde-vs-gnome-a-subjective-view.html" rel="bookmark" title="Permalink to KDE vs. Gnome - A Subjective View">KDE vs. Gnome - A Subjective View</a></h1>
+                        <h1><a href=".././nautilus-minus-extension.html" rel="bookmark" title="Permalink to Nautilus-minus extension">Nautilus-minus extension</a></h1>
                 </header>
                 
                 <div class="entry-content">
                 <footer class="post-info">
-                        <abbr class="published" title="2011-10-29T21:03:00">
-                                Sat 29 October 2011
+                        <abbr class="published" title="2011-02-14T19:01:00">
+                                Mon 14 February 2011
                         </abbr>
 
                         <address class="vcard author">
                                 By <a class="url fn" href="#">Dejan Noveski</a>
                         </address>
-                        <p> In <a href=".././category/Miscellaneous.html">Miscellaneous</a></p>
-                        <p>tags: <a href=".././tag/kde.html">kde</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/lxde.html">lxde</a> <a href=".././tag/xfce.html">xfce</a> <a href=".././tag/desktop.html">desktop</a> <a href=".././tag/linux.html">linux</a> <a href=".././tag/miscellaneous.html">miscellaneous</a> </p>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/gnome.html">gnome</a> <a href=".././tag/nautilus.html">nautilus</a> </p>
 </p>
                     <p></p>
                 </footer><!-- /.post-info -->
-                <property object at 0x32e5208>
-                <a class="readmore" href=".././kde-vs-gnome-a-subjective-view.html">read more</a>
+                <p><strong>nautilus-min.us</strong> is an <em>extension</em> for nautilus that makes uploading images
+and galleries to <a class="reference external" href="http://min.us">http://min.us</a> easier for the user. It adds an item in the
+context menu, so when you select one or more images, you click &quot;Upload to min.us&quot;,
+wait for a moment, and your default ...</p>
+                <a class="readmore" href=".././nautilus-minus-extension.html">read more</a>
                 </div><!-- /.entry-content -->
         </article></li>
     
@@ -200,6 +295,16 @@ request pulls and comment on <a class="reference external" href="https://github.
                 </address><!-- /#about -->
         </footer><!-- /#contentinfo -->
 
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-26853324-1");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
 
 </body>
 </html>
