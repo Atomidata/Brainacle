@@ -31,7 +31,8 @@ programming. It helped me get more insight in django's models and magic.
 3. What’s the name of the open source project you contributed the most in 2011 ? What did you do ?
 ##################################################################################################
 
-Around late November and throughout December, I started contributing to `AskBot <https://github.com/ASKBOT/askbot-devel>`_.
+Around late November and throughout December, I started contributing to `AskBot <https://github.com/ASKBOT/askbot-devel>`_. 
+`Here is <https://github.com/ASKBOT/askbot-devel/commits/master?author=dekomote>`_ my contribution so far.
 2011 was a very busy year for me, didn't have much time to contribute. I hope things will change to better next year.
 
 4. What was the Python blog or website you read the most in 2011 ?
