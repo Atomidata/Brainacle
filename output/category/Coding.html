@@ -55,10 +55,10 @@
         
     
         <aside id="featured" class="body"><article>
-                <h1 class="entry-title"><a href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html">HOW-TO: Use multiple WMD editors on a same page</a></h1> 
+                <h1 class="entry-title"><a href=".././new-years-python-meme-2012.html">New Year's Python Meme 2012</a></h1> 
                 <footer class="post-info">
-                        <abbr class="published" title="2011-10-27T15:30:00">
-                                Thu 27 October 2011
+                        <abbr class="published" title="2011-12-28T14:01:00">
+                                Wed 28 December 2011
                         </abbr>
 
                         
@@ -67,54 +67,73 @@
                         </address>
                         
                 <p>In <a href=".././category/Coding.html">Coding</a>. </p>
-                <p>tags: <a href=".././tag/wmd.html">wmd</a> <a href=".././tag/markdown.html">markdown</a> <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/how-to.html">how-to</a> <a href=".././tag/coding.html">coding</a> </p>
+                <p>tags: <a href=".././tag/linux.html">linux</a> <a href=".././tag/coding.html">coding</a> <a href=".././tag/python.html">python</a> <a href=".././tag/meme.html">meme</a> </p>
 </p>
                 </footer><!-- /.post-info -->
-                <p><a class="reference external" href="http://code.google.com/p/wmd/">WMD</a> editor resembles Stackoverflow's Markdown editor and it's probably one of
-the best WYSIWYG editors that work with Markdown as input. Because of that, it's widely used in
-Stackoverflow clones (i.e. <a class="reference external" href="http://http://www.osqa.net/">OSQA</a>). It's easy to install and use (just tie it to a
-textarea), it supports the mostly used features, provided by this type of editors, but has 1 major flaw:
-It doesn't support multiple textareas/multiple editors per page.</p>
-<p>I've been working on an OSQA based platform recently when I stumbled across this issue. Since we didn't want to change
-the editor completely, I had to improvise.</p>
-<div class="section" id="javascript-to-the-rescue">
-<h2>Javascript to the rescue!</h2>
-<p>Going through WMD's code, I found a way to re-initialize the editor with different textarea. When that goes through, the
-tool bar will be bound to the newly marked textarea and it will edit it's content. The fix is pretty simple actually
-(my example uses jQuery, but i'm sure you will understand what it does):</p>
-<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.wmd-textarea&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-            <span class="c1">// Execute this when a textarea with a class .wmd-textarea gains focus</span>
-
-    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#wmd-button-bar&quot;</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">));</span> <span class="c1">// Prepend the toolbox to the parent div of the textarea</span>
-
-    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">input</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// Set WMD&#39;s textarea input to this textarea</span>
-    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">editor</span><span class="p">();</span> <span class="c1">// Re-init the editor.</span>
-<span class="p">});</span>
-</pre></div>
-<p>What this block does is hook a function to the <em>focus</em> event of the textarea. Each time the textarea gains focus, it prepends
-the toolbox to the input's parent element, sets it as the input and reinitializes the WMD editor. That simple.</p>
-<p>If you don't want the toolbox to move -- i.e. you want a toolbox above each textarea, just paste the toolbox HTML as desired,
-point <em>Attacklab.panels.buttonBar</em> to the toolbox tied to the textarea with the focus on it, and re-init the editor:</p>
-<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.wmd-textarea&quot;</span><span class="p">).</span><span class="nx">focus</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-            <span class="c1">// Execute this when a textarea with a class .wmd-textarea gains focus</span>
-
-    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#wmd-button-bar&quot;</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">));</span> <span class="c1">// Prepend the toolbox to the parent div of the textarea</span>
-    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">buttonBar</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.wmd-toolbox&quot;</span><span class="p">);</span> <span class="c1">// Set WMD&#39;s textarea toolbox</span>
-    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">panels</span><span class="p">.</span><span class="nx">input</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// Set WMD&#39;s textarea input to this textarea</span>
-    <span class="nx">Attacklab</span><span class="p">.</span><span class="nx">editor</span><span class="p">();</span> <span class="c1">// Re-init the editor.</span>
-<span class="p">});</span>
-</pre></div>
-<p><strong>Note</strong> The above code blocks would work with this markup:</p>
-<div class="highlight"><pre><span class="c">&lt;!-- HAVE A WMD EDITOR INITIALIZED SOMEWHERE IN YOUR HTML --&gt;</span>
-<span class="nt">&lt;div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wmd-toolbox&quot;</span><span class="nt">&gt;</span><span class="c">&lt;!-- HERE GOES TOOLBOX HTML - ONLY FOR PRESENTATION - REMOVE ID&#39;S. COPY IT FROM YOUR FULLY RENDERED PAGE SOURCE. --&gt;</span><span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;.wmd-textarea&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wmd-toolbox&quot;</span><span class="nt">&gt;</span><span class="c">&lt;!-- HERE GOES TOOLBOX HTML - ONLY FOR PRESENTATION - REMOVE ID&#39;S. COPY IT FROM YOUR FULLY RENDERED PAGE SOURCE. --&gt;</span><span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;.wmd-textarea&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</pre></div>
+                <p>Following Tarek Ziade's <a class="reference external" href="http://tarekziade.wordpress.com/2011/12/20/new-years-python-meme-2/">#2012pythonmeme</a>:</p>
+<div class="section" id="whats-the-coolest-python-application-framework-or-library-you-have-discovered-in-2011">
+<h2>1. What’s the coolest Python application, framework or library you have discovered in 2011?</h2>
+<blockquote>
+<ul class="simple">
+<li><strong>gunicorn</strong> - We are on our way to change every apache installation to gunicorn. Proved to be just as good and quite possibly, better.</li>
+<li><strong>haystack</strong> - I've built quite a few apps that employed solr, and every time I did that, I wrote the solr
+config and client API by hand. I was a bit skeptic about Haystack, but now that I've tried it in production,
+i won't be writing any more solr client APIs any more.</li>
+<li><strong>python opencv</strong> - Still haven't used it in production, but it's a very cool library.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="what-new-programming-technique-did-you-learn-in-2011">
+<h2>2. What new programming technique did you learn in 2011 ?</h2>
+<p>Meta programming in Python. I worked on a project that relied heavily on meta
+programming. It helped me get more insight in django's models and magic.</p>
+</div>
+<div class="section" id="whats-the-name-of-the-open-source-project-you-contributed-the-most-in-2011-what-did-you-do">
+<h2>3. What’s the name of the open source project you contributed the most in 2011 ? What did you do ?</h2>
+<p>Around late November and throughout December, I started contributing to <a class="reference external" href="https://github.com/ASKBOT/askbot-devel">AskBot</a>.
+2011 was a very busy year for me, didn't have much time to contribute. I hope things will change to better next year.</p>
+</div>
+<div class="section" id="what-was-the-python-blog-or-website-you-read-the-most-in-2011">
+<h2>4. What was the Python blog or website you read the most in 2011 ?</h2>
+<p><a class="reference external" href="http://reddit.com/r/python/">/r/python</a>. Every important news in the python
+community lands there pretty fast, and the discussions can be both
+entertaining and educational.</p>
+</div>
+<div class="section" id="what-are-the-three-top-things-you-want-to-learn-in-2012">
+<h2>5. What are the three top things you want to learn in 2012 ?</h2>
+<blockquote>
+<p>1. Qt / PyQT - IMHO Qt is the desktop toolkit that evolves the best of all. It has a great community,
+good documentation and a very rich feature set. It's cross-platform, and even mobile platforms (Android/iOS)
+are starting to support it.</p>
+<ol class="arabic simple" start="2">
+<li>C - I slowly started brushing up my C skills during this month, and I want to learn more advanced topics in C next year.</li>
+</ol>
+<p>3. Pypy - Haven't had the time to test this bad boy better. I have played with it couple of times, but I want to
+make a serious effort and see the advantages it brings.</p>
+<ol class="arabic simple" start="4">
+<li>If it's not too much already, I want to learn Scheme.</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="what-are-the-top-software-app-or-lib-you-wish-someone-would-write-in-2012">
+<h2>6. What are the top software, app or lib you wish someone would write in 2012 ?</h2>
+<blockquote>
+<ol class="arabic simple">
+<li>Python based Redmine... Better python based redmine.</li>
+<li>Python based reporting software. Something like JasperReports</li>
+<li>Out of the context, but I wish i can switch to Python3. I wish more libs get ported
+since there are some very good features of py3 i want to exploit.</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="want-to-do-your-own-list-heres-how">
+<h2>Want to do your own list? Here’s how:</h2>
+<blockquote>
+<ul class="simple">
+<li>Copy-paste the questions and answer to them in your blog</li>
+<li>Tweet it with the #2012pythonmeme hashtag</li>
+</ul>
+</blockquote>
 </div>
 
         </article></aside><!-- /#featured -->
@@ -124,6 +143,35 @@ point <em>Attacklab.panels.buttonBar</em> to the toolbox tied to the textarea wi
                 <hr />
                     <ol id="posts-list" class="hfeed">
         
+    
+        
+     
+        <li><article class="hentry">    
+                <header>
+                        <h1><a href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html" rel="bookmark" title="Permalink to HOW-TO: Use multiple WMD editors on a same page">HOW-TO: Use multiple WMD editors on a same page</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+                        <abbr class="published" title="2011-10-27T15:30:00">
+                                Thu 27 October 2011
+                        </abbr>
+
+                        <address class="vcard author">
+                                By <a class="url fn" href="#">Dejan Noveski</a>
+                        </address>
+                        <p> In <a href=".././category/Coding.html">Coding</a></p>
+                        <p>tags: <a href=".././tag/wmd.html">wmd</a> <a href=".././tag/markdown.html">markdown</a> <a href=".././tag/javascript.html">javascript</a> <a href=".././tag/how-to.html">how-to</a> <a href=".././tag/coding.html">coding</a> </p>
+</p>
+                    <p></p>
+                </footer><!-- /.post-info -->
+                <p><a class="reference external" href="http://code.google.com/p/wmd/">WMD</a> editor resembles Stackoverflow's Markdown editor and it's probably one of
+the best WYSIWYG editors that work with Markdown as input. Because of that, it's widely used in
+Stackoverflow clones (i.e. <a class="reference external" href="http://http://www.osqa.net/">OSQA</a>). It's easy to install and use (just tie it to a
+textarea), it ...</p>
+                <a class="readmore" href=".././how-to-use-multiple-wmd-editors-on-a-same-page.html">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
     
         
      

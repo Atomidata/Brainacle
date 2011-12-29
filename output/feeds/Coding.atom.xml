@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Coding.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-10-27T15:30:00Z</updated><entry><title>HOW-TO: Use multiple WMD editors on a same page</title><link href="http://brainacle.com/how-to-use-multiple-wmd-editors-on-a-same-page.html" rel="alternate"></link><updated>2011-10-27T15:30:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-10-27:/how-to-use-multiple-wmd-editors-on-a-same-page.html/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://code.google.com/p/wmd/"&gt;WMD&lt;/a&gt; editor resembles Stackoverflow's Markdown editor and it's probably one of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brainacle</title><link href="http://brainacle.com" rel="alternate"></link><link href="http://brainacle.com/feeds/Coding.atom.xml" rel="self"></link><id>http://brainacle.com</id><updated>2011-12-28T14:01:00Z</updated><entry><title>New Year's Python Meme 2012</title><link href="http://brainacle.com/new-years-python-meme-2012.html" rel="alternate"></link><updated>2011-12-28T14:01:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-12-28:/new-years-python-meme-2012.html/</id><summary type="html">&lt;p&gt;Following Tarek Ziade's &lt;a class="reference external" href="http://tarekziade.wordpress.com/2011/12/20/new-years-python-meme-2/"&gt;#2012pythonmeme&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="section" id="whats-the-coolest-python-application-framework-or-library-you-have-discovered-in-2011"&gt;
+&lt;h2&gt;1. What’s the coolest Python application, framework or library you have discovered in 2011?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;gunicorn&lt;/strong&gt; - We are on our way to change every apache installation to gunicorn. Proved to be just as good and quite possibly, better.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;haystack&lt;/strong&gt; - I've built quite a few apps that employed solr, and every time I did that, I wrote the solr
+config and client API by hand. I was a bit skeptic about Haystack, but now that I've tried it in production,
+i won't be writing any more solr client APIs any more.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;python opencv&lt;/strong&gt; - Still haven't used it in production, but it's a very cool library.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-new-programming-technique-did-you-learn-in-2011"&gt;
+&lt;h2&gt;2. What new programming technique did you learn in 2011 ?&lt;/h2&gt;
+&lt;p&gt;Meta programming in Python. I worked on a project that relied heavily on meta
+programming. It helped me get more insight in django's models and magic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="whats-the-name-of-the-open-source-project-you-contributed-the-most-in-2011-what-did-you-do"&gt;
+&lt;h2&gt;3. What’s the name of the open source project you contributed the most in 2011 ? What did you do ?&lt;/h2&gt;
+&lt;p&gt;Around late November and throughout December, I started contributing to &lt;a class="reference external" href="https://github.com/ASKBOT/askbot-devel"&gt;AskBot&lt;/a&gt;.
+2011 was a very busy year for me, didn't have much time to contribute. I hope things will change to better next year.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-was-the-python-blog-or-website-you-read-the-most-in-2011"&gt;
+&lt;h2&gt;4. What was the Python blog or website you read the most in 2011 ?&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://reddit.com/r/python/"&gt;/r/python&lt;/a&gt;. Every important news in the python
+community lands there pretty fast, and the discussions can be both
+entertaining and educational.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-are-the-three-top-things-you-want-to-learn-in-2012"&gt;
+&lt;h2&gt;5. What are the three top things you want to learn in 2012 ?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1. Qt / PyQT - IMHO Qt is the desktop toolkit that evolves the best of all. It has a great community,
+good documentation and a very rich feature set. It's cross-platform, and even mobile platforms (Android/iOS)
+are starting to support it.&lt;/p&gt;
+&lt;ol class="arabic simple" start="2"&gt;
+&lt;li&gt;C - I slowly started brushing up my C skills during this month, and I want to learn more advanced topics in C next year.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;3. Pypy - Haven't had the time to test this bad boy better. I have played with it couple of times, but I want to
+make a serious effort and see the advantages it brings.&lt;/p&gt;
+&lt;ol class="arabic simple" start="4"&gt;
+&lt;li&gt;If it's not too much already, I want to learn Scheme.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-are-the-top-software-app-or-lib-you-wish-someone-would-write-in-2012"&gt;
+&lt;h2&gt;6. What are the top software, app or lib you wish someone would write in 2012 ?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Python based Redmine... Better python based redmine.&lt;/li&gt;
+&lt;li&gt;Python based reporting software. Something like JasperReports&lt;/li&gt;
+&lt;li&gt;Out of the context, but I wish i can switch to Python3. I wish more libs get ported
+since there are some very good features of py3 i want to exploit.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="want-to-do-your-own-list-heres-how"&gt;
+&lt;h2&gt;Want to do your own list? Here’s how:&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Copy-paste the questions and answer to them in your blog&lt;/li&gt;
+&lt;li&gt;Tweet it with the #2012pythonmeme hashtag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</summary><category term="linux"></category><category term="coding"></category><category term="python"></category><category term="meme"></category></entry><entry><title>HOW-TO: Use multiple WMD editors on a same page</title><link href="http://brainacle.com/how-to-use-multiple-wmd-editors-on-a-same-page.html" rel="alternate"></link><updated>2011-10-27T15:30:00Z</updated><author><name>Dejan Noveski</name></author><id>tag:brainacle.com,2011-10-27:/how-to-use-multiple-wmd-editors-on-a-same-page.html/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://code.google.com/p/wmd/"&gt;WMD&lt;/a&gt; editor resembles Stackoverflow's Markdown editor and it's probably one of
 the best WYSIWYG editors that work with Markdown as input. Because of that, it's widely used in
 Stackoverflow clones (i.e. &lt;a class="reference external" href="http://http://www.osqa.net/"&gt;OSQA&lt;/a&gt;). It's easy to install and use (just tie it to a
 textarea), it supports the mostly used features, provided by this type of editors, but has 1 major flaw:
